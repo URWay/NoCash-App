@@ -1,38 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_action_home"
+            android:title="Home" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:id="@+id/nav_promo"
+            android:icon="@drawable/ic_action_attach_money"
+            android:title="Promoções" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:id="@+id/nav_recarga"
+            android:icon="@drawable/ic_action_credit_card"
+            android:title="Recarga" />
+
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="Meus Dados">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:id="@+id/nav_conta"
+                android:icon="@drawable/ic_action_chrome_reader_mode"
+                android:title="Minha Conta" />
+
             <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:id="@+id/nav_transac"
+                android:icon="@drawable/ic_action_content_copy"
+                android:title="Minhas Transações" />
+            <item
+                android:id="@+id/nav_login"
+                android:icon="@drawable/ic_action_account_circle"
+                android:title="Login" />
+        </menu>
+    </item>
+
+    <item android:title="Sobre a NoteCash">
+        <menu>
+            <item
+                android:id="@+id/nav_about"
+                android:icon="@drawable/ic_action_contacts"
+                android:title="Sobre nós" />
         </menu>
     </item>
 
