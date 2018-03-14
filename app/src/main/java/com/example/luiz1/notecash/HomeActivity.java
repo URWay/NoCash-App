@@ -3,6 +3,8 @@ package com.example.luiz1.notecash;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,13 +15,34 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.luiz1.notecash.Adapter.CustomAdapter;
+import com.example.luiz1.notecash.Model.Item;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    RecyclerView recyclerView;
+    RecyclerView.LayoutManager layoutManager;
 
-    @Override
+    private List<Item> items = new ArrayList<>();
+    CustomAdapter adapter;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+
+        recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
+
+
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -32,6 +55,22 @@ public class HomeActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+
+        initItem();
+    }
+
+    private void initItem() {
+            // 0 = Novo tipo, 1 = "Hot Type" 2 = Other Type
+            items.add(new Item(0,"Esquadrão Suicida","UHU","http://media.comicbook.com/2016/06/suicide-squad-poster-186482.jpg"));
+            items.add(new Item(2,"The Walking Dead","UHU","http://br.web.img3.acsta.net/newsv7/18/03/12/23/06/5841466.jpg"));
+            items.add(new Item(1,"Akira","UHU","http://nerdista.com.br/wp-content/uploads/2016/04/akira_cover2.jpg"));
+            items.add(new Item(2,"FUNFOU","UHU","https://i.stack.imgur.com/c99WD.jpg"));
+
+
+        adapter = new CustomAdapter(this, items);
+        recyclerView.setAdapter(adapter);
     }
 
     @Override
@@ -72,19 +111,22 @@ public class HomeActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-     /*   if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
 
-        } else if (id == R.id.nav_slideshow) {
+        if (id == R.id.nav_home) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_promo) {
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_recarga) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_conta) {
 
-        }*/
+        } else if (id == R.id.nav_transac) {
+
+        } else if (id == R.id.nav_login){
+
+        } else if (id == R.id.nav_about){
+
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

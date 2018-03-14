@@ -21,5 +21,14 @@ public class IntroActivity extends AppCompatActivity {
             }
         }, SPLASH_TIMEOUT);
 
-    }
+
+
+
+
+
+
+     }
 }
+
+
+
