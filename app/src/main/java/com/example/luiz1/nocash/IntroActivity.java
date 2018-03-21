@@ -1,4 +1,4 @@
-package com.example.luiz1.notecash;
+package com.example.luiz1.nocash;
 
 import android.content.Intent;
 import android.os.Handler;

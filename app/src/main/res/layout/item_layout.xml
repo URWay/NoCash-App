@@ -3,14 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="214dp"
     android:layout_margin="10dp"
     app:cardElevation="10dp" >
 
     <com.battleent.ribbonviews.RibbonLayout
         android:id="@+id/ribbonLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="214dp"
         android:padding="16dp"
         app:bottom_height="100"
         app:bottom_padding="10"
@@ -26,19 +26,11 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:scaleType="centerCrop"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:text="Novidades estão vindo por aí!"
-            android:textSize="40sp"
-            android:gravity="center"/>
+            android:layout_alignParentTop="true"
+            android:scaleType="centerCrop" />
 
     </com.battleent.ribbonviews.RibbonLayout>
 

@@ -1,16 +1,11 @@
-package com.example.luiz1.notecash.Model;
+package com.example.luiz1.nocash.Model;
 
-/**
- * Created by luiz.gscorreia on 13/03/2018.
- */
+import java.util.List;
 
 public class Item {
     public int type;
     public String headerText, bottomText, imageURL;
 
-    public Item(){
-
-    }
 
     public Item(int type, String headerText, String bottomText, String imageURL) {
         this.type = type;
@@ -18,6 +13,8 @@ public class Item {
         this.bottomText = bottomText;
         this.imageURL = imageURL;
     }
+
+
 
     public int getType() {
         return type;
@@ -50,4 +47,6 @@ public class Item {
     public void setImageURL(String imageURL) {
         this.imageURL = imageURL;
     }
+
+
 }
