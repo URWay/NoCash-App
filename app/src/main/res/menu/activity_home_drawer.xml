@@ -33,11 +33,11 @@
             <item
                 android:id="@+id/nav_login"
                 android:icon="@drawable/ic_action_account_circle"
-                android:title="Login" />
+                android:title="Logout" />
         </menu>
     </item>
 
-    <item android:title="Sobre a NoteCash">
+    <item android:title="Sobre Nós">
         <menu>
             <item
                 android:id="@+id/nav_about"

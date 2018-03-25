@@ -1,5 +1,7 @@
 package com.example.luiz1.nocash.Model;
 
+import android.view.View;
+
 import java.util.List;
 
 public class Item {
@@ -22,6 +24,10 @@ public class Item {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public interface ItemClickListener{
+        void onClick(View view, int position, boolean islongclick);
     }
 
     public String getHeaderText() {
