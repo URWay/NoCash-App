@@ -1,11 +1,19 @@
 package com.example.luiz1.nocash;
 
+
+
+import android.app.FragmentTransaction;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -26,8 +34,12 @@ import com.example.luiz1.nocash.Model.Item;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private Bundle bundle;
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
 
@@ -105,6 +117,7 @@ public class HomeActivity extends AppCompatActivity
 
 
     private void initPromo() {
+
         // 0 = Novidade, 1 = "Promoção"
 
         recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
@@ -119,7 +132,7 @@ public class HomeActivity extends AppCompatActivity
         itemspromo.add(new Item(1,"Promoção","UHU","http://nerdista.com.br/wp-content/uploads/2016/04/akira_cover2.jpg"));
 
         adapter2 = new CustomAdapter(this, itemspromo);
-        recyclerView.setAdapter(adapter2);
+
 
         adapter2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,6 +143,7 @@ public class HomeActivity extends AppCompatActivity
                                 .getHeaderText(),Toast.LENGTH_SHORT).show();
             }
         });
+        recyclerView.setAdapter(adapter2);
     }
 
     @Override
@@ -161,32 +175,105 @@ public class HomeActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    public void logout(){
+        new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+                .setTitleText("Logoff")
+                .setContentText("Deseja fazer logoff?")
+                .setConfirmText("Sim")
+                .setCancelText("Não")
+                          // Função para confirmar
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sDialog) {
+                        sDialog.dismissWithAnimation();
+                         Intent i = new Intent(HomeActivity.this, LoginActivity.class);
+                        startActivity(i);
+                        finish();
+
+                    }
+                }
+                )
+                // Função para cancelar
+                .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sDialog) {
+                        sDialog.cancel();
+                        sDialog.dismissWithAnimation();
+                    }
+                })
+
+
+                .show();
+
+
+    }
+
+    private void somelista(){
+        recyclerView.setVisibility(View.GONE);
+    }
+
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        Fragment fragment = null;
+        Class fragmentClass = null;
+
 
 
         if (id == R.id.nav_home) {
+            fragment.isHidden();
             getSupportActionBar().setTitle("Home");
+
                 initItem();
         } else if (id == R.id.nav_promo) {
+            fragment.isHidden();
             getSupportActionBar().setTitle("Promoções");
                 initPromo();
         } else if (id == R.id.nav_recarga) {
+            somelista();
+            fragmentClass = RecargaFragment.class;
             getSupportActionBar().setTitle("Recarga");
+
+
+
         } else if (id == R.id.nav_conta) {
+            fragment.isHidden();
+
             getSupportActionBar().setTitle("Minha Conta");
+            somelista();
         } else if (id == R.id.nav_transac) {
+            fragment.isHidden();
             getSupportActionBar().setTitle("Minhas Transações");
+            somelista();
         } else if (id == R.id.nav_login){
+
             getSupportActionBar().setTitle("Login");
+            logout();
+
         } else if (id == R.id.nav_about){
+
             getSupportActionBar().setTitle("Sobre nós");
+            somelista();
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+       try {
+           fragment = (Fragment) fragmentClass.newInstance();
+           fragment.setArguments(bundle);
+
+       } catch (Exception e) {
+         e.printStackTrace();
+       }
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.corpo, fragment).commit();
+
+
+
+
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
