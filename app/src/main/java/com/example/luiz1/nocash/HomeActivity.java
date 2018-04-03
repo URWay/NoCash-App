@@ -92,7 +92,7 @@ public class HomeActivity extends AppCompatActivity
 
     private void initItem() {
 
-
+        recyclerView.setVisibility(View.VISIBLE);
         // 0 = Novidade, 1 = "Promoção"
         itemshome.add(new Item(0,"Novidade","UHU","http://media.comicbook.com/2016/06/suicide-squad-poster-186482.jpg"));
         itemshome.add(new Item(0,"Novidade","UHU","http://media.comicbook.com/2016/06/suicide-squad-poster-186482.jpg"));
@@ -124,6 +124,7 @@ public class HomeActivity extends AppCompatActivity
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setVisibility(View.VISIBLE);
 
 
         itemspromo.add(new Item(1,"Promoção","UHU","http://nerdista.com.br/wp-content/uploads/2016/04/akira_cover2.jpg"));
@@ -186,7 +187,7 @@ public class HomeActivity extends AppCompatActivity
                     @Override
                     public void onClick(SweetAlertDialog sDialog) {
                         sDialog.dismissWithAnimation();
-                         Intent i = new Intent(HomeActivity.this, LoginActivity.class);
+                        Intent i = new Intent(HomeActivity.this, LoginActivity.class);
                         startActivity(i);
                         finish();
 
@@ -197,6 +198,7 @@ public class HomeActivity extends AppCompatActivity
                 .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
                     @Override
                     public void onClick(SweetAlertDialog sDialog) {
+                        getApplicationContext();
                         sDialog.cancel();
                         sDialog.dismissWithAnimation();
                     }
@@ -218,58 +220,38 @@ public class HomeActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        Fragment fragment = null;
-        Class fragmentClass = null;
-
 
 
         if (id == R.id.nav_home) {
-            fragment.isHidden();
-            getSupportActionBar().setTitle("Home");
 
-                initItem();
+            getSupportActionBar().setTitle("Home");
+            initItem();
+
         } else if (id == R.id.nav_promo) {
-            fragment.isHidden();
-            getSupportActionBar().setTitle("Promoções");
-                initPromo();
+
+          getSupportActionBar().setTitle("Promoções");
+          initPromo();
         } else if (id == R.id.nav_recarga) {
+
             somelista();
-            fragmentClass = RecargaFragment.class;
+//          fragmentClass = RecargaFragment.class;
             getSupportActionBar().setTitle("Recarga");
 
 
-
         } else if (id == R.id.nav_conta) {
-            fragment.isHidden();
-
+            somelista();
             getSupportActionBar().setTitle("Minha Conta");
-            somelista();
+
         } else if (id == R.id.nav_transac) {
-            fragment.isHidden();
+            somelista();
             getSupportActionBar().setTitle("Minhas Transações");
-            somelista();
         } else if (id == R.id.nav_login){
-
-            getSupportActionBar().setTitle("Login");
             logout();
-
+            getSupportActionBar().setTitle("Login");
         } else if (id == R.id.nav_about){
-
-            getSupportActionBar().setTitle("Sobre nós");
             somelista();
+            getSupportActionBar().setTitle("Sobre nós");
         }
-
-       try {
-           fragment = (Fragment) fragmentClass.newInstance();
-           fragment.setArguments(bundle);
-
-       } catch (Exception e) {
-         e.printStackTrace();
-       }
-
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.corpo, fragment).commit();
-
 
 
 
