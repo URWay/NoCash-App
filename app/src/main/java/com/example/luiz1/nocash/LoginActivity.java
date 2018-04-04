@@ -53,21 +53,16 @@ public class LoginActivity extends AppCompatActivity {
         txtcadlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                webcadastrologin();
+                Intent i = new Intent(LoginActivity.this, LinkedActivity.class);
+                startActivity(i);
+
             }
         });
 
     }
 
 
-    private void webcadastrologin(){
 
-        WebView webView = new WebView(this);
-        setContentView(webView);
-        webView.loadUrl("https://developer.android.com/training/app-links/index.html");
-
-
-    }
     public void loading(String msg){
 
         SweetAlertDialog load = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);

@@ -1,7 +1,4 @@
 package com.example.luiz1.nocash;
-
-
-
 import android.app.FragmentTransaction;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -78,9 +75,6 @@ public class HomeActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-//
-//        LayoutInflater li  = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//        ftView = li.inflate(R.layout.footer_view, null);
 
 
         initItem();
@@ -218,6 +212,7 @@ public class HomeActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
@@ -234,7 +229,6 @@ public class HomeActivity extends AppCompatActivity
         } else if (id == R.id.nav_recarga) {
 
             somelista();
-//          fragmentClass = RecargaFragment.class;
             getSupportActionBar().setTitle("Recarga");
 
 
