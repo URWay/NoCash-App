@@ -37,14 +37,14 @@ public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private Bundle bundle;
-    RecyclerView recyclerView;
-    RecyclerView.LayoutManager layoutManager;
-
-    private List<Item> itemshome = new ArrayList<>();
-    CustomAdapter adapter;
-
-    private List<Item> itemspromo = new ArrayList<>();
-    CustomAdapter adapter2;
+//    RecyclerView recyclerView;
+//    RecyclerView.LayoutManager layoutManager;
+//
+//    private List<Item> itemshome = new ArrayList<>();
+//    CustomAdapter adapter;
+//
+//    private List<Item> itemspromo = new ArrayList<>();
+//    CustomAdapter adapter2;
 
 //    public Handler mHandler;
 //    public View ftView;
@@ -55,12 +55,10 @@ public class HomeActivity extends AppCompatActivity
         setContentView(R.layout.activity_home);
 
 
-        recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
-        recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-
-
+//        recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
+//        recyclerView.setHasFixedSize(true);
+//        layoutManager = new LinearLayoutManager(this);
+//        recyclerView.setLayoutManager(layoutManager);
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -76,14 +74,9 @@ public class HomeActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
-        initItem();
-
-
-
     }
 
-
+/*
     private void initItem() {
 
         recyclerView.setVisibility(View.VISIBLE);
@@ -140,7 +133,7 @@ public class HomeActivity extends AppCompatActivity
         });
         recyclerView.setAdapter(adapter2);
     }
-
+*/
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -203,15 +196,18 @@ public class HomeActivity extends AppCompatActivity
 
 
     }
-
+/*
     private void somelista(){
         recyclerView.setVisibility(View.GONE);
     }
-
+*/
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+        Fragment fragment = null;
+        Class fragmentClass = null;
+
 
         // Handle navigation view item clicks here.
         int id = item.getItemId();
@@ -220,33 +216,47 @@ public class HomeActivity extends AppCompatActivity
         if (id == R.id.nav_home) {
 
             getSupportActionBar().setTitle("Home");
-            initItem();
-
         } else if (id == R.id.nav_promo) {
 
           getSupportActionBar().setTitle("Promoções");
-          initPromo();
+
         } else if (id == R.id.nav_recarga) {
 
-            somelista();
-            getSupportActionBar().setTitle("Recarga");
-
-
+        getSupportActionBar().setTitle("Recarga");
+            fragmentClass = RecargaFragment.class;
         } else if (id == R.id.nav_conta) {
-            somelista();
+
             getSupportActionBar().setTitle("Minha Conta");
 
         } else if (id == R.id.nav_transac) {
-            somelista();
+
             getSupportActionBar().setTitle("Minhas Transações");
         } else if (id == R.id.nav_login){
-            logout();
-            getSupportActionBar().setTitle("Login");
+             getSupportActionBar().setTitle("Login");
+
+             logout();
+
+
+
         } else if (id == R.id.nav_about){
-            somelista();
+
             getSupportActionBar().setTitle("Sobre nós");
+            fragmentClass = SobreFragment.class;
         }
 
+
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.corpo, fragment).commit();
 
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

@@ -39,7 +39,8 @@
         android:layout_height="40dp"
         android:layout_alignStart="@+id/textView3"
         android:layout_centerVertical="true"
-        android:text="+ R$ 10" />
+        android:text="+ R$ 10"
+        />
 
     <Button
         android:id="@+id/btn3"
