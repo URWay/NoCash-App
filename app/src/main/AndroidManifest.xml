@@ -27,7 +27,8 @@
         <activity
             android:name=".HomeActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".LinkedActivity"></activity>
+        <activity android:name=".LinkedActivity" />
+        <activity android:name=".CadastroActivity"></activity>
     </application>
 
 </manifest>

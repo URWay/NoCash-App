@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import com.pnikosis.materialishprogress.ProgressWheel;
 
+import java.text.Normalizer;
+
 import cn.pedant.SweetAlert.ProgressHelper;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -44,16 +46,14 @@ public class LoginActivity extends AppCompatActivity {
 
                loginok();
 
-
            }
         }
     });
 
-
         txtcadlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(LoginActivity.this, LinkedActivity.class);
+                Intent i = new Intent(LoginActivity.this, CadastroActivity.class);
                 startActivity(i);
 
             }
@@ -103,13 +103,24 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+
+
     private void errologin() {
 
         new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
                 .setTitleText("Opa, houve um erro!")
-                .setContentText("O login e senha informados são inválidos, verifique-os e tente novamente.")
+                .setContentText("Os campos com * são de preenchimento obrigatórios.")
                 .show();
+
+        removeAccent(txtuser.toString());
     }
+
+    public String removeAccent(final String str) {
+        String strNoAccent = Normalizer.normalize(str, Normalizer.Form.NFD);
+        strNoAccent = strNoAccent.replaceAll("[^\\p{ASCII}]", "");
+        return strNoAccent;
+    }
+
 
 
 

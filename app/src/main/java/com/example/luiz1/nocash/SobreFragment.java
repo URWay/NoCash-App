@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.luiz1.notecash.R;
+import com.example.luiz1.nocash.R;
 
 /**
  * A simple {@link Fragment} subclass.
