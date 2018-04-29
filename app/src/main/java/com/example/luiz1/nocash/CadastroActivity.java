@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -71,7 +72,29 @@ public class CadastroActivity extends AppCompatActivity {
             }
         });
 
+        btncep.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String vcep = txtcep.getText().toString();
 
+                if(vcep.isEmpty() || vcep.equals("")){
+                    errocep();
+                } else {
+                   // EnderecoNetworkCall myCallEndereco = new EnderecoNetworkCall();
+                  //  myCallEndereco.execute("https://viacep.com.br/ws/"+vcep+"/json/");
+                }
+            }
+        });
+
+
+    }
+
+
+    private void errocep(){
+        new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+                .setTitleText("Opa, houve um erro!")
+                .setContentText("O CEP informado é inválido, verifique o CEP informado e tente novamente. ")
+                .show();
     }
     private void erromail() {
 
@@ -82,7 +105,6 @@ public class CadastroActivity extends AppCompatActivity {
 
 
     }
-
     private void errocpf() {
 
         new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
@@ -92,8 +114,6 @@ public class CadastroActivity extends AppCompatActivity {
 
 
     }
-
-
     private void errologin() {
 
         new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
