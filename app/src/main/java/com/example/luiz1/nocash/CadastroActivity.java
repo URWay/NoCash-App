@@ -61,10 +61,12 @@ public class CadastroActivity extends AppCompatActivity {
                     txtsenha.getText().toString().isEmpty()
                     ){
                     errologin();
-                }else if(f.isValidEmail(txtmail.toString()) == false){
+                }
+                /*else if(f.isValidEmail(txtmail.toString()) == false){
                     erromail();
 
-                }else if(f.isCPF(txtcpf.toString()) == false){
+                }*/
+                else if(f.isCPF(txtcpf.toString()) == false){
                     errocpf();
                 }else{
                     loginok();
