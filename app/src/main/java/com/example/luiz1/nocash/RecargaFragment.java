@@ -1,6 +1,7 @@
 package com.example.luiz1.nocash;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -26,20 +27,14 @@ private TextView txtval;
     }
     private void  AddDez(){
     double soma = 10;
-    double valor = Double.parseDouble(txtval.getText().toString());
-    double total = valor+soma;
-    String totalmax = Double.toString(total);
-
-    txtval.setText(totalmax);
-
+    double val = 
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
-        View view = inflater.inflate(R.layout.fragment_recarga, container, false);
+       View view = inflater.inflate(R.layout.fragment_recarga, container, false);
 
         btn10=(Button) view.findViewById(R.id.btn1);
         btn20=(Button) view.findViewById(R.id.btn3);
@@ -47,23 +42,23 @@ private TextView txtval;
         btn100=(Button)view.findViewById(R.id.button5);
         btnconfrecarga = (Button) view.findViewById(R.id.btnconfrecarga);
 
-        txtval = (TextView)view.findViewById(R.id.textView2);
+        txtval = view.findViewById(R.id.textView2);
         btn10.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                    AddDez();
+            AddDez();
             }
         });
         btn20.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddDez();
+
             }
         });
         btn50.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddDez();
+
             }
         });
         btn100.setOnClickListener(new OnClickListener() {
@@ -76,7 +71,8 @@ private TextView txtval;
         btnconfrecarga.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(getActivity(), PagamentoActivity.class);
+                startActivity(intent);
             }
         });
         return view;
