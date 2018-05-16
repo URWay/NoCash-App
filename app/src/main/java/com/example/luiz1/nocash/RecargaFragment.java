@@ -11,6 +11,11 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import android.view.View.OnClickListener;
+
+import java.text.DecimalFormat;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -22,14 +27,17 @@ private Button btn50;
 private Button btn100;
 private Button btnconfrecarga;
 private TextView txtval;
+private TextView txtlimpa;
+private Double soma=0.00;
+
     public RecargaFragment() {
         // Required empty public constructor
     }
-    private void  AddDez(){
-    double soma = 10;
-    double val = 
-    }
 
+    private void AddSoma(Double valor) {
+        soma+=valor;
+        txtval.setText(new DecimalFormat("#,##0.00").format(soma));
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -41,45 +49,73 @@ private TextView txtval;
         btn50=(Button) view.findViewById(R.id.button4);
         btn100=(Button)view.findViewById(R.id.button5);
         btnconfrecarga = (Button) view.findViewById(R.id.btnconfrecarga);
-
         txtval = view.findViewById(R.id.textView2);
+
+
+        txtval.setText(new DecimalFormat("#,##0.00").format(0));
         btn10.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-            AddDez();
+                AddSoma(10.00);
             }
+
         });
         btn20.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                AddSoma(20.00);
             }
         });
         btn50.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                AddSoma(50.00);
             }
         });
         btn100.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                AddSoma(100.00);
+            }
+        });
 
+        txtlimpa = view.findViewById(R.id.txtlimpa);
+
+        txtlimpa.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                soma = 0.00;
+                txtval.setText(new DecimalFormat("#,##0.00").format(soma));
             }
         });
 
         btnconfrecarga.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), PagamentoActivity.class);
-                startActivity(intent);
+
+
+                if (soma <= 0.00) {
+                    new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Opa, houve um erro!")
+                            .setContentText("A recarga mínima é de R$ 10,00.")
+                            .show();
+
+
+                }else if(soma > 5000.00){
+                    new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Opa, houve um erro!")
+                            .setContentText("A recarga máxima é de R$ 5.000,00.")
+                            .show();
+
+                }else {
+                    Intent intent = new Intent(getActivity(), PagamentoActivity.class);
+                    startActivity(intent);
+                }
             }
         });
         return view;
 
     }
-
-
 
 
 }

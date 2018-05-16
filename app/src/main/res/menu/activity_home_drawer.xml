@@ -21,10 +21,6 @@
 
     <item android:title="Meus Dados">
         <menu>
-            <item
-                android:id="@+id/nav_conta"
-                android:icon="@drawable/ic_action_chrome_reader_mode"
-                android:title="Minha Conta" />
 
             <item
                 android:id="@+id/nav_transac"
@@ -37,13 +33,5 @@
         </menu>
     </item>
 
-    <item android:title="Sobre Nós">
-        <menu>
-            <item
-                android:id="@+id/nav_about"
-                android:icon="@drawable/ic_action_contacts"
-                android:title="Sobre nós" />
-        </menu>
-    </item>
 
 </menu>

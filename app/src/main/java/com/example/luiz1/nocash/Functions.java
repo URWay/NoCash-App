@@ -1,8 +1,16 @@
 package com.example.luiz1.nocash;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+
 import java.util.InputMismatchException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * Created by luiz1 on 29/04/2018.
@@ -10,6 +18,43 @@ import java.util.regex.Pattern;
 
 public class Functions {
 
+    public static boolean isConected(Context cont, final Activity activity){
+        ConnectivityManager conmag = (ConnectivityManager)cont.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        if ( conmag != null ) {
+            conmag.getActiveNetworkInfo();
+
+            //Verifica internet pela WIFI
+            if (conmag.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected()) {
+                return true;
+            }
+            //Verifica se tem internet móvel
+            if (conmag.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).isConnected()) {
+                return true;
+            }
+        }else{
+            new SweetAlertDialog(activity)
+                    .setTitleText("Falha ao se conectar com a rede!")
+                    .setContentText("Verifique sua conexão com a Web, e tente novamente")
+                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sweetAlertDialog) {
+                            sweetAlertDialog.dismissWithAnimation();
+
+                            //Falta fragment net!
+                                Intent i = new Intent(activity , HomeActivity.class);
+                                activity.startActivity(i);
+
+
+                        }
+
+                    })
+                    .show();
+
+        }
+
+        return false;
+    }
 
 
     public boolean isValidEmail(String email){

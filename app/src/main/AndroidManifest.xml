@@ -4,6 +4,7 @@
     package="com.example.luiz1.nocash">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:allowBackup="true"
@@ -29,7 +30,8 @@
             android:screenOrientation="portrait" />
         <activity android:name=".LinkedActivity" />
         <activity android:name=".CadastroActivity" />
-        <activity android:name=".PagamentoActivity"></activity>
+        <activity android:name=".PagamentoActivity" />
+        <activity android:name=".TutorialActivity"></activity>
     </application>
 
 </manifest>

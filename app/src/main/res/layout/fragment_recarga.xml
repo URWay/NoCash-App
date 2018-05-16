@@ -14,8 +14,8 @@
         android:layout_above="@+id/btn3"
         android:layout_alignEnd="@+id/textView6"
         android:layout_toEndOf="@+id/textView3"
-        android:text="0,00"
         android:textAlignment="textEnd"
+
         android:textColor="#6cb907"
         android:textSize="50sp" />
 
@@ -67,7 +67,7 @@
         android:text="+ R$ 100" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/txtlimpa"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/textView2"
