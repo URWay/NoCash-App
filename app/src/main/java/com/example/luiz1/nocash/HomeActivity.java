@@ -228,25 +228,16 @@ public class HomeActivity extends AppCompatActivity
 
         getSupportActionBar().setTitle("Recarga");
             fragmentClass = RecargaFragment.class;
-        } else if (id == R.id.nav_conta) {
 
-            getSupportActionBar().setTitle("Minha Conta");
-            fragmentClass = ContaFragment.class;
         } else if (id == R.id.nav_transac) {
 
             getSupportActionBar().setTitle("Minhas Transações");
 
-        } else if (id == R.id.nav_login){
-             getSupportActionBar().setTitle("Login");
+        } else if (id == R.id.nav_login) {
+            getSupportActionBar().setTitle("Login");
 
-             logout();
+            logout();
 
-
-
-        } else if (id == R.id.nav_about){
-
-            getSupportActionBar().setTitle("Sobre nós");
-            fragmentClass = SobreFragment.class;
         }
 
 
