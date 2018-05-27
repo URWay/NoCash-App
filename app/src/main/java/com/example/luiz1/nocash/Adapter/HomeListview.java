@@ -12,14 +12,14 @@ import android.widget.TextView;
 import com.example.luiz1.nocash.R;
 
 
-public class CustomListview extends ArrayAdapter<String> {
+public class HomeListview extends ArrayAdapter<String> {
 
     private String[] nomeprod;
     private String[] proddesc;
     private Integer[] imgid;
     private Activity context;
 
-    public CustomListview(Activity context, String[] nomeprod, String[] proddesc, Integer[] imgid) {
+    public HomeListview(Activity context, String[] nomeprod, String[] proddesc, Integer[] imgid) {
        super(context, R.layout.layoutlista,nomeprod);
 
         this.context = context;
