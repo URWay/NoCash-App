@@ -24,13 +24,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
-import com.example.luiz1.nocash.Adapter.CustomAdapter;
-import com.example.luiz1.nocash.Model.Item;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -38,32 +32,13 @@ public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private Bundle bundle;
-//    RecyclerView recyclerView;
-//    RecyclerView.LayoutManager layoutManager;
-//
-//    private List<Item> itemshome = new ArrayList<>();
-//    CustomAdapter adapter;
-//
-//    private List<Item> itemspromo = new ArrayList<>();
-//    CustomAdapter adapter2;
 
-//    public Handler mHandler;
-//    public View ftView;
-//    public boolean isLoading = false;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
         ConnectivityManager cm = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-
-
-
-//        recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
-//        recyclerView.setHasFixedSize(true);
-//        layoutManager = new LinearLayoutManager(this);
-//        recyclerView.setLayoutManager(layoutManager);
-
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -78,66 +53,40 @@ public class HomeActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+
+
+        //CARREGA HOME
+
+
+
+        Fragment fragment = null;
+        Class fragmentClass = null;
+
+        fragmentClass = HomeFragment.class;
+
+
+        getSupportActionBar().setTitle("Home");
+
+
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+            fragment.setArguments(bundle);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.corpo, fragment).commit();
+
+
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+
     }
 
-/*
-    private void initItem() {
 
-        recyclerView.setVisibility(View.VISIBLE);
-        // 0 = Novidade, 1 = "Promoção"
-        itemshome.add(new Item(0,"Novidade","UHU","http://media.comicbook.com/2016/06/suicide-squad-poster-186482.jpg"));
-        itemshome.add(new Item(0,"Novidade","UHU","http://media.comicbook.com/2016/06/suicide-squad-poster-186482.jpg"));
-        itemshome.add(new Item(0,"Novidade","UHU","http://media.comicbook.com/2016/06/suicide-squad-poster-186482.jpg"));
-        itemshome.add(new Item(0,"Novidade","UHU","http://media.comicbook.com/2016/06/suicide-squad-poster-186482.jpg"));
-        itemshome.add(new Item(0,"Novidade","UHU","http://media.comicbook.com/2016/06/suicide-squad-poster-186482.jpg"));
-
-
-        adapter = new CustomAdapter(this, itemshome);
-        adapter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(),
-                        "Categoria: "+itemshome.get
-                                (recyclerView.getChildAdapterPosition(view))
-                                .getHeaderText(),Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        recyclerView.setAdapter(adapter);
-    }
-
-
-    private void initPromo() {
-
-        // 0 = Novidade, 1 = "Promoção"
-
-        recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
-        recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setVisibility(View.VISIBLE);
-
-
-        itemspromo.add(new Item(1,"Promoção","UHU","http://nerdista.com.br/wp-content/uploads/2016/04/akira_cover2.jpg"));
-        itemspromo.add(new Item(1,"Promoção","UHU","http://nerdista.com.br/wp-content/uploads/2016/04/akira_cover2.jpg"));
-        itemspromo.add(new Item(1,"Promoção","UHU","http://nerdista.com.br/wp-content/uploads/2016/04/akira_cover2.jpg"));
-        itemspromo.add(new Item(1,"Promoção","UHU","http://nerdista.com.br/wp-content/uploads/2016/04/akira_cover2.jpg"));
-
-        adapter2 = new CustomAdapter(this, itemspromo);
-
-
-        adapter2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(),
-                        "Categoria: "+itemspromo.get
-                                (recyclerView.getChildAdapterPosition(view))
-                                .getHeaderText(),Toast.LENGTH_SHORT).show();
-            }
-        });
-        recyclerView.setAdapter(adapter2);
-    }
-*/
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -200,11 +149,7 @@ public class HomeActivity extends AppCompatActivity
 
 
     }
-/*
-    private void somelista(){
-        recyclerView.setVisibility(View.GONE);
-    }
-*/
+
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -220,6 +165,8 @@ public class HomeActivity extends AppCompatActivity
         if (id == R.id.nav_home) {
 
             getSupportActionBar().setTitle("Home");
+
+        fragmentClass = HomeFragment.class;
         } else if (id == R.id.nav_promo) {
 
           getSupportActionBar().setTitle("Promoções");
