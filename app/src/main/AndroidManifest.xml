@@ -31,7 +31,6 @@
         <activity android:name=".LinkedActivity" />
         <activity android:name=".CadastroActivity" />
         <activity android:name=".PagamentoActivity" />
-        <activity android:name=".TutorialActivity"></activity>
     </application>
 
 </manifest>

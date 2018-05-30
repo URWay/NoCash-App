@@ -3,6 +3,8 @@ package com.example.luiz1.nocash;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +15,6 @@ import android.widget.Toast;
 import com.example.luiz1.nocash.Adapter.PromoListview;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class PromocaoFragment extends Fragment {
 
 
@@ -42,7 +41,12 @@ public class PromocaoFragment extends Fragment {
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getActivity(),"WORKS", Toast.LENGTH_SHORT ).show();
+
+                FragmentHomeProduto frag1 = new FragmentHomeProduto();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.corpo, frag1);
+                fragmentTransaction.commit();
             }
         });
 

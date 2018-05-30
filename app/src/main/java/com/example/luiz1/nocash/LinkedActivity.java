@@ -24,7 +24,7 @@ public class LinkedActivity extends AppCompatActivity {
 
 // Toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarnav);
-        toolbar.setTitle("Cadastre-se Aqui!");
+        toolbar.setTitle("Oferta Produto");
         toolbar.setNavigationIcon(R.drawable.ic_clear_white_24dp);
 
         setSupportActionBar(toolbar);
