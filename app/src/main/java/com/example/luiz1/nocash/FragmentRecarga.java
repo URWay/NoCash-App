@@ -19,7 +19,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class RecargaFragment extends Fragment {
+public class FragmentRecarga extends Fragment {
 
 private Button btn10;
 private Button btn20;
@@ -30,7 +30,7 @@ private TextView txtval;
 private TextView txtlimpa;
 private Double soma=0.00;
 
-    public RecargaFragment() {
+    public FragmentRecarga() {
         // Required empty public constructor
     }
 

@@ -15,10 +15,10 @@ import android.widget.Toast;
 import com.example.luiz1.nocash.Adapter.PromoListview;
 
 
-public class PromocaoFragment extends Fragment {
+public class FragmentPromocao extends Fragment {
 
 
-    public PromocaoFragment() {
+    public FragmentPromocao() {
         // Required empty public constructor
     }
 

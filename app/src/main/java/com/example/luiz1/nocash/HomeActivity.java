@@ -16,8 +16,6 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 
-import java.text.DecimalFormat;
-
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class HomeActivity extends AppCompatActivity
@@ -165,11 +163,11 @@ public class HomeActivity extends AppCompatActivity
         } else if (id == R.id.nav_promo) {
 
           getSupportActionBar().setTitle("Promoções");
-        fragmentClass = PromocaoFragment.class;
+        fragmentClass = FragmentPromocao.class;
         } else if (id == R.id.nav_recarga) {
 
         getSupportActionBar().setTitle("Recarga");
-            fragmentClass = RecargaFragment.class;
+            fragmentClass = FragmentRecarga.class;
 
         } else if (id == R.id.nav_transac) {
 
