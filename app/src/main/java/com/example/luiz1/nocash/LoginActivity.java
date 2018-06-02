@@ -48,6 +48,7 @@ public class LoginActivity extends AppCompatActivity {
 
         loading = (ProgressBar) findViewById(R.id.loading);
 
+
         btnsubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

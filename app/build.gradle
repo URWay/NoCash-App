@@ -20,6 +20,7 @@ android {
 
 
 dependencies {
+    compile 'com.github.msayan:tutorial-view:v1.0.6'
     compile 'com.github.f0ris.sweetalert:library:1.5.2'
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     implementation fileTree(include: ['*.jar'], dir: 'libs')

@@ -4,7 +4,7 @@
     package="com.example.luiz1.nocash">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -13,14 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/NoteCashApp"
         tools:replace="android:icon,android:label">
-        <activity
-            android:name=".IntroActivity"
-            android:screenOrientation="portrait">
+        <activity  android:name=".IntroActivity"            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+
         </activity>
         <activity
             android:name=".LoginActivity"
@@ -31,6 +30,9 @@
         <activity android:name=".LinkedActivity" />
         <activity android:name=".CadastroActivity" />
         <activity android:name=".PagamentoActivity" />
+        <activity android:name=".BoardActivity">
+
+        </activity>
     </application>
 
 </manifest>
