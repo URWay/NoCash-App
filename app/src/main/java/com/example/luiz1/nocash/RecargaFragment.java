@@ -36,7 +36,7 @@ private Double soma=0.00;
 
     private void AddSoma(Double valor) {
         soma+=valor;
-        txtval.setText(new DecimalFormat("#,##0.00").format(soma));
+        txtval.setText(new DecimalFormat("###,###,##0.00").format(soma));
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,7 +52,7 @@ private Double soma=0.00;
         txtval = view.findViewById(R.id.textView2);
 
 
-        txtval.setText(new DecimalFormat("#,##0.00").format(0));
+        txtval.setText(new DecimalFormat("###,###,##0.00").format(0));
         btn10.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -85,7 +85,7 @@ private Double soma=0.00;
             @Override
             public void onClick(View view) {
                 soma = 0.00;
-                txtval.setText(new DecimalFormat("#,##0.00").format(soma));
+                txtval.setText(new DecimalFormat("###,###,##0.00").format(soma));
             }
         });
 

@@ -13,7 +13,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
+
+import java.text.DecimalFormat;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -21,11 +24,14 @@ public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private Bundle bundle;
-
+    private TextView txtsaldomenu;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        txtsaldomenu = findViewById(R.id.txtsaldo);
+
 
         ConnectivityManager cm = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
 
@@ -116,7 +122,7 @@ public class HomeActivity extends AppCompatActivity
                     @Override
                     public void onClick(SweetAlertDialog sDialog) {
                         sDialog.dismissWithAnimation();
-                        Intent i = new Intent(HomeActivity.this, LoginActivity.class);
+                        Intent i = new Intent(getApplicationContext(), LoginActivity.class);
                         startActivity(i);
                         finish();
 
@@ -168,10 +174,10 @@ public class HomeActivity extends AppCompatActivity
         } else if (id == R.id.nav_transac) {
 
             getSupportActionBar().setTitle("Minhas Transações");
-
+            fragmentClass = FragmentTransacao.class;
         } else if (id == R.id.nav_login) {
             getSupportActionBar().setTitle("Login");
-
+            fragmentClass = HomeFragment.class;
             logout();
 
         }
