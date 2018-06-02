@@ -117,137 +117,14 @@
 
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/textInputLayoutCep"
-                android:layout_width="210dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="350dp"
-                android:inputType="number"
-                android:textColorHint="#ffffff"
-                android:padding="10dp">
-
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/txtcep"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="CEP *"
-                    android:inputType="number"
-                    android:singleLine="true">
-
-
-                </android.support.design.widget.TextInputEditText>
-
-
-            </android.support.design.widget.TextInputLayout>
-
-            <Button
-                android:id="@+id/btncep"
-                android:layout_width="70dp"
-                android:layout_height="55dp"
-                android:layout_alignStart="@+id/textInputLayoutNumero"
-                android:layout_below="@+id/textInputLayoutRg"
-                android:layout_gravity="center"
-                android:background="#009926"
-                android:text="Buscar cep" />
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/textInputLayoutEndereco"
-                android:layout_width="220dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="400dp"
-                android:textColorHint="#ffffff"
-                android:padding="10dp">
-
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/txtendereco"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Endereço *"
-                    android:singleLine="true">
-
-                </android.support.design.widget.TextInputEditText>
-
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/textInputLayoutNumero"
-                android:layout_width="70dp"
-                android:layout_height="71dp"
-                android:layout_marginStart="245dp"
-                android:layout_marginTop="410dp"
-                android:textColorHint="#ffffff"
-                android:padding="1dp">
-
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/txtnumero"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:hint="N° *"
-                    android:maxLength="5"
-                    android:singleLine="true">
-
-                </android.support.design.widget.TextInputEditText>
-
-
-            </android.support.design.widget.TextInputLayout>
-
-
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/textInputLayoutComplemento"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="450dp"
-                android:textColorHint="#ffffff"
-                android:padding="10dp">
-
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/txtcompcad"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Complemento"
-                    android:singleLine="true">
-
-                </android.support.design.widget.TextInputEditText>
-
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/textInputLayoutLoginCadastro"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="500dp"
-                android:textColorHint="#ffffff"
-                android:padding="10dp">
-
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/txtlogincad"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Login *"
-                    android:singleLine="true">
-
-                </android.support.design.widget.TextInputEditText>
-
-
-            </android.support.design.widget.TextInputLayout>
-
-
-            <android.support.design.widget.TextInputLayout
                 android:id="@+id/textInputLayoutSenhaCadastro"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
-                android:layout_marginTop="550dp"
-                android:textColorHint="#ffffff"
+                android:layout_marginTop="360dp"
+                android:padding="10dp"
 
-                android:padding="10dp">
+                android:textColorHint="#ffffff">
 
                 <android.support.design.widget.TextInputEditText
                     android:id="@+id/txtsenhacad"
@@ -261,7 +138,7 @@
                 </android.support.design.widget.TextInputEditText>
 
 
-            <Button
+                <Button
                     android:id="@+id/btnsubmit"
                     android:layout_width="300dp"
                     android:layout_height="60dp"
@@ -271,7 +148,7 @@
                     android:layout_marginTop="20dp"
                     android:background="#009926"
 
-                    android:text="Entrar" />
+                    android:text="Cadastrar" />
 
             </android.support.design.widget.TextInputLayout>
 

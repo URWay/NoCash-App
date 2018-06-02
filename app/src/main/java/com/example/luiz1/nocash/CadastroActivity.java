@@ -1,218 +1,166 @@
 package com.example.luiz1.nocash;
 
 import android.content.Intent;
-import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import com.example.luiz1.nocash.Model.Cliente;
+import com.example.luiz1.nocash.service.ClienteService;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
+public class CadastroActivity extends AppCompatActivity {
 
-    public class CadastroActivity extends AppCompatActivity {
+    private static final String TAG = "Cadastro";
 
-        private EditText txtnome;
-        private EditText txtmail;
-        private EditText txtcpf;
-        private EditText txtrg;
-        private EditText txtcep;
-        private Button btncep;
-        private EditText txtendereco;
-        private EditText txtnum;
-        private EditText compcad;
-        private EditText txtlogin;
-        private EditText txtsenha;
-        private Button btnok;
-        private Toolbar toolbar;
-        private WebView webView;
-        private Functions f = new Functions();
+    private EditText txtnome;
+    private EditText txtmail;
+    private EditText txtcpf;
+    private EditText txtrg;
+    private EditText txtsenha;
+    private Button btnok;
+    private Toolbar toolbar;
+    private WebView webView;
+    private Functions functions = new Functions();
 
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_cadastro);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_cadastro);
 
-            txtnome = findViewById(R.id.txtnome);
-            txtmail = findViewById(R.id.txtmail);
-            txtcpf = findViewById(R.id.txtcpf);
-            txtrg = findViewById(R.id.txtrg);
-            txtcep = findViewById(R.id.txtcep);
-            btncep = findViewById(R.id.btncep);
-            txtendereco = findViewById(R.id.txtendereco);
-            txtnum = findViewById(R.id.txtnumero);
-            compcad = findViewById(R.id.txtcompcad);
-            txtlogin = findViewById(R.id.txtlogincad);
-            txtsenha = findViewById(R.id.txtsenhacad);
-            btnok = findViewById(R.id.btnsubmit);
+        txtnome = findViewById(R.id.txtnome);
+        txtmail = findViewById(R.id.txtmail);
+        txtcpf = findViewById(R.id.txtcpf);
+        txtrg = findViewById(R.id.txtrg);
+        txtsenha = findViewById(R.id.txtsenhacad);
+        btnok = findViewById(R.id.btnsubmit);
 
-            txtcpf.addTextChangedListener(Mask.insert("###.###.###-##", txtcpf));
-            txtrg.addTextChangedListener(Mask.insert("##.###.###-#", txtrg));
-            txtcep.addTextChangedListener(Mask.insert("#####-###", txtcep));
+        txtcpf.addTextChangedListener(Mask.insert("###.###.###-##", txtcpf));
+        txtrg.addTextChangedListener(Mask.insert("##.###.###-#", txtrg));
 
+        // Toolbar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarcad);
+        toolbar.setTitle("Cadastro de Usuário");
+        toolbar.setNavigationIcon(R.drawable.ic_clear_white_24dp);
 
-            // Toolbar
-            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarcad);
-            toolbar.setTitle("Cadastro de Usuário");
-            toolbar.setNavigationIcon(R.drawable.ic_clear_white_24dp);
-
-            setSupportActionBar(toolbar);
-            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent i = new Intent(CadastroActivity.this, LoginActivity.class);
-                    startActivity(i);
-                    finish();
-                }
-            });
-
-
-
-
-            btnok.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (txtnome.getText().toString().isEmpty() ||
-                            txtmail.getText().toString().isEmpty() ||
-                            txtcpf.getText().toString().isEmpty() ||
-                            txtrg.getText().toString().isEmpty() ||
-                            txtcep.getText().toString().isEmpty() ||
-                            txtendereco.getText().toString().isEmpty() ||
-                            txtnum.getText().toString().isEmpty() ||
-                            txtlogin.getText().toString().isEmpty() ||
-                            txtsenha.getText().toString().isEmpty()
-                            ) {
-                        errologin();
-                    }
-                /*else if(f.isValidEmail(txtmail.toString()) == false){
-                    erromail();
-
-                }*/
-                    else if (f.isCPF(txtcpf.toString()) == false) {
-                        errocpf();
-                    } else {
-                        loginok();
-                    }
-                }
-            });
-
-
-            btncep.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    String vcep = txtcep.getText().toString();
-
-                    if (vcep.isEmpty() || vcep.equals("")) {
-                        errocep();
-                    } else {
-                        EnderecoNetworkCall myCallEndereco = new EnderecoNetworkCall();
-                        myCallEndereco.execute("https://viacep.com.br/ws/" + vcep + "/json/");
-                    }
-                }
-            });
-
-
-        }
-
-
-        private void errocep() {
-            new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
-                    .setTitleText("Opa, houve um erro!")
-                    .setContentText("O CEP informado é inválido, verifique o CEP informado e tente novamente. ")
-                    .show();
-        }
-
-        private void erromail() {
-
-            new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
-                    .setTitleText("Opa, houve um erro!")
-                    .setContentText("O e-mail informado é inválido, verifique o e-mail informado e tente novamente.")
-                    .show();
-
-
-        }
-
-
-
-        // WEBSERVICE CEP
-        public class EnderecoNetworkCall extends AsyncTask<String, Void, String> {
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
-            protected String doInBackground(String... params) {
-                try {
-                    HttpURLConnection urlConnection = (HttpURLConnection) new URL(params[0]).openConnection();
-                    InputStream in = urlConnection.getInputStream();
-                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
-
-                    StringBuilder resultado = new StringBuilder();
-                    String linha = bufferedReader.readLine();
-
-                    while (linha != null) {
-                        resultado.append(linha);
-                        linha = bufferedReader.readLine();
-                    }
-
-                    String respostaCompleta = resultado.toString();
-                    return respostaCompleta;
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                return null;
+            public void onClick(View view) {
+            Intent i = new Intent(CadastroActivity.this, LoginActivity.class);
+            startActivity(i);
+            finish();
             }
-        }
+        });
 
+        btnok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Declaração das variáveis
+                String nome = txtnome.getText().toString().trim();
+                String email = txtmail.getText().toString().trim();
+                String cpf = txtcpf.getText().toString().trim();
+                String rg = txtrg.getText().toString().trim();
+                String senha = txtsenha.getText().toString().trim();
 
+                if (nome.isEmpty() || email.isEmpty() || cpf.isEmpty() ||
+                        rg.isEmpty() || senha.isEmpty() )
+                {
+                    erro("Os campos com * são de preenchimento obrigatórios.");
+                }
+                else if (functions.isCPF(cpf) == false) {
+                    erro("O CPF informado é inválido, verifique o CPF informado e tente novamente.");
+                } else {
 
-        private void errocpf() {
+                    // Colocar o loading aqui
 
-            new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
-                    .setTitleText("Opa, houve um erro!")
-                    .setContentText("O CPF informado é inválido, verifique o CPF informado e tente novamente.")
-                    .show();
+                    Cliente cliente = new Cliente();
 
+                    cliente.setNome(nome);
+                    cliente.setEmail(email);
+                    cliente.setSenha(senha);
+                    cliente.setRg(rg);
+                    cliente.setCpf(cpf);
 
-        }
+                    // Efetua o cadastro
+                    Retrofit retrofit = new Retrofit.Builder()
+                            .baseUrl(ClienteService.BASE_URL)
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .build();
 
-        private void errologin() {
+                    ClienteService service = retrofit.create(ClienteService.class);
+                    Call<Cliente> response = service.Cadastro(cliente);
 
-            new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
-                    .setTitleText("Opa, houve um erro!")
-                    .setContentText("Os campos com * são de preenchimento obrigatórios.")
-                    .show();
-
-
-        }
-
-        private void loginok() {
-            new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
-                    .setTitleText("Bem vindo!")
-                    .setContentText("Cadastro realizado com sucesso!")
-                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-
+                    response.enqueue(new Callback<Cliente>() {
                         @Override
-                        public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        public void onResponse(Call<Cliente> call, Response<Cliente> response) {
 
-                            sweetAlertDialog.dismissWithAnimation();
-                            Intent i = new Intent(CadastroActivity.this, LoginActivity.class);
-                            startActivity(i);
+                            if (!response.isSuccessful()) {
+                                Log.i(TAG, "Erro: " + response.code());
+                                erro("Não foi possível realizar o cadastro, fale com " +
+                                        "os desenvolvedores do aplicativo para resolver o problema!");
+                                // Terminar o loading aqui
+                            } else {
+                                if (response.code() == 200){
+                                    // Terminar o loading aqui
+                                    loginok();
+                                }
+                            }
                         }
 
-                    })
-                    .show();
-
-        }
+                        @Override
+                        public void onFailure(Call<Cliente> call, Throwable t) {
+                            Log.e(TAG, "Erro: " + t.getMessage());
+                            erro("Não foi possível realizar o cadastro, verifique o " +
+                                    "sinal da internet e tente novamente!");
+                            // Terminar o loading aqui
+                        }
+                    });
+                }
+            }
+        });
 
     }
 
+    // Mensagens de aviso
+    private void erro(String mensagem) {
+        new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+                .setTitleText("Opa, houve um erro!")
+                .setContentText(mensagem)
+                .show();
+    }
 
+    // Caso o cadastro seja realizado com sucesso, cadastra o cliente e
+    // redireciona para realizar o Login
+    private void loginok() {
+        new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
+                .setTitleText("Bem vindo!")
+                .setContentText("Cadastro realizado com sucesso!")
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+
+                        sweetAlertDialog.dismissWithAnimation();
+                        Intent i = new Intent(CadastroActivity.this, LoginActivity.class);
+                        startActivity(i);
+                    }
+
+                })
+                .show();
+
+    }
+
+}
