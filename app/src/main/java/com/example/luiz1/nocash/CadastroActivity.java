@@ -1,6 +1,7 @@
 package com.example.luiz1.nocash;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -45,6 +46,8 @@ public class CadastroActivity extends AppCompatActivity {
     Runnable runnable;
     Timer timer;
 
+    SweetAlertDialog load;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,10 +62,6 @@ public class CadastroActivity extends AppCompatActivity {
 
         txtcpf.addTextChangedListener(Mask.insert("###.###.###-##", txtcpf));
         txtrg.addTextChangedListener(Mask.insert("##.###.###-#", txtrg));
-
-        loading = (ProgressBar) findViewById(R.id.loading);
-        // Testar esse loading
-        loading.setVisibility(View.GONE);
 
 
         // Toolbar
@@ -104,9 +103,12 @@ public class CadastroActivity extends AppCompatActivity {
                 } else {
 
                     // Colocar o loading aqui
+                    load=new SweetAlertDialog(CadastroActivity.this,SweetAlertDialog.PROGRESS_TYPE);
+                    load.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+                    load.setTitleText("Aguarde...");
+                    load.setCancelable(true);
+                    load.show();
 
-                    // Testar esse loading
-                loading.setVisibility(View.VISIBLE);
 
                     Cliente cliente = new Cliente();
 
@@ -134,15 +136,12 @@ public class CadastroActivity extends AppCompatActivity {
                                 erro("Não foi possível realizar o cadastro, fale com " +
                                         "os desenvolvedores do aplicativo para resolver o problema!");
                                 // Terminar o loading aqui
-
-                                loading.setVisibility(View.GONE);
+                                    load.hide();
 
                             } else {
                                 if (response.code() == 200){
                                     // Terminar o loading aqui
-                                    // Testar esse loading
-                                    loading.setVisibility(View.GONE);
-
+                                    load.hide();
 
                                     loginok();
                                 }
@@ -155,8 +154,7 @@ public class CadastroActivity extends AppCompatActivity {
                             erro("Não foi possível realizar o cadastro, verifique o " +
                                     "sinal da internet e tente novamente!");
                             // Terminar o loading aqui
-                            // Testar esse loading
-                            loading.setVisibility(View.GONE);
+                            load.hide();
                         }
                     });
                 }
@@ -194,4 +192,11 @@ public class CadastroActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent i = new Intent(CadastroActivity.this, LoginActivity.class);
+        startActivity(i);
+        finish();
+    }
 }

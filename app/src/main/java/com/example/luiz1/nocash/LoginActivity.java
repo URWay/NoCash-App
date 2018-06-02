@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
     private ProgressHelper tempoload;
 
     private ProgressBar loading;
-
+    SweetAlertDialog load;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,10 +47,6 @@ public class LoginActivity extends AppCompatActivity {
         txtcadlogin = (TextView) findViewById(R.id.txtcadlogin);
 
         loading = (ProgressBar) findViewById(R.id.loading);
-        // Testar esse loading
-        loading.setVisibility(View.GONE);
-
-
 
         btnsubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,8 +61,11 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
 
                     // Colocar o loading aqui
-                    // Testar esse loading
-                    loading.setVisibility(View.VISIBLE);
+                    load=new SweetAlertDialog(LoginActivity.this,SweetAlertDialog.PROGRESS_TYPE);
+                    load.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+                    load.setTitleText("Aguarde...");
+                    load.setCancelable(true);
+                    load.show();
 
 
                     final Cliente cliente = new Cliente();
@@ -90,18 +89,15 @@ public class LoginActivity extends AppCompatActivity {
                                     Log.i(TAG, "Erro: " + response.code());
                                     erro("Erro", "E-mail ou senha inválidos!");
                                     // Terminar o loading aqui
-
-                                    // Testar esse loading
-                                    loading.setVisibility(View.GONE);
+                                    load.hide();
 
                                 } else {
                                     // Requisição retornou com sucesso
                                     Cliente cliente = response.body();
                                     if(cliente.getId() > 0){
                                         // Terminar o loading aqui
+                                    load.hide();
 
-                                        // Testar esse loading
-                                        loading.setVisibility(View.GONE);
 
                                         new Session().SessaoLogin(LoginActivity.this, cliente.getId());
                                         loginok();
@@ -115,9 +111,8 @@ public class LoginActivity extends AppCompatActivity {
                                         "Não foi possível realizar o login, verifique o sinal da internet e tente novamente!");
                                 Log.e(TAG, "Erro: " + t.getMessage());
                                 // Terminar o loading aqui
+                                load.hide();
 
-                                // Testar esse loading
-                                loading.setVisibility(View.GONE);
 
                             }
                         });
@@ -125,9 +120,7 @@ public class LoginActivity extends AppCompatActivity {
                         erro("Erro", "Houve um erro: " + e.getMessage());
                         Log.e(TAG, "Erro: " + e.getMessage());
                         // Terminar o loading aqui
-
-                        // Testar esse loading
-                        loading.setVisibility(View.GONE);
+                        load.hide();
 
                     }
                 }

@@ -16,9 +16,6 @@ import java.text.DecimalFormat;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class FragmentRecarga extends Fragment {
 
 private Button btn10;
