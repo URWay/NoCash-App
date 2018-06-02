@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.luiz1.nocash.Model.Cliente;
@@ -33,6 +34,8 @@ public class LoginActivity extends AppCompatActivity {
     private TextView txtcadlogin;
     private ProgressHelper tempoload;
 
+    private ProgressBar loading;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +45,12 @@ public class LoginActivity extends AppCompatActivity {
         txtsenha = (EditText)findViewById(R.id.txtsenha);
         btnsubmit = (Button)findViewById(R.id.btnsubmit);
         txtcadlogin = (TextView) findViewById(R.id.txtcadlogin);
+
+        loading = (ProgressBar) findViewById(R.id.loading);
+        // Testar esse loading
+        loading.setVisibility(View.GONE);
+
+
 
         btnsubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +65,9 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
 
                     // Colocar o loading aqui
+                    // Testar esse loading
+                    loading.setVisibility(View.VISIBLE);
+
 
                     final Cliente cliente = new Cliente();
                     cliente.setEmail(email);
@@ -78,11 +90,19 @@ public class LoginActivity extends AppCompatActivity {
                                     Log.i(TAG, "Erro: " + response.code());
                                     erro("Erro", "E-mail ou senha inválidos!");
                                     // Terminar o loading aqui
+
+                                    // Testar esse loading
+                                    loading.setVisibility(View.GONE);
+
                                 } else {
                                     // Requisição retornou com sucesso
                                     Cliente cliente = response.body();
                                     if(cliente.getId() > 0){
                                         // Terminar o loading aqui
+
+                                        // Testar esse loading
+                                        loading.setVisibility(View.GONE);
+
                                         new Session().SessaoLogin(LoginActivity.this, cliente.getId());
                                         loginok();
                                     }
@@ -95,12 +115,20 @@ public class LoginActivity extends AppCompatActivity {
                                         "Não foi possível realizar o login, verifique o sinal da internet e tente novamente!");
                                 Log.e(TAG, "Erro: " + t.getMessage());
                                 // Terminar o loading aqui
+
+                                // Testar esse loading
+                                loading.setVisibility(View.GONE);
+
                             }
                         });
                     }catch(Exception e){
                         erro("Erro", "Houve um erro: " + e.getMessage());
                         Log.e(TAG, "Erro: " + e.getMessage());
                         // Terminar o loading aqui
+
+                        // Testar esse loading
+                        loading.setVisibility(View.GONE);
+
                     }
                 }
             }

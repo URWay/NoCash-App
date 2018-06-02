@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 public class IntroActivity extends AppCompatActivity {
-    private static int SPLASH_TIMEOUT = 4000;
+    private static int SPLASH_TIMEOUT = 3000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,11 +20,6 @@ public class IntroActivity extends AppCompatActivity {
                 finish();
             }
         }, SPLASH_TIMEOUT);
-
-
-
-
-
 
 
      }

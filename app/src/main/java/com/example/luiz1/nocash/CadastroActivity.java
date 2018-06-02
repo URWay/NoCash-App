@@ -2,6 +2,7 @@ package com.example.luiz1.nocash;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -9,9 +10,13 @@ import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import com.example.luiz1.nocash.Model.Cliente;
 import com.example.luiz1.nocash.service.ClienteService;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import retrofit2.Call;
@@ -35,6 +40,11 @@ public class CadastroActivity extends AppCompatActivity {
     private WebView webView;
     private Functions functions = new Functions();
 
+    private ProgressBar loading;
+    Handler handler;
+    Runnable runnable;
+    Timer timer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +59,11 @@ public class CadastroActivity extends AppCompatActivity {
 
         txtcpf.addTextChangedListener(Mask.insert("###.###.###-##", txtcpf));
         txtrg.addTextChangedListener(Mask.insert("##.###.###-#", txtrg));
+
+        loading = (ProgressBar) findViewById(R.id.loading);
+        // Testar esse loading
+        loading.setVisibility(View.GONE);
+
 
         // Toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarcad);
@@ -65,9 +80,13 @@ public class CadastroActivity extends AppCompatActivity {
             }
         });
 
+
+
         btnok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
                 // Declaração das variáveis
                 String nome = txtnome.getText().toString().trim();
                 String email = txtmail.getText().toString().trim();
@@ -85,6 +104,9 @@ public class CadastroActivity extends AppCompatActivity {
                 } else {
 
                     // Colocar o loading aqui
+
+                    // Testar esse loading
+                loading.setVisibility(View.VISIBLE);
 
                     Cliente cliente = new Cliente();
 
@@ -112,9 +134,16 @@ public class CadastroActivity extends AppCompatActivity {
                                 erro("Não foi possível realizar o cadastro, fale com " +
                                         "os desenvolvedores do aplicativo para resolver o problema!");
                                 // Terminar o loading aqui
+
+                                loading.setVisibility(View.GONE);
+
                             } else {
                                 if (response.code() == 200){
                                     // Terminar o loading aqui
+                                    // Testar esse loading
+                                    loading.setVisibility(View.GONE);
+
+
                                     loginok();
                                 }
                             }
@@ -126,6 +155,8 @@ public class CadastroActivity extends AppCompatActivity {
                             erro("Não foi possível realizar o cadastro, verifique o " +
                                     "sinal da internet e tente novamente!");
                             // Terminar o loading aqui
+                            // Testar esse loading
+                            loading.setVisibility(View.GONE);
                         }
                     });
                 }
