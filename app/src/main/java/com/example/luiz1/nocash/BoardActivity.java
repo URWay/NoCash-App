@@ -20,32 +20,25 @@ public class BoardActivity extends TutorialActivity {
         setFinishText("Usar o aplicativo"); // Finish button text
         setCancelText("Cancelar"); // Cancel button text
 
-
-
         addFragment(new Step.Builder().setTitle("Bem vindo ao NoCash!")
-                .setContent("This is content")
+                .setContent("Aqui você conseguirá verificar o seu saldo, adicionar créditos à sua carteira e conferir diversas promoções!")
                 .setBackgroundColor(Color.parseColor("#121212")) // int background color
-                .setDrawable(R.drawable.logomenu) // int top drawable
-                .setSummary("This is summary")
+                .setDrawable(R.drawable.logonocash) // int top drawable
                 .build());
 
 
         addFragment(new Step.Builder().setTitle("Facilidade nas suas compras!")
-                .setContent("This is content")
+                .setContent("Com a NoCash, você conta com promoções exclusivas para você! ")
                 .setBackgroundColor(Color.parseColor("#121212")) // int background color
-                .setDrawable(R.drawable.ic_action_home) // int top drawable
-                .setSummary("This is summary")
+                .setDrawable(R.drawable.imgcompra) // int top drawable
                 .build());
 
 
-        addFragment(new Step.Builder().setTitle("Realize o login")
-                .setContent("Com o login realizado, poderá ter acesso total à plataforma!")
+        addFragment(new Step.Builder().setTitle("Faça o login!")
+                .setContent("Com o login efetuado, terá acesso total à plataforma, obtendo descontos, promoções e muito mais!")
                 .setBackgroundColor(Color.parseColor("#121212")) // int background color
-                .setDrawable(R.drawable.ic_login) // int top drawable
-                .setSummary("Obtendo descontos, promoções e muito mais!")
+                .setDrawable(R.drawable.imguser) // int top drawable
                 .build());
-
-
 
 
     }
