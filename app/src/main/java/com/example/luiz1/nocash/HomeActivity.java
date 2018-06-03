@@ -1,11 +1,11 @@
 package com.example.luiz1.nocash;
-import android.net.ConnectivityManager;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,7 +14,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -115,17 +114,23 @@ public class HomeActivity extends AppCompatActivity
                 .setContentText("Deseja fazer logoff?")
                 .setConfirmText("Sim")
                 .setCancelText("Não")
-                          // Função para confirmar
-                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                    @Override
-                    public void onClick(SweetAlertDialog sDialog) {
-                        sDialog.dismissWithAnimation();
-                        Intent i = new Intent(getApplicationContext(), LoginActivity.class);
-                        startActivity(i);
-                        finish();
 
+                // Função para confirmar
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sDialog) {
+
+                            // Logout - mata a sessão
+                            Session session = new Session();
+                            session.Logoff(HomeActivity.this);
+
+                            sDialog.dismissWithAnimation();
+                            Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+                            startActivity(i);
+                            finish();
+
+                        }
                     }
-                }
                 )
                 // Função para cancelar
                 .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
@@ -137,9 +142,7 @@ public class HomeActivity extends AppCompatActivity
                     }
                 })
 
-
                 .show();
-
 
     }
 

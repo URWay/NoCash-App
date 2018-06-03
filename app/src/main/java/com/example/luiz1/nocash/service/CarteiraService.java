@@ -8,12 +8,12 @@ import retrofit2.http.POST;
 
 public interface CarteiraService {
 
-    public static final String BASE_URL = "http://localhost:8080/nocash/ws/carteira/";
+    public static final String BASE_URL = "https://carteiravirtualws.azurewebsites.net/nocash/ws/";
 
     /**
      *  Serviço de cadastro da carteira do cliente
      */
-    @POST
+    @POST("carteira")
     Call<Carteira> Cadastro(@Body Carteira carteira);
 
 }

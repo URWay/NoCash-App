@@ -98,43 +98,36 @@ public class LoginActivity extends AppCompatActivity {
                             @Override
                             public void onResponse(Call<Cliente> call, Response<Cliente> response) {
 
-                                if (!response.isSuccessful()) {
-                                    Log.i(TAG, "Erro: " + response.code());
-                                    erro("Erro", "E-mail ou senha inválidos!");
+                                if (response.isSuccessful()) {
                                     // Terminar o loading aqui
                                     load.hide();
+                                    Log.i(TAG, "Erro: " + response.code());
 
-                                } else {
-                                    // Requisição retornou com sucesso
                                     Cliente cliente = response.body();
                                     if(cliente.getId() > 0){
-                                        // Terminar o loading aqui
-                                    load.hide();
-
-
                                         new Session().SessaoLogin(LoginActivity.this, cliente.getId());
                                         loginok();
+                                    } else {
+                                        erro("Erro", "E-mail ou senha inválidos!");
                                     }
                                 }
+                                
                             }
 
                             @Override
                             public void onFailure(Call<Cliente> call, Throwable t) {
+                                load.hide();
                                 erro("Erro", "" +
                                         "Não foi possível realizar o login, verifique o sinal da internet e tente novamente!");
                                 Log.e(TAG, "Erro: " + t.getMessage());
                                 // Terminar o loading aqui
-                                load.hide();
-
-
                             }
                         });
                     }catch(Exception e){
-                        erro("Erro", "Houve um erro: " + e.getMessage());
-                        Log.e(TAG, "Erro: " + e.getMessage());
                         // Terminar o loading aqui
                         load.hide();
-
+                        erro("Erro", "Houve um erro: " + e.getMessage());
+                        Log.e(TAG, "Erro: " + e.getMessage());
                     }
                 }
             }

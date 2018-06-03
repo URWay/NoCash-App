@@ -17,7 +17,6 @@ import com.example.luiz1.nocash.Model.Cliente;
 import com.example.luiz1.nocash.service.ClienteService;
 
 import java.util.Timer;
-import java.util.TimerTask;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import retrofit2.Call;
@@ -109,7 +108,6 @@ public class CadastroActivity extends AppCompatActivity {
                     load.setCancelable(true);
                     load.show();
 
-
                     Cliente cliente = new Cliente();
 
                     cliente.setNome(nome);
@@ -119,44 +117,50 @@ public class CadastroActivity extends AppCompatActivity {
                     cliente.setCpf(cpf);
 
                     // Efetua o cadastro
-                    Retrofit retrofit = new Retrofit.Builder()
-                            .baseUrl(ClienteService.BASE_URL)
-                            .addConverterFactory(GsonConverterFactory.create())
-                            .build();
+                    try {
+                        Retrofit retrofit = new Retrofit.Builder()
+                                .baseUrl(ClienteService.BASE_URL)
+                                .addConverterFactory(GsonConverterFactory.create())
+                                .build();
 
-                    ClienteService service = retrofit.create(ClienteService.class);
-                    Call<Cliente> response = service.Cadastro(cliente);
+                        ClienteService service = retrofit.create(ClienteService.class);
+                        Call<Void> response = service.inserirCliente(cliente);
 
-                    response.enqueue(new Callback<Cliente>() {
-                        @Override
-                        public void onResponse(Call<Cliente> call, Response<Cliente> response) {
+                        response.enqueue(new Callback<Void>() {
+                            @Override
+                            public void onResponse(Call<Void> call, Response<Void> response) {
 
-                            if (!response.isSuccessful()) {
-                                Log.i(TAG, "Erro: " + response.code());
-                                erro("Não foi possível realizar o cadastro, fale com " +
-                                        "os desenvolvedores do aplicativo para resolver o problema!");
-                                // Terminar o loading aqui
+                                if (!response.isSuccessful()) {
+                                    // Terminar o loading aqui
                                     load.hide();
 
-                            } else {
-                                if (response.code() == 200){
+                                    Log.i(TAG, "Erro: " + response.code());
+                                    erro("Não foi possível realizar o cadastro verifique" +
+                                            " os campos e tente novamente!");
+                                } else {
                                     // Terminar o loading aqui
                                     load.hide();
 
                                     loginok();
                                 }
                             }
-                        }
 
-                        @Override
-                        public void onFailure(Call<Cliente> call, Throwable t) {
-                            Log.e(TAG, "Erro: " + t.getMessage());
-                            erro("Não foi possível realizar o cadastro, verifique o " +
-                                    "sinal da internet e tente novamente!");
-                            // Terminar o loading aqui
-                            load.hide();
-                        }
-                    });
+                            @Override
+                            public void onFailure(Call<Void> call, Throwable t) {
+                                // Terminar o loading aqui
+                                load.hide();
+
+                                Log.e(TAG, "Erro: " + t.getMessage());
+                                erro("Não foi possível realizar o cadastro!");
+                            }
+                        });
+                    } catch(Exception e){
+                        // Terminar o loading aqui
+                        load.hide();
+
+                        erro("Houve um erro: " + e.getMessage());
+                        Log.e(TAG, "Erro: " + e.getMessage());
+                    }
                 }
             }
         });

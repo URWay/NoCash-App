@@ -8,17 +8,17 @@ import retrofit2.http.POST;
 
 public interface ClienteService {
 
-    public static final String BASE_URL = "http://localhost:8080/nocash/ws/clientes/";
+    public static final String BASE_URL = "https://carteiravirtualws.azurewebsites.net/nocash/ws/";
 
     /**
      *  Serviço de login do cliente
      */
-    @POST("login")
+    @POST("clientes/login")
     Call<Cliente> Login(@Body Cliente cliente);
 
     /**
     *  Serviço de cadastro do cliente
     */
-    @POST
-    Call<Cliente> Cadastro(@Body Cliente cliente);
+    @POST("clientes")
+    Call<Void> inserirCliente(@Body Cliente cliente);
 }
