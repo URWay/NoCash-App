@@ -44,10 +44,13 @@ public class BoardActivity extends TutorialActivity {
     }
 
     @Override
+    public void onBackPressed() {   }
+    @Override
     public void finishTutorial() {
         Intent i = new Intent(BoardActivity.this, LoginActivity.class);
         startActivity(i);
         finish();
 
     }
+
 }
