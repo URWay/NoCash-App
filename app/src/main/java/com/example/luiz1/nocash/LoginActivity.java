@@ -48,6 +48,18 @@ public class LoginActivity extends AppCompatActivity {
 
         loading = (ProgressBar) findViewById(R.id.loading);
 
+        Boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+                .getBoolean("isFirstRun", true);
+
+        if (isFirstRun) {
+            //show sign up activity
+            startActivity(new Intent(LoginActivity.this, BoardActivity.class));
+
+        }
+        getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                .putBoolean("isFirstRun", false).commit();
+
+
 
         btnsubmit.setOnClickListener(new View.OnClickListener() {
             @Override

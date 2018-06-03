@@ -15,6 +15,11 @@ public class BoardActivity extends TutorialActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setPrevText("Anterior"); // Previous button text
+        setNextText("Próximo"); // Next button text
+        setFinishText("Usar o aplicativo"); // Finish button text
+        setCancelText("Cancelar"); // Cancel button text
+
 
 
         addFragment(new Step.Builder().setTitle("Bem vindo ao NoCash!")
@@ -40,11 +45,6 @@ public class BoardActivity extends TutorialActivity {
                 .setSummary("Obtendo descontos, promoções e muito mais!")
                 .build());
 
-
-        setPrevText("Anterior"); // Previous button text
-        setNextText("Próximo"); // Next button text
-        setFinishText("Usar o aplicativo"); // Finish button text
-        setCancelText("Cancelar"); // Cancel button text
 
 
 
