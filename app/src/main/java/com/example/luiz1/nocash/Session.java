@@ -1,10 +1,13 @@
 package com.example.luiz1.nocash;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.example.luiz1.nocash.Model.Carteira;
 import com.example.luiz1.nocash.Model.Cliente;
+import com.example.luiz1.nocash.service.CarteiraService;
 import com.example.luiz1.nocash.service.ClienteService;
 import com.google.gson.Gson;
 
@@ -20,7 +23,11 @@ public class Session {
     private static boolean RETORNO = false;
     private SharedPreferences prefs = null;
 
-    // Retorno do ID do cliente
+    /*
+    ------------------------------------- Sessão do Cliente  ------------------------------------
+     */
+
+    // Retorno do cliente
     public String getSession(Context context){
         prefs = context.getSharedPreferences("SessionLogin", context.MODE_PRIVATE);
         return prefs.getString("Session", "");
@@ -43,7 +50,44 @@ public class Session {
         prefs.edit().remove("Session").commit();
     }
 
-    // Verifica se já existe o e-mail cadastradi
+    /*
+    ------------------------------------- Sessão da Carteira ------------------------------------
+     */
+
+    // Armazena a carteira para atualizar o valor
+    public void SessaoCarteira(Context context, Carteira carteira){
+        Gson gson = new Gson();
+        try {
+            String object = gson.toJson(carteira);
+
+            prefs = context.getSharedPreferences("SessionWallet", context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putString("Wallet", object);
+            editor.apply();
+
+        } catch (Exception e){
+            Log.e(TAG, "Erro: " + e.getMessage());
+        }
+    }
+
+    // Deleta sessão da Carteira
+    public void SessionCarteiraDelete(Context context){
+        prefs = context.getSharedPreferences("SessionWallet", context.MODE_PRIVATE);
+        prefs.edit().remove("Wallet").commit();
+    }
+
+    // Retorno da carteira
+    public String getSessionCarteira(Context context){
+        prefs = context.getSharedPreferences("SessionWallet", context.MODE_PRIVATE);
+        Log.e(TAG, "Carteira: " + prefs.getString("Wallet", ""));
+        return prefs.getString("Wallet", "");
+    }
+
+    /*
+    ------------------------------------- Validações ------------------------------------
+     */
+
+    // Verifica se já existe o e-mail cadastrado
     public boolean verificaEmail(String email){
 
         try {
@@ -69,6 +113,131 @@ public class Session {
                 @Override
                 public void onFailure(Call<Boolean> call, Throwable t) {
                     Log.e(TAG, "Erro: " + t.getMessage());
+                    RETORNO = true;
+                }
+            });
+
+        } catch (Exception e){
+            Log.e(TAG, "Erro: " + e.getMessage());
+            RETORNO = true;
+        }
+
+        return RETORNO;
+    }
+
+    // Verifica o primeiro acesso
+    public boolean primeiroAcesso(Activity activity){
+
+        try {
+
+            String json = getSession(activity);
+            Log.i(TAG, "Session: " + json);
+            Gson gson = new Gson();
+
+            try {
+
+                Cliente cliente = gson.fromJson(json, Cliente.class);
+                int id = cliente.getId();
+
+                retornoCarteira(id, activity);
+                Session session = new Session();
+
+                String object = session.getSessionCarteira(activity);
+
+                Carteira carteira = gson.fromJson(object, Carteira.class);
+
+                if(carteira.getId() > 0)
+                    RETORNO = true;
+                else
+                    RETORNO = false;
+
+            } catch (Exception e) {
+                Log.i(TAG, "Session: " + e.getMessage());
+            }
+
+        } catch (Exception e){
+            Log.e(TAG, "Erro: " + e.getMessage());
+        }
+
+        return RETORNO;
+    }
+
+    // Busca a carteira do cliente
+    public void retornoCarteira(int id, final Activity activity){
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(CarteiraService.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        CarteiraService service = retrofit.create(CarteiraService.class);
+        Call<Carteira> response = service.obter(id);
+
+        response.enqueue(new Callback<Carteira>() {
+            @Override
+            public void onResponse(Call<Carteira> call, Response<Carteira> response) {
+                if (response.isSuccessful()) {
+                    Carteira carteira = new Carteira();
+                    carteira = response.body();
+                    SessaoCarteira(activity, carteira);
+                } else {
+                    Log.e(TAG, "Erro: " + response.isSuccessful());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Carteira> call, Throwable t) {
+                Log.e(TAG, "Erro: " + t.getMessage());
+            }
+        });
+
+    }
+
+    // Insere a carteira do cliente
+    public void inserirCarteira(final Activity activity) {
+
+        try {
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(CarteiraService.BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+
+            CarteiraService service = retrofit.create(CarteiraService.class);
+            String object =  new Session().getSession(activity);
+
+            Gson gson = new Gson();
+            final Cliente cliente = gson.fromJson(object, Cliente.class);
+
+            final Carteira[] carteira = {new Carteira()};
+            carteira[0].setNome(cliente.getNome());
+            carteira[0].setSenha(cliente.getSenha());
+            carteira[0].setSaldo(0.0);
+            carteira[0].setSenhaOpcional((short) 0);
+
+            carteira[0].setCliente(cliente);
+
+            Call<Void> response = service.inserirCarteira(carteira[0]);
+            response.enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    if (!response.isSuccessful()) {
+                        Log.i(TAG, "Erro: " + response.code());
+                    } else {
+                        Gson g = new Gson();
+                        Session session = new Session();
+
+                        String object = session.getSessionCarteira(activity);
+
+                        Carteira carteira = g.fromJson(object, Carteira.class);
+
+                        SessaoCarteira(activity, carteira);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Void> call, Throwable t) {
+                    Log.e(TAG, "Erro: " + t.getMessage());
                 }
             });
 
@@ -76,7 +245,6 @@ public class Session {
             Log.e(TAG, "Erro: " + e.getMessage());
         }
 
-        return RETORNO;
     }
 
 }

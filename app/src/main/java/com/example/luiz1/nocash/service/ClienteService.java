@@ -25,6 +25,6 @@ public interface ClienteService {
     /**
      *  Serviço que verifica se já existe o e-mail cadastrado
      */
-    @POST("email")
+    @POST("clientes/email")
     Call<Boolean> verificaEmail(@Body String email);
 }

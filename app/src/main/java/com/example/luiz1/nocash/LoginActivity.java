@@ -147,6 +147,11 @@ public class LoginActivity extends AppCompatActivity {
                         Cliente cliente = response.body();
                         if(cliente.getId() > 0){
                             new Session().SessaoLogin(LoginActivity.this, cliente);
+
+                            // Armazena a carteira
+                            Session session = new Session();
+                            session.retornoCarteira(cliente.getId(), LoginActivity.this);
+
                             loginok();
                         } else {
                             erro("Erro", "E-mail ou senha inválidos!");

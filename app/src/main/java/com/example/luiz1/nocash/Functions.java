@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
+
+import com.example.luiz1.nocash.Model.Carteira;
+import com.google.gson.Gson;
 
 import java.util.InputMismatchException;
 import java.util.regex.Matcher;
@@ -56,7 +58,6 @@ public class Functions {
         return false;
     }
 
-
     public boolean isValidEmail(String email){
         if (null != email) {
             String regex = "^([_a-zA-Z0-9-]+(\\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*(\\.[a-zA-Z]{1,6}))?$";
@@ -71,7 +72,6 @@ public class Functions {
 
         return false;
     }
-
 
     public static boolean isCPF(String CPF) {
         CPF = CPF.replace(".", "");
@@ -130,6 +130,18 @@ public class Functions {
         }
     }
 
+    // Retorna o saldo na carteira
+    public double vSaldo(Activity activity) {
+        Gson gson = new Gson();
+        Session session = new Session();
 
+        String object = session.getSessionCarteira(activity);
+
+        Carteira carteira = gson.fromJson(object, Carteira.class);
+
+        double saldo = carteira.getSaldo();
+
+        return saldo;
+    }
 
 }
