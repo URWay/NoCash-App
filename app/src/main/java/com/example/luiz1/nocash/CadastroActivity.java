@@ -116,44 +116,54 @@ public class CadastroActivity extends AppCompatActivity {
                     cliente.setRg(rg);
                     cliente.setCpf(cpf);
 
-                    // Efetua o cadastro
                     try {
-                        Retrofit retrofit = new Retrofit.Builder()
-                                .baseUrl(ClienteService.BASE_URL)
-                                .addConverterFactory(GsonConverterFactory.create())
-                                .build();
+                        // Verifica se o e-mail não está cadastrado
+                        Session session = new Session();
+                        if(!session.verificaEmail(email)) {
+                            // Efetua o cadastro
+                            Retrofit retrofit = new Retrofit.Builder()
+                                    .baseUrl(ClienteService.BASE_URL)
+                                    .addConverterFactory(GsonConverterFactory.create())
+                                    .build();
 
-                        ClienteService service = retrofit.create(ClienteService.class);
-                        Call<Void> response = service.inserirCliente(cliente);
+                            ClienteService service = retrofit.create(ClienteService.class);
+                            Call<Void> response = service.inserirCliente(cliente);
 
-                        response.enqueue(new Callback<Void>() {
-                            @Override
-                            public void onResponse(Call<Void> call, Response<Void> response) {
+                            response.enqueue(new Callback<Void>() {
+                                @Override
+                                public void onResponse(Call<Void> call, Response<Void> response) {
 
-                                if (!response.isSuccessful()) {
-                                    // Terminar o loading aqui
-                                    load.hide();
+                                    if (!response.isSuccessful()) {
+                                        // Terminar o loading aqui
+                                        load.hide();
 
-                                    Log.i(TAG, "Erro: " + response.code());
-                                    erro("Não foi possível realizar o cadastro verifique" +
-                                            " os campos e tente novamente!");
-                                } else {
-                                    // Terminar o loading aqui
-                                    load.hide();
+                                        Log.i(TAG, "Erro: " + response.code());
+                                        erro("Não foi possível realizar o cadastro verifique" +
+                                                " os campos e tente novamente!");
+                                    } else {
+                                        // Terminar o loading aqui
+                                        load.hide();
 
-                                    loginok();
+                                        loginok();
+                                    }
                                 }
-                            }
 
-                            @Override
-                            public void onFailure(Call<Void> call, Throwable t) {
-                                // Terminar o loading aqui
-                                load.hide();
+                                @Override
+                                public void onFailure(Call<Void> call, Throwable t) {
+                                    // Terminar o loading aqui
+                                    load.hide();
 
-                                Log.e(TAG, "Erro: " + t.getMessage());
-                                erro("Não foi possível realizar o cadastro!");
-                            }
-                        });
+                                    Log.e(TAG, "Erro: " + t.getMessage());
+                                    erro("Não foi possível realizar o cadastro!");
+                                }
+                            });
+                        } else {
+                            // Terminar o loading aqui
+                            load.hide();
+
+                            erro("E-mail já cadastro!");
+                        }
+
                     } catch(Exception e){
                         // Terminar o loading aqui
                         load.hide();
@@ -188,6 +198,7 @@ public class CadastroActivity extends AppCompatActivity {
 
                         sweetAlertDialog.dismissWithAnimation();
                         Intent i = new Intent(CadastroActivity.this, LoginActivity.class);
+                        i.putExtra("Login", "false");
                         startActivity(i);
                     }
 

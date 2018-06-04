@@ -21,4 +21,10 @@ public interface ClienteService {
     */
     @POST("clientes")
     Call<Void> inserirCliente(@Body Cliente cliente);
+
+    /**
+     *  Serviço que verifica se já existe o e-mail cadastrado
+     */
+    @POST("email")
+    Call<Boolean> verificaEmail(@Body String email);
 }
