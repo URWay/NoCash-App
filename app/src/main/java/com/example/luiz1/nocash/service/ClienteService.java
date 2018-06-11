@@ -4,9 +4,7 @@ import com.example.luiz1.nocash.Model.Cliente;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.Path;
 
 public interface ClienteService {
 
@@ -27,6 +25,6 @@ public interface ClienteService {
     /**
      *  Serviço que verifica se já existe o e-mail cadastrado
      */
-    @GET("clientes/email/{param}")
-    Call<Boolean> verificaEmail(@Path("param") String email);
+    @POST("clientes/email")
+    Call<Boolean> verificaEmail(@Body String email);
 }
