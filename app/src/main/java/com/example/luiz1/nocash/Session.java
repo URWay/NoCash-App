@@ -123,7 +123,7 @@ public class Session {
 
         try {
             // verificar pq não está validando
-            String emailUnico = "\"email\":" + "\""+email+"\"";
+            String emailUnico = "{\"email\":" + "\""+email+"\"}";
 
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(ClienteService.BASE_URL)
@@ -138,18 +138,9 @@ public class Session {
                 public void onResponse(Call<Boolean> call, Response<Boolean> response) {
 
                     if(response.isSuccessful()){
-                        Boolean retorno = response.body();
-
                         prefs = context.getSharedPreferences("RETORNO", context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = prefs.edit();
-                        editor.putBoolean("RETORNO", retorno);
-                        editor.apply();
-                    } else {
-                        Boolean retorno = response.body();
-
-                        prefs = context.getSharedPreferences("RETORNO", context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = prefs.edit();
-                        editor.putBoolean("RETORNO", retorno);
+                        editor.putBoolean("RETORNO", true);
                         editor.apply();
                     }
                 }
