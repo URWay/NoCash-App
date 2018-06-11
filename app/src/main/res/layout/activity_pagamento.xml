@@ -87,7 +87,7 @@
         android:textSize="18sp" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnEfetuarPagamento"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/textView9"

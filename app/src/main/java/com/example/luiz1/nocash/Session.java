@@ -3,14 +3,17 @@ package com.example.luiz1.nocash;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.util.Log;
 
 import com.example.luiz1.nocash.Model.Carteira;
 import com.example.luiz1.nocash.Model.Cliente;
+import com.example.luiz1.nocash.Model.Pagamento;
 import com.example.luiz1.nocash.service.CarteiraService;
 import com.example.luiz1.nocash.service.ClienteService;
 import com.google.gson.Gson;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -84,11 +87,39 @@ public class Session {
     }
 
     /*
+    ------------------------------------- Sessão do Movimento ------------------------------------
+     */
+
+    // Armazena o da recarga
+    public void SessaoPagamento(Context context, Pagamento pagamento){
+        Gson gson = new Gson();
+        try {
+            String object = gson.toJson(pagamento);
+
+            prefs = context.getSharedPreferences("SessionPay", context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putString("Pay", object);
+            editor.apply();
+
+        } catch (Exception e){
+            Log.e(TAG, "Erro: " + e.getMessage());
+        }
+    }
+
+    // Retorno da carteira
+    public String getSessionPagamento(Context context){
+        prefs = context.getSharedPreferences("SessionPay", context.MODE_PRIVATE);
+        Log.e(TAG, "Pagamento: " + prefs.getString("Pay", ""));
+        return prefs.getString("Pay", "");
+    }
+
+
+    /*
     ------------------------------------- Validações ------------------------------------
      */
 
     // Verifica se já existe o e-mail cadastrado
-    public boolean verificaEmail(String email){
+    public boolean verificaEmail(String email, final Context context){
 
         try {
             // verificar pq não está validando
@@ -105,8 +136,21 @@ public class Session {
             response.enqueue(new Callback<Boolean>() {
                 @Override
                 public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                    if (response.isSuccessful()) {
-                        RETORNO = response.body();
+
+                    if(response.isSuccessful()){
+                        Boolean retorno = response.body();
+
+                        prefs = context.getSharedPreferences("RETORNO", context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = prefs.edit();
+                        editor.putBoolean("RETORNO", retorno);
+                        editor.apply();
+                    } else {
+                        Boolean retorno = response.body();
+
+                        prefs = context.getSharedPreferences("RETORNO", context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = prefs.edit();
+                        editor.putBoolean("RETORNO", retorno);
+                        editor.apply();
                     }
                 }
 
@@ -121,6 +165,9 @@ public class Session {
             Log.e(TAG, "Erro: " + e.getMessage());
             RETORNO = true;
         }
+
+        prefs = context.getSharedPreferences("RETORNO", context.MODE_PRIVATE);
+        RETORNO =  prefs.getBoolean("RETORNO", false);
 
         return RETORNO;
     }
@@ -246,5 +293,30 @@ public class Session {
         }
 
     }
+
+    // Verifica se o cliente não possuí uma carteira e cria
+    public void verificaCarteira(Activity activity){
+
+        String object = getSessionCarteira(activity);
+        Gson gson = new Gson();
+        Carteira carteira = gson.fromJson(object, Carteira.class);
+
+        if(carteira.getId() == 0){
+            if(!primeiroAcesso(activity)){
+                SweetAlertDialog load;
+                load = new SweetAlertDialog(activity,SweetAlertDialog.PROGRESS_TYPE);
+                load.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+                load.setTitleText("Aguarde...");
+                load.setCancelable(true);
+                load.show();
+
+                // Insere a carteira do cliente
+                inserirCarteira(activity);
+                load.hide();
+            }
+        }
+    }
+
+
 
 }
