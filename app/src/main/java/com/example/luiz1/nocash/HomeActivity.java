@@ -2,7 +2,6 @@ package com.example.luiz1.nocash;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -16,9 +15,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-
-import com.example.luiz1.nocash.Model.Carteira;
-import com.google.gson.Gson;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -82,31 +78,13 @@ public class HomeActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
 
         // Verifica se o cliente não possuí uma carteira e cria
-
         Session session = new Session();
-
-        String object = session.getSessionCarteira(HomeActivity.this);
-        Gson gson = new Gson();
-        Carteira carteira = gson.fromJson(object, Carteira.class);
-
-        if(carteira.getId() == 0){
-            if(!session.primeiroAcesso(HomeActivity.this)){
-                load = new SweetAlertDialog(HomeActivity.this,SweetAlertDialog.PROGRESS_TYPE);
-                load.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
-                load.setTitleText("Aguarde...");
-                load.setCancelable(true);
-                load.show();
-
-                // Insere a carteira do cliente
-                session.inserirCarteira(HomeActivity.this);
-                load.hide();
-            }
-        }
+        session.verificaCarteira(HomeActivity.this);
 
         // Atualizar o valor da carteira
-        //Functions functions = new Functions();
-        //double saldo = functions.vSaldo(HomeActivity.this);
-        //txtsaldomenu.setText(String.valueOf(saldo));
+        Functions functions = new Functions();
+        double saldo = functions.vSaldo(HomeActivity.this);
+        //txtsaldomenu.setText(new DecimalFormat("R$ #,##0.00").format(saldo));
 
     }
 

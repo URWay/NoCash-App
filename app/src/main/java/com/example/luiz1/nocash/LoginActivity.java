@@ -140,7 +140,6 @@ public class LoginActivity extends AppCompatActivity {
                 public void onResponse(Call<Cliente> call, Response<Cliente> response) {
 
                     if (response.isSuccessful()) {
-                        // Terminar o loading aqui
                         load.hide();
                         Log.i(TAG, "Erro: " + response.code());
 
@@ -166,11 +165,9 @@ public class LoginActivity extends AppCompatActivity {
                     erro("Erro", "" +
                             "Não foi possível realizar o login, verifique o sinal da internet e tente novamente!");
                     Log.e(TAG, "Erro: " + t.getMessage());
-                    // Terminar o loading aqui
                 }
             });
         }catch(Exception e){
-            // Terminar o loading aqui
             load.hide();
             erro("Erro", "Houve um erro: " + e.getMessage());
             Log.e(TAG, "Erro: " + e.getMessage());

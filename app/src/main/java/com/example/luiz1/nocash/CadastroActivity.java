@@ -119,7 +119,8 @@ public class CadastroActivity extends AppCompatActivity {
                     try {
                         // Verifica se o e-mail não está cadastrado
                         Session session = new Session();
-                        if(!session.verificaEmail(email)) {
+                        // ESSA POHA NÃO FUNCIONAAAAAAAAAAAAAAAAAAAAAAAAA
+                        if(!session.verificaEmail(email, CadastroActivity.this)) {
                             // Efetua o cadastro
                             Retrofit retrofit = new Retrofit.Builder()
                                     .baseUrl(ClienteService.BASE_URL)

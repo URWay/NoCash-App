@@ -8,9 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import android.view.View.OnClickListener;
+
+import com.example.luiz1.nocash.Model.Pagamento;
 
 import java.text.DecimalFormat;
 
@@ -18,14 +21,15 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class FragmentRecarga extends Fragment {
 
-private Button btn10;
-private Button btn20;
-private Button btn50;
-private Button btn100;
-private Button btnconfrecarga;
-private TextView txtval;
-private TextView txtlimpa;
-private Double soma=0.00;
+    private Button btn10;
+    private Button btn20;
+    private Button btn50;
+    private Button btn100;
+    private Button btnconfrecarga;
+    private TextView txtval;
+    private TextView txtlimpa;
+    private EditText edtIdentificacao;
+    private Double soma=0.00;
 
     public FragmentRecarga() {
         // Required empty public constructor
@@ -40,6 +44,8 @@ private Double soma=0.00;
                              Bundle savedInstanceState) {
 
        View view = inflater.inflate(R.layout.fragment_recarga, container, false);
+
+        edtIdentificacao=(EditText) view.findViewById(R.id.edtIdentificacao);
 
         btn10=(Button) view.findViewById(R.id.btn1);
         btn20=(Button) view.findViewById(R.id.btn3);
@@ -90,7 +96,6 @@ private Double soma=0.00;
             @Override
             public void onClick(View view) {
 
-
                 if (soma <= 0.00) {
                     new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
                             .setTitleText("Opa, houve um erro!")
@@ -105,6 +110,12 @@ private Double soma=0.00;
                             .show();
 
                 }else {
+                    String descricao = edtIdentificacao.getText().toString().trim();
+                    Pagamento pagamento = new Pagamento(soma, descricao);
+
+                    Session session = new Session();
+                    session.SessaoPagamento(getActivity(), pagamento);
+
                     Intent intent = new Intent(getActivity(), PagamentoActivity.class);
                     startActivity(intent);
                 }
