@@ -16,6 +16,10 @@
             android:id="@+id/nav_recarga"
             android:icon="@drawable/ic_action_credit_card"
             android:title="Recarga" />
+        <item
+            android:id="@+id/nav_compra"
+            android:icon="@drawable/ic_action_attach_money"
+            android:title="Vender" />
 
     </group>
 

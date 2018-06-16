@@ -179,8 +179,13 @@ public class HomeActivity extends AppCompatActivity
         fragmentClass = FragmentPromocao.class;
         } else if (id == R.id.nav_recarga) {
 
-        getSupportActionBar().setTitle("Recarga");
+            getSupportActionBar().setTitle("Recarga");
             fragmentClass = FragmentRecarga.class;
+
+        } else if (id == R.id.nav_compra) {
+
+            getSupportActionBar().setTitle("Venda");
+            fragmentClass = FragmentCompra.class;
 
         } else if (id == R.id.nav_transac) {
 
