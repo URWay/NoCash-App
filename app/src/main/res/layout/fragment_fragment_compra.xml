@@ -1,0 +1,55 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.luiz1.nocash.FragmentHomeProduto"
+    android:background="@drawable/bgcompra">
+
+
+    <Button
+        android:id="@+id/btnsubmit"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="65dp"
+        android:background="@color/accent_material_dark_1"
+        android:text="COMPRAR" />
+
+    <EditText
+        android:id="@+id/txtVL_COMPRA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/btnsubmit"
+        android:layout_centerVertical="true"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name" />
+
+    <EditText
+        android:id="@+id/txtNrDocumento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/txtVL_COMPRA"
+        android:layout_alignStart="@+id/txtVL_COMPRA"
+        android:layout_marginBottom="25dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name" />
+
+    <EditText
+        android:id="@+id/txtCOD_USER"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/txtNrDocumento"
+        android:layout_alignStart="@+id/txtNrDocumento"
+        android:layout_marginBottom="33dp"
+        android:layout_marginStart="14dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name" />
+
+
+</RelativeLayout>
