@@ -1,6 +1,7 @@
 package com.example.luiz1.nocash;
 
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
@@ -47,8 +48,11 @@ private Button btnsubmit;
         btnsubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getContext(), LinkedActivity.class);
-                startActivity(i);
+                Intent intent=new Intent(getActivity(), CompraActivity.class);
+
+                startActivity(intent);
+
+
             }
         });
 

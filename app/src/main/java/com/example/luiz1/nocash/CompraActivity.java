@@ -36,6 +36,7 @@ public class CompraActivity extends AppCompatActivity {
     private ProgressHelper tempoload;
     SweetAlertDialog load;
 
+
     private EditText txtNr;
     private EditText txtVl;
     private EditText txtCD;
@@ -108,7 +109,7 @@ public class CompraActivity extends AppCompatActivity {
 
                                 new SweetAlertDialog(CompraActivity.this, SweetAlertDialog.SUCCESS_TYPE)
                                     .setTitleText("Sucesso!")
-                                    .setContentText("Venda efetuado com sucesso!")
+                                    .setContentText("Compra efetuada com sucesso!")
                                     .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
 
                                         @Override
@@ -132,7 +133,7 @@ public class CompraActivity extends AppCompatActivity {
                                 load.hide();
                                 Log.i(TAG, "Erro: " + response.code());
                                 erro("Erro", "" +
-                                        "Houve um erro, não foi possível realizar a venda!");
+                                        "Houve um erro, não foi possível realizar a compra!");
                             }
                         }
 
@@ -140,7 +141,7 @@ public class CompraActivity extends AppCompatActivity {
                         public void onFailure(Call<Movimento> call, Throwable t) {
                             load.hide();
                             erro("Erro", "" +
-                                    "Houve um erro, não foi possível realizar a venda!");
+                                    "Houve um erro, não foi possível realizar a compra!");
                             Log.e(TAG, "Erro: " + t.getMessage());
                         }
                     });

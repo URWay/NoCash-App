@@ -5,8 +5,78 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.luiz1.nocash.FragmentHomeProduto"
-    android:background="@drawable/bgcompra">
+    android:background="@drawable/bgrecarga">
 
+
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/textInputLayoutCod"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="105dp"
+        android:textColorHint="#ffffff"
+        android:padding="10dp">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/txtCOD_USER"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/txtNrDocumento"
+            android:layout_alignStart="@+id/txtNrDocumento"
+            android:layout_marginBottom="30dp"
+            android:ems="10"
+            android:hint="Código do Usuário"
+            android:inputType="textPersonName">
+
+        </android.support.design.widget.TextInputEditText>
+
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/textInputLayoutDoc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="190dp"
+        android:textColorHint="#ffffff"
+        android:padding="10dp">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/txtNrDocumento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textInputLayoutCod"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="36dp"
+            android:ems="10"
+            android:hint="N° Documento"
+            android:inputType="textPersonName" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/textInputLayoutCompra"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="280dp"
+        android:textColorHint="#ffffff"
+        android:padding="10dp">
+
+    <android.support.design.widget.TextInputEditText
+        android:id="@+id/txtVL_COMPRA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnsubmit"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="68dp"
+        android:ems="10"
+        android:hint="Valor da Compra"
+        android:inputType="textPersonName" />
+
+    </android.support.design.widget.TextInputLayout>
 
     <Button
         android:id="@+id/btnsubmit"
@@ -18,38 +88,19 @@
         android:background="@color/accent_material_dark_1"
         android:text="COMPRAR" />
 
-    <EditText
-        android:id="@+id/txtVL_COMPRA"
+    <TextView
+        android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/btnsubmit"
-        android:layout_centerVertical="true"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name" />
-
-    <EditText
-        android:id="@+id/txtNrDocumento"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/txtVL_COMPRA"
-        android:layout_alignStart="@+id/txtVL_COMPRA"
-        android:layout_marginBottom="25dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name" />
-
-    <EditText
-        android:id="@+id/txtCOD_USER"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/txtNrDocumento"
-        android:layout_alignStart="@+id/txtNrDocumento"
-        android:layout_marginBottom="33dp"
-        android:layout_marginStart="14dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name" />
+        android:layout_alignEnd="@+id/textInputLayoutCod"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/textInputLayoutCod"
+        android:layout_marginTop="45dp"
+        android:text="Compra do Produto"
+        android:textAlignment="center"
+        android:textColor="@color/button_text_color"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
 
 </RelativeLayout>
