@@ -114,63 +114,70 @@ public class LoginActivity extends AppCompatActivity {
     // Função para realizar o login
     private void login(String email, String senha){
 
-        // Colocar o loading aqui
-        load=new SweetAlertDialog(LoginActivity.this,SweetAlertDialog.PROGRESS_TYPE);
-        load.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
-        load.setTitleText("Aguarde...");
-        load.setCancelable(true);
-        load.show();
+        boolean isEmail = Functions.isEmail(email);
 
+        if (!isEmail) {
 
-        final Cliente cliente = new Cliente();
-        cliente.setEmail(email);
-        cliente.setSenha(senha);
+            erro("Erro", "E-mail informado inválido!");
 
-        try {
-            Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(ClienteService.BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
+        } else {
 
-            ClienteService service = retrofit.create(ClienteService.class);
-            Call<Cliente> requestLogin = service.Login(cliente);
+            load=new SweetAlertDialog(LoginActivity.this,SweetAlertDialog.PROGRESS_TYPE);
+            load.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+            load.setTitleText("Aguarde...");
+            load.setCancelable(true);
+            load.show();
 
-            requestLogin.enqueue(new Callback<Cliente>() {
-                @Override
-                public void onResponse(Call<Cliente> call, Response<Cliente> response) {
+            final Cliente cliente = new Cliente();
+            cliente.setEmail(email);
+            cliente.setSenha(senha);
 
-                    if (response.isSuccessful()) {
-                        load.hide();
-                        Log.i(TAG, "Erro: " + response.code());
+            try {
+                Retrofit retrofit = new Retrofit.Builder()
+                        .baseUrl(ClienteService.BASE_URL)
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
 
-                        Cliente cliente = response.body();
-                        if(cliente.getId() > 0){
-                            new Session().SessaoLogin(LoginActivity.this, cliente);
+                ClienteService service = retrofit.create(ClienteService.class);
+                Call<Cliente> requestLogin = service.Login(cliente);
 
-                            // Armazena a carteira
-                            Session session = new Session();
-                            session.retornoCarteira(cliente.getId(), LoginActivity.this);
+                requestLogin.enqueue(new Callback<Cliente>() {
+                    @Override
+                    public void onResponse(Call<Cliente> call, Response<Cliente> response) {
 
-                            loginok();
-                        } else {
-                            erro("Erro", "E-mail ou senha inválidos!");
+                        if (response.isSuccessful()) {
+                            load.hide();
+                            Log.i(TAG, "Erro: " + response.code());
+
+                            Cliente cliente = response.body();
+                            if(cliente.getId() > 0){
+                                new Session().SessaoLogin(LoginActivity.this, cliente);
+
+                                // Armazena a carteira
+                                Session session = new Session();
+                                session.retornoCarteira(cliente.getId(), LoginActivity.this);
+
+                                loginok();
+                            } else {
+                                erro("Erro", "E-mail ou senha inválidos!");
+                            }
                         }
+
                     }
 
-                }
-
-                @Override
-                public void onFailure(Call<Cliente> call, Throwable t) {
-                    load.hide();
-                    erro("Erro", "" +
-                            "Não foi possível realizar o login, verifique o sinal da internet e tente novamente!");
-                    Log.e(TAG, "Erro: " + t.getMessage());
-                }
-            });
-        }catch(Exception e){
-            load.hide();
-            erro("Erro", "Houve um erro: " + e.getMessage());
-            Log.e(TAG, "Erro: " + e.getMessage());
+                    @Override
+                    public void onFailure(Call<Cliente> call, Throwable t) {
+                        load.hide();
+                        erro("Erro", "" +
+                                "Não foi possível realizar o login, verifique o sinal da internet e tente novamente!");
+                        Log.e(TAG, "Erro: " + t.getMessage());
+                    }
+                });
+            }catch(Exception e){
+                load.hide();
+                erro("Erro", "Houve um erro: " + e.getMessage());
+                Log.e(TAG, "Erro: " + e.getMessage());
+            }
         }
 
     }

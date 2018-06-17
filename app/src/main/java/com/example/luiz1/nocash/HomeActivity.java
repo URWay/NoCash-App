@@ -12,9 +12,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import java.text.DecimalFormat;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -23,6 +26,7 @@ public class HomeActivity extends AppCompatActivity
 
     private Bundle bundle;
     private TextView txtsaldomenu;
+    private String TAG = "HOME";
 
     SweetAlertDialog load;
 
@@ -30,8 +34,7 @@ public class HomeActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        txtsaldomenu = findViewById(R.id.txtsaldo);
-
+        txtsaldomenu = (TextView) findViewById(R.id.txtsaldo);
 
         ConnectivityManager cm = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
 
@@ -65,9 +68,9 @@ public class HomeActivity extends AppCompatActivity
             fragment = (Fragment) fragmentClass.newInstance();
             fragment.setArguments(bundle);
 
-
         } catch (Exception e) {
             e.printStackTrace();
+            Log.e(TAG, e.getMessage());
         }
 
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -77,17 +80,27 @@ public class HomeActivity extends AppCompatActivity
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
 
-        // Verifica se o cliente não possuí uma carteira e cria
-        Session session = new Session();
-        session.verificaCarteira(HomeActivity.this);
-
-        // Atualizar o valor da carteira
-        Functions functions = new Functions();
-        double saldo = functions.vSaldo(HomeActivity.this);
-        //txtsaldomenu.setText(new DecimalFormat("R$ #,##0.00").format(saldo));
-
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        try {
+
+            // Verifica se o cliente não possuí uma carteira e cria
+            Session session = new Session();
+            session.verificaCarteira(HomeActivity.this);
+
+            // Atualizar o valor da carteira
+            Functions functions = new Functions();
+            double saldo = functions.vSaldo(HomeActivity.this);
+            txtsaldomenu.setText(new DecimalFormat("R$ #,##0.00").format(saldo));
+
+        } catch (Exception e){
+            Log.e(TAG, "Erro na criação da carteira:" + e.getMessage());
+        }
+    }
 
     @Override
     public void onBackPressed() {
@@ -167,7 +180,6 @@ public class HomeActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-
         if (id == R.id.nav_home) {
 
             getSupportActionBar().setTitle("Home");
@@ -195,14 +207,11 @@ public class HomeActivity extends AppCompatActivity
             getSupportActionBar().setTitle("Login");
             fragmentClass = HomeFragment.class;
             logout();
-
         }
 
 
         try {
             fragment = (Fragment) fragmentClass.newInstance();
-
-
 
         } catch (Exception e) {
             e.printStackTrace();

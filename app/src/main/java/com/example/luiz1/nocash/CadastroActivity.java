@@ -101,76 +101,81 @@ public class CadastroActivity extends AppCompatActivity {
                     erro("O CPF informado é inválido, verifique o CPF informado e tente novamente.");
                 } else {
 
-                    // Colocar o loading aqui
-                    load=new SweetAlertDialog(CadastroActivity.this,SweetAlertDialog.PROGRESS_TYPE);
-                    load.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
-                    load.setTitleText("Aguarde...");
-                    load.setCancelable(true);
-                    load.show();
+                    boolean isEmail = Functions.isEmail(email);
 
-                    Cliente cliente = new Cliente();
+                    if(!isEmail) {
 
-                    cliente.setNome(nome);
-                    cliente.setEmail(email);
-                    cliente.setSenha(senha);
-                    cliente.setRg(rg);
-                    cliente.setCpf(cpf);
+                        load.hide();
+                        erro("E-mail infomado inválido!");
 
-                    try {
-                        // Verifica se o e-mail não está cadastrado
-                        Session session = new Session();
-                        // ESSA POHA NÃO FUNCIONAAAAAAAAAAAAAAAAAAAAAAAAA
-                        if(!session.verificaEmail(email, CadastroActivity.this)) {
-                            // Efetua o cadastro
-                            Retrofit retrofit = new Retrofit.Builder()
-                                    .baseUrl(ClienteService.BASE_URL)
-                                    .addConverterFactory(GsonConverterFactory.create())
-                                    .build();
+                    } else {
 
-                            ClienteService service = retrofit.create(ClienteService.class);
-                            Call<Void> response = service.inserirCliente(cliente);
+                        load=new SweetAlertDialog(CadastroActivity.this,SweetAlertDialog.PROGRESS_TYPE);
+                        load.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+                        load.setTitleText("Aguarde...");
+                        load.setCancelable(true);
+                        load.show();
 
-                            response.enqueue(new Callback<Void>() {
-                                @Override
-                                public void onResponse(Call<Void> call, Response<Void> response) {
+                        Cliente cliente = new Cliente();
 
-                                    if (!response.isSuccessful()) {
-                                        // Terminar o loading aqui
-                                        load.hide();
+                        cliente.setNome(nome);
+                        cliente.setEmail(email);
+                        cliente.setSenha(senha);
+                        cliente.setRg(rg);
+                        cliente.setCpf(cpf);
 
-                                        Log.i(TAG, "Erro: " + response.code());
-                                        erro("Não foi possível realizar o cadastro verifique" +
-                                                " os campos e tente novamente!");
-                                    } else {
-                                        // Terminar o loading aqui
-                                        load.hide();
+                        try {
+                            // Verifica se o e-mail não está cadastrado
+                            Session session = new Session();
 
-                                        loginok();
+                            if(!session.verificaEmail(email, CadastroActivity.this)) {
+                                // Efetua o cadastro
+                                Retrofit retrofit = new Retrofit.Builder()
+                                        .baseUrl(ClienteService.BASE_URL)
+                                        .addConverterFactory(GsonConverterFactory.create())
+                                        .build();
+
+                                ClienteService service = retrofit.create(ClienteService.class);
+                                Call<Void> response = service.inserirCliente(cliente);
+
+                                response.enqueue(new Callback<Void>() {
+                                    @Override
+                                    public void onResponse(Call<Void> call, Response<Void> response) {
+
+                                        if (!response.isSuccessful()) {
+                                            load.hide();
+
+                                            Log.i(TAG, "Erro: " + response.code());
+                                            erro("Não foi possível realizar o cadastro verifique" +
+                                                    " os campos e tente novamente!");
+                                        } else {
+                                            load.hide();
+
+                                            loginok();
+                                        }
                                     }
-                                }
 
-                                @Override
-                                public void onFailure(Call<Void> call, Throwable t) {
-                                    // Terminar o loading aqui
-                                    load.hide();
+                                    @Override
+                                    public void onFailure(Call<Void> call, Throwable t) {
+                                        load.hide();
 
-                                    Log.e(TAG, "Erro: " + t.getMessage());
-                                    erro("Não foi possível realizar o cadastro!");
-                                }
-                            });
-                        } else {
+                                        Log.e(TAG, "Erro: " + t.getMessage());
+                                        erro("Não foi possível realizar o cadastro!");
+                                    }
+                                });
+                            } else {
+                                load.hide();
+
+                                erro("E-mail já cadastro!");
+                            }
+
+                        } catch(Exception e){
                             // Terminar o loading aqui
                             load.hide();
 
-                            erro("E-mail já cadastro!");
+                            erro("Houve um erro: " + e.getMessage());
+                            Log.e(TAG, "Erro: " + e.getMessage());
                         }
-
-                    } catch(Exception e){
-                        // Terminar o loading aqui
-                        load.hide();
-
-                        erro("Houve um erro: " + e.getMessage());
-                        Log.e(TAG, "Erro: " + e.getMessage());
                     }
                 }
             }

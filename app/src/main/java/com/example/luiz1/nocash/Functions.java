@@ -20,6 +20,10 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class Functions {
 
+    private static final String EMAIL_PATTERN =
+            "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                    + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+
     public static boolean isConected(Context cont, final Activity activity){
         ConnectivityManager conmag = (ConnectivityManager)cont.getSystemService(Context.CONNECTIVITY_SERVICE);
 
@@ -142,6 +146,13 @@ public class Functions {
         double saldo = carteira.getSaldo();
 
         return saldo;
+    }
+
+    private static final Pattern pattern = Pattern.compile(EMAIL_PATTERN, Pattern.CASE_INSENSITIVE);
+
+    public static boolean isEmail(String email){
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
     }
 
 }

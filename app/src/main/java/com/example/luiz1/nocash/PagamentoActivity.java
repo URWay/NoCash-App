@@ -19,7 +19,6 @@ import com.example.luiz1.nocash.service.MovimentoService;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import cn.pedant.SweetAlert.ProgressHelper;
@@ -129,8 +128,8 @@ public class PagamentoActivity extends AppCompatActivity {
                     movimento.setVlLiquido(pagamento.getValor());
                     movimento.setVlDesc(0);
 
-                    Date date = new Date();
-                    movimento.setDtMovimento(date);
+                    String mov = gson.toJson(movimento);
+                    Log.e(TAG, "Movimento: " + mov);
 
                     Retrofit retrofit = new Retrofit.Builder()
                             .baseUrl(MovimentoService.BASE_URL)
@@ -138,22 +137,23 @@ public class PagamentoActivity extends AppCompatActivity {
                             .build();
 
                     MovimentoService service = retrofit.create(MovimentoService.class);
-                    Call<Movimento> request = service.cargaMovimento(movimento);
+                    Call<Void> request = service.cargaMovimento(movimento);
 
-                    request.enqueue(new Callback<Movimento>() {
+                    request.enqueue(new Callback<Void>() {
                         @Override
-                        public void onResponse(Call<Movimento> call, Response<Movimento> response) {
+                        public void onResponse(Call<Void> call, Response<Void> response) {
+                            Log.i(TAG, "Retorno: " + response.isSuccessful());
                             if (response.isSuccessful()) {
                                 load.hide();
                                 Log.i(TAG, "Erro: " + response.code());
 
                                 new SweetAlertDialog(PagamentoActivity.this, SweetAlertDialog.SUCCESS_TYPE)
                                     .setTitleText("Sucesso!")
-                                    .setContentText("Recarga efetuado com sucesso!")
+                                    .setContentText("Recarga efetuado com \nsucesso!")
                                     .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
 
-                                        @Override
-                                        public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                            @Override
+                                            public void onClick(SweetAlertDialog sweetAlertDialog) {
 
                                         sweetAlertDialog.dismissWithAnimation();
                                         Intent i = new Intent(PagamentoActivity.this, HomeActivity.class);
@@ -178,7 +178,7 @@ public class PagamentoActivity extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onFailure(Call<Movimento> call, Throwable t) {
+                        public void onFailure(Call<Void> call, Throwable t) {
                             load.hide();
                             erro("Erro", "" +
                                     "Houve um erro, não foi possível realizar a recarga!");

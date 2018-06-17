@@ -14,6 +14,6 @@ public interface MovimentoService {
      *  Serviço para recarga da carteira
      */
     @POST("movimento/carga")
-    Call<Movimento> cargaMovimento(@Body Movimento movimento);
+    Call<Void> cargaMovimento(@Body Movimento movimento);
 
 }

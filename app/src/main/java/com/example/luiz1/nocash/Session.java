@@ -90,7 +90,7 @@ public class Session {
     ------------------------------------- Sessão do Movimento ------------------------------------
      */
 
-    // Armazena o da recarga
+    // Armazena sessão da recarga
     public void SessaoPagamento(Context context, Pagamento pagamento){
         Gson gson = new Gson();
         try {

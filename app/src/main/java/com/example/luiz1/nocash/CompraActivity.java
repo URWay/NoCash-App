@@ -4,13 +4,10 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 
 import com.example.luiz1.nocash.Model.Carteira;
 import com.example.luiz1.nocash.Model.Movimento;
@@ -18,9 +15,7 @@ import com.example.luiz1.nocash.Model.Pagamento;
 import com.example.luiz1.nocash.service.MovimentoService;
 import com.google.gson.Gson;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import cn.pedant.SweetAlert.ProgressHelper;
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -98,11 +93,11 @@ public class CompraActivity extends AppCompatActivity {
                             .build();
 
                     MovimentoService service = retrofit.create(MovimentoService.class);
-                    Call<Movimento> request = service.cargaMovimento(movimento);
+                    Call<Void> request = service.cargaMovimento(movimento);
 
-                    request.enqueue(new Callback<Movimento>() {
+                    request.enqueue(new Callback<Void>() {
                         @Override
-                        public void onResponse(Call<Movimento> call, Response<Movimento> response) {
+                        public void onResponse(Call<Void> call, Response<Void> response) {
                             if (response.isSuccessful()) {
                                 load.hide();
                                 Log.i(TAG, "Erro: " + response.code());
@@ -138,7 +133,7 @@ public class CompraActivity extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onFailure(Call<Movimento> call, Throwable t) {
+                        public void onFailure(Call<Void> call, Throwable t) {
                             load.hide();
                             erro("Erro", "" +
                                     "Houve um erro, não foi possível realizar a compra!");
