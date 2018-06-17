@@ -12,7 +12,6 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.luiz1.nocash.Adapter.PromoListview;
 
@@ -36,7 +35,7 @@ public class FragmentPromocao extends Fragment {
 
 
         imgitem = view.findViewById(R.id.imgitem);
-        nometrans = view.findViewById(R.id.nometrans);
+        nometrans = view.findViewById(R.id.nomeparca);
         descpromo = view.findViewById(R.id.descpromo);
 
 // Definindo o que será passado: nome da promoção, descrição, e imagem nessa ordem:

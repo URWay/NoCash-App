@@ -32,8 +32,6 @@ public class FragmentTransacao extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_fragment_transacao, container, false);
 
-
-
 // Definindo o que será passado: nome da promoção, descrição, e imagem nessa ordem:
         String[] nometrans={"Prod1","Prod2", "Prod3", "Prod4"};
         String[] desctrans={"Desc1", "Desc2", "Desc3", "Desc4"};
