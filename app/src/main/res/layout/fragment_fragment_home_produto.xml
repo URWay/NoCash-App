@@ -73,7 +73,7 @@
         android:textSize="24sp" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/imgprodutofrag"
         android:layout_width="wrap_content"
         android:layout_height="220dp"
         android:layout_below="@+id/toolbarnav2"
