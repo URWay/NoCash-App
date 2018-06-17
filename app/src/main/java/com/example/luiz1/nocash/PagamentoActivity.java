@@ -109,11 +109,11 @@ public class PagamentoActivity extends AppCompatActivity {
 
                 try {
 
-                    Session session = new Session();
-                    Gson gson = new Gson();
+                    final Session session = new Session();
+                    final Gson gson = new Gson();
 
                     String object = session.getSessionPagamento(PagamentoActivity.this);
-                    Pagamento pagamento = gson.fromJson(object, Pagamento.class);
+                    final Pagamento pagamento = gson.fromJson(object, Pagamento.class);
 
                     // Carteira Destino
                     String objCarteira = session.getSessionCarteira(PagamentoActivity.this);
@@ -146,6 +146,13 @@ public class PagamentoActivity extends AppCompatActivity {
                             if (response.isSuccessful()) {
                                 load.hide();
                                 Log.i(TAG, "Erro: " + response.code());
+
+                                // Atualiza valor da carteira
+                                String carteiraObj = session.getSessionCarteira(PagamentoActivity.this);
+                                Carteira carteira = gson.fromJson(carteiraObj, Carteira.class);
+                                double saldo = carteira.getSaldo() + pagamento.getValor();
+                                carteira.setSaldo(saldo);
+                                session.SessaoCarteira(PagamentoActivity.this, carteira);
 
                                 new SweetAlertDialog(PagamentoActivity.this, SweetAlertDialog.SUCCESS_TYPE)
                                     .setTitleText("Sucesso!")
