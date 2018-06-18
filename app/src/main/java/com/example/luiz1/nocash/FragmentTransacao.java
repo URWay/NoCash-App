@@ -12,6 +12,13 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.luiz1.nocash.Adapter.ContaListView;
+import com.example.luiz1.nocash.Adapter.HomeListview;
+import com.example.luiz1.nocash.R;
+
+import org.w3c.dom.Text;
+
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -20,8 +27,8 @@ import java.util.Locale;
  * A simple {@link Fragment} subclass.
  */
 public class FragmentTransacao extends Fragment {
-private TextView txtdata;
-
+    private TextView txtdata;
+    private TextView nomeprod;
     public FragmentTransacao() {
         // Required empty public constructor
     }
@@ -32,19 +39,24 @@ private TextView txtdata;
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_fragment_transacao, container, false);
+        nomeprod = v.findViewById(R.id.nomeprod);
+
+        SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
+        Date todayDate = new Date();
+        String data = currentDate.format(todayDate);
+
+// Definindo o que será passado: descrição da transação, e valor
+        String[] vtrans={"50","100", "200", "300"};
+        String[] desctrans={"Desc1", "Desc2", "Desc3", "Desc4"};
 
 
 
-        // Definindo o que será passado: nome da promoção, descrição, e imagem nessa ordem:
-        String[] nometrans={"Prod1","Prod2", "Prod3", "Prod4"};
-        String[] vtrans={"Desc1", "Desc2", "Desc3", "Desc4"};
-        String txtdata = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date());
-
-
-        // Listener de cada item da lista
+// Listener de cada item da lista
         ListView lista =  v.findViewById(R.id.listatrans);
-        //ContaListView contaListview = new ContaListView(getActivity(), nometrans, vtrans, txtdata);
-        //lista.setAdapter(contaListview);
+        ContaListView contaListview = new ContaListView(getActivity(), vtrans, desctrans, data);
+        lista.setAdapter(contaListview);
+
+
 
 
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -56,6 +68,8 @@ private TextView txtdata;
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.corpo, frag1);
                 fragmentTransaction.commit();
+
+
             }
         });
 
