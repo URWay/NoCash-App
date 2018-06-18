@@ -13,20 +13,25 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class ContaListView  extends ArrayAdapter<String>  {
     private String[] nometrans;
     private String[] desctrans;
-    private Integer[] imgtrans;
+    private String data;
     private Activity context;
 
 
-    public ContaListView(Activity context, String[] nometrans, String[] desctrans, Integer[] imgtrans) {
+    public ContaListView(Activity context, String[] nometrans, String[] desctrans, String data) {
         super(context, R.layout.layoutlistatransacao, nometrans);
 
         this.context = context;
         this.nometrans = nometrans;
         this.desctrans = desctrans;
-        this.imgtrans = imgtrans;
+        this.data=data;
 
     }
 
@@ -48,7 +53,7 @@ public class ContaListView  extends ArrayAdapter<String>  {
 
         viewHolder.nometrans.setText(nometrans[position]);
         viewHolder.desctrans.setText(desctrans[position]);
-        viewHolder.imgtrans.setImageResource(imgtrans[position]);
+
 
 
         return r;
@@ -58,11 +63,15 @@ public class ContaListView  extends ArrayAdapter<String>  {
         TextView nometrans;
         TextView desctrans;
         ImageView imgtrans;
+        String data;
         ViewHolder(View v){
 
             nometrans = (TextView) v.findViewById(R.id.nomeprod);
             desctrans = (TextView) v.findViewById(R.id.desctrans);
-            imgtrans = (ImageView) v.findViewById(R.id.imgprodparca);
+
+            SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
+            Date todayDate = new Date();
+            data = currentDate.format(todayDate);
         }
 
     }

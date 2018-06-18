@@ -123,6 +123,7 @@ public class FragmentParceiroProduto extends Fragment {
                     FragmentManager fragmentManager = getFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.corpo, frag1);
+
                     fragmentTransaction.commit();
 
 
