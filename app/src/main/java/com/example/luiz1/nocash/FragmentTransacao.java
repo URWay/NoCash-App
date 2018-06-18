@@ -12,12 +12,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.luiz1.nocash.Adapter.ContaListView;
-import com.example.luiz1.nocash.Adapter.HomeListview;
-import com.example.luiz1.nocash.R;
-
-import org.w3c.dom.Text;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -41,20 +35,16 @@ private TextView txtdata;
 
 
 
-// Definindo o que será passado: nome da promoção, descrição, e imagem nessa ordem:
+        // Definindo o que será passado: nome da promoção, descrição, e imagem nessa ordem:
         String[] nometrans={"Prod1","Prod2", "Prod3", "Prod4"};
         String[] vtrans={"Desc1", "Desc2", "Desc3", "Desc4"};
-        Integer[] imgtrans={R.drawable.logomenu, R.drawable.bglogin,R.drawable.bglogin,R.drawable.bglogin};
         String txtdata = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date());
 
 
-
-// Listener de cada item da lista
+        // Listener de cada item da lista
         ListView lista =  v.findViewById(R.id.listatrans);
-        ContaListView contaListview = new ContaListView(getActivity(), nometrans, vtrans, imgtrans,txtdata);
-        lista.setAdapter(contaListview);
-
-
+        //ContaListView contaListview = new ContaListView(getActivity(), nometrans, vtrans, txtdata);
+        //lista.setAdapter(contaListview);
 
 
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -66,8 +56,6 @@ private TextView txtdata;
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.corpo, frag1);
                 fragmentTransaction.commit();
-
-
             }
         });
 

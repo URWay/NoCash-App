@@ -155,4 +155,11 @@ public class Functions {
         return matcher.matches();
     }
 
+    public void erro(String title, String mensagem, Activity activity) {
+        new SweetAlertDialog(activity, SweetAlertDialog.ERROR_TYPE)
+                .setTitleText(title)
+                .setContentText(mensagem)
+                .show();
+    }
+
 }

@@ -100,6 +100,14 @@ public class HomeActivity extends AppCompatActivity
         } catch (Exception e){
             Log.e(TAG, "Erro na carteira:" + e.getMessage());
         }
+
+        try {
+            // Carrega as transações
+            Transacoes transacoes = new Transacoes();
+            transacoes.Lista(this);
+        } catch (Exception e){
+            Log.e(TAG, "Erro ao carregar a lista:" + e.getMessage());
+        }
     }
 
     @Override
@@ -146,6 +154,7 @@ public class HomeActivity extends AppCompatActivity
                             // Logout - mata a sessão
                             Session session = new Session();
                             session.Logoff(HomeActivity.this);
+                            session.SessionCarteiraDelete(HomeActivity.this);
 
                             sDialog.dismissWithAnimation();
                             Intent i = new Intent(getApplicationContext(), LoginActivity.class);

@@ -220,4 +220,12 @@ public class CadastroActivity extends AppCompatActivity {
         startActivity(i);
         finish();
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        // Armazena os e-mails
+
+    }
 }

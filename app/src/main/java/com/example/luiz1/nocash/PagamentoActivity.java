@@ -154,6 +154,9 @@ public class PagamentoActivity extends AppCompatActivity {
                                 carteira.setSaldo(saldo);
                                 session.SessaoCarteira(PagamentoActivity.this, carteira);
 
+                                // Deleta pagamento
+                                session.SessionPagamentoDelete(PagamentoActivity.this);
+
                                 new SweetAlertDialog(PagamentoActivity.this, SweetAlertDialog.SUCCESS_TYPE)
                                     .setTitleText("Sucesso!")
                                     .setContentText("Recarga efetuado com \nsucesso!")

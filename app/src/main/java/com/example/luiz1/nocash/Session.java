@@ -113,6 +113,11 @@ public class Session {
         return prefs.getString("Pay", "");
     }
 
+    public void SessionPagamentoDelete(Context context){
+        prefs = context.getSharedPreferences("SessionPay", context.MODE_PRIVATE);
+        prefs.edit().remove("Pay").commit();
+    }
+
 
     /*
     ------------------------------------- Validações ------------------------------------
