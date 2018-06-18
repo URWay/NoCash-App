@@ -10,8 +10,12 @@ import com.example.luiz1.nocash.Model.Carteira;
 import com.example.luiz1.nocash.Model.Cliente;
 import com.example.luiz1.nocash.Model.Pagamento;
 import com.example.luiz1.nocash.service.CarteiraService;
-import com.example.luiz1.nocash.service.ClienteService;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import retrofit2.Call;
@@ -51,6 +55,32 @@ public class Session {
     public void Logoff(Context context){
         prefs = context.getSharedPreferences("SessionLogin", context.MODE_PRIVATE);
         prefs.edit().remove("Session").commit();
+    }
+
+    // Armazenando sessão
+    public void SessaoCliente(Context context, List<Cliente> clientes){
+        try {
+            Gson gson = new Gson();
+            String cliente = gson.toJson(clientes);
+
+            prefs = context.getSharedPreferences("SessionCliente", context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putString("SessionCliente", cliente);
+            editor.apply();
+
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage());
+        }
+    }
+
+    public String getSessionCliente(Context context){
+        prefs = context.getSharedPreferences("SessionCliente", context.MODE_PRIVATE);
+        return prefs.getString("SessionCliente", "");
+    }
+
+    public void SessaoClienteDelete(Context context){
+        prefs = context.getSharedPreferences("SessionCliente", context.MODE_PRIVATE);
+        prefs.edit().remove("SessionCliente").commit();
     }
 
     /*
@@ -127,45 +157,26 @@ public class Session {
     public boolean verificaEmail(String email, final Context context){
 
         try {
-            // verificar pq não está validando
-            String emailUnico = "{\"email\":" + "\""+email+"\"}";
 
-            Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(ClienteService.BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
+            Gson g = new Gson();
 
-            ClienteService service = retrofit.create(ClienteService.class);
-            Call<Boolean> response = service.verificaEmail(emailUnico);
+            Type listType = new TypeToken<ArrayList<Cliente>>(){}.getType();
+            String clientes = getSessionCliente(context);
+            List<Cliente> list = new Gson().fromJson(clientes, listType);
 
-            response.enqueue(new Callback<Boolean>() {
-                @Override
-                public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-
-                    if(response.isSuccessful()){
-                        prefs = context.getSharedPreferences("RETORNO", context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = prefs.edit();
-                        editor.putBoolean("RETORNO", true);
-                        editor.apply();
-                    }
+            for(int i = 0; i <= list.size(); i++) {
+                if(email == list.get(i).getEmail()){
+                    return true;
+                } else {
+                    return false;
                 }
-
-                @Override
-                public void onFailure(Call<Boolean> call, Throwable t) {
-                    Log.e(TAG, "Erro: " + t.getMessage());
-                    RETORNO = true;
-                }
-            });
+            }
 
         } catch (Exception e){
-            Log.e(TAG, "Erro: " + e.getMessage());
-            RETORNO = true;
+            Log.e(TAG, e.getMessage());
         }
 
-        prefs = context.getSharedPreferences("RETORNO", context.MODE_PRIVATE);
-        RETORNO =  prefs.getBoolean("RETORNO", false);
-
-        return RETORNO;
+        return false;
     }
 
     // Verifica o primeiro acesso

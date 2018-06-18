@@ -2,8 +2,11 @@ package com.example.luiz1.nocash.service;
 
 import com.example.luiz1.nocash.Model.Cliente;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface ClienteService {
@@ -27,4 +30,10 @@ public interface ClienteService {
      */
     @POST("clientes/email")
     Call<Boolean> verificaEmail(@Body String email);
+
+    /**
+    * Serviço de retorno dos clientes
+     */
+    @GET("clientes")
+    Call<List<Cliente>> getClientes();
 }

@@ -95,7 +95,7 @@ public class DatabaseTransacao extends SQLiteOpenHelper{
 
         if(res.getCount() > 0){
             res.moveToFirst();
-            while (res.moveToNext()){
+            do {
                 Movimento movimento = new Movimento();
                 movimento.setId(res.getInt(1));
                 movimento.setNrDocumento(res.getString(3));
@@ -107,7 +107,7 @@ public class DatabaseTransacao extends SQLiteOpenHelper{
                 //Date date = format.parse(res.getString(8));
                 //movimento.setDtMovimento(date);
                 list.add(movimento);
-            }
+            } while (res.moveToNext());
         }
 
         return list;

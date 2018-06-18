@@ -16,6 +16,8 @@ import android.widget.ProgressBar;
 import com.example.luiz1.nocash.Model.Cliente;
 import com.example.luiz1.nocash.service.ClienteService;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -226,6 +228,42 @@ public class CadastroActivity extends AppCompatActivity {
         super.onStart();
 
         // Armazena os e-mails
+        new Session().SessaoClienteDelete(CadastroActivity.this);
+
+        try {
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(ClienteService.BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+
+            ClienteService service = retrofit.create(ClienteService.class);
+            Call<List<Cliente>> response = service.getClientes();
+
+            response.enqueue(new Callback<List<Cliente>>() {
+                @Override
+                public void onResponse(Call<List<Cliente>> call, Response<List<Cliente>> response) {
+
+                    if(response.isSuccessful()) {
+
+                        List<Cliente> clientes = new ArrayList<>();
+                        clientes.addAll(response.body());
+
+                        Session session = new Session();
+                        session.SessaoCliente(CadastroActivity.this, clientes);
+                        Log.e(TAG, "Clientes carregados: " + response.body());
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<List<Cliente>> call, Throwable t) {
+                    Log.e(TAG, t.getMessage());
+                }
+            });
+
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage());
+        }
 
     }
 }
