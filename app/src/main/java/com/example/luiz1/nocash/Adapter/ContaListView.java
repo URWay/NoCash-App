@@ -16,19 +16,16 @@ import android.widget.TextView;
 public class ContaListView  extends ArrayAdapter<String>  {
     private String[] nometrans;
     private String[] desctrans;
-
     private Integer[] imgtrans;
-    private String data;
     private Activity context;
 
 
-    public ContaListView(Activity context, String[] nometrans, String[] desctrans, Integer[] imgtrans, String data) {
+    public ContaListView(Activity context, String[] nometrans, String[] desctrans, Integer[] imgtrans) {
         super(context, R.layout.layoutlistatransacao, nometrans);
 
         this.context = context;
         this.nometrans = nometrans;
         this.desctrans = desctrans;
-        this.data = data;
         this.imgtrans = imgtrans;
 
     }
@@ -51,7 +48,7 @@ public class ContaListView  extends ArrayAdapter<String>  {
 
         viewHolder.nometrans.setText(nometrans[position]);
         viewHolder.desctrans.setText(desctrans[position]);
-      // viewHolder.imgtrans.setImageResource(imgtrans[position]);
+        viewHolder.imgtrans.setImageResource(imgtrans[position]);
 
 
         return r;
@@ -65,7 +62,7 @@ public class ContaListView  extends ArrayAdapter<String>  {
 
             nometrans = (TextView) v.findViewById(R.id.nomeprod);
             desctrans = (TextView) v.findViewById(R.id.desctrans);
-        //    imgtrans = (ImageView) v.findViewById(R.id.imgprodparca);
+            imgtrans = (ImageView) v.findViewById(R.id.imgprodparca);
         }
 
     }
