@@ -41,6 +41,7 @@ private Button btnsubmit;
         imgprod = v.findViewById(R.id.imgprodutofrag);
 
 
+
         // Pegando os dados dos produtos (Fragment Home Produto)
         Bundle bundle = this.getArguments();
          if(bundle !=null){

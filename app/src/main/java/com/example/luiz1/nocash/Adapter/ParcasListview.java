@@ -2,10 +2,8 @@ package com.example.luiz1.nocash.Adapter;
 
 
 import android.app.Activity;
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,9 +59,9 @@ public class ParcasListview extends ArrayAdapter<String>{
         ImageView imgparca;
         ViewHolder(View v){
 
-             txtnomeparca = (TextView) v.findViewById(R.id.nomeparca);
+             txtnomeparca = (TextView) v.findViewById(R.id.nomeprod);
         //    txtdescricaoparca = (TextView) v.findViewById(R.id.descparca);
-            imgparca = (ImageView) v.findViewById(R.id.imgparca);
+            imgparca = (ImageView) v.findViewById(R.id.imgprodparca);
         }
 
     }

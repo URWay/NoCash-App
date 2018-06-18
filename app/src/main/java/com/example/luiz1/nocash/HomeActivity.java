@@ -176,6 +176,10 @@ public class HomeActivity extends AppCompatActivity
         Fragment fragment = null;
         Class fragmentClass = null;
 
+        if(fragmentClass == FragmentHomeProduto.class){
+
+            getSupportActionBar().setTitle("Produto");
+        }
 
         // Handle navigation view item clicks here.
         int id = item.getItemId();
@@ -184,7 +188,13 @@ public class HomeActivity extends AppCompatActivity
 
             getSupportActionBar().setTitle("Home");
 
-        fragmentClass = HomeFragment.class;
+            fragmentClass = HomeFragment.class;
+
+        } else if(id == R.id.nav_parcas){
+            getSupportActionBar().setTitle("Parceiros");
+
+            fragmentClass = ListaParceirosFragment.class;
+
         } else if (id == R.id.nav_promo) {
 
           getSupportActionBar().setTitle("Promoções");

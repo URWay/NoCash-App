@@ -58,7 +58,7 @@ public class HomeListview extends ArrayAdapter<String> {
         ImageView imgprod;
         ViewHolder(View v){
 
-            txtprod = (TextView) v.findViewById(R.id.nomeparca);
+            txtprod = (TextView) v.findViewById(R.id.nomeprod);
             txtdesc = (TextView) v.findViewById(R.id.descpromo);
             imgprod = (ImageView) v.findViewById(R.id.imgitem);
         }

@@ -35,7 +35,7 @@ public class FragmentPromocao extends Fragment {
 
 
         imgitem = view.findViewById(R.id.imgitem);
-        nometrans = view.findViewById(R.id.nomeparca);
+        nometrans = view.findViewById(R.id.nomeprod);
         descpromo = view.findViewById(R.id.descpromo);
 
 // Definindo o que será passado: nome da promoção, descrição, e imagem nessa ordem:
@@ -79,19 +79,17 @@ public class FragmentPromocao extends Fragment {
 
                 if(s == nomepromoprod[0]){
 
-
                     bundle2.putString("nomedoproduto", s);
                     bundle2.putString("descricaoprod", prodpromodesc[0]);
                     bundle2.putInt("Imagem", imgpromoid[0]);
-
                     bundle2.putDouble("precoproduto", precos[0]);
                     bundle2.putDouble("antigosprecos", antigosprecos[0]);
+
                 }else if(s == nomepromoprod[1]){
 
                     bundle2.putString("nomedoproduto", s);
                     bundle2.putString("descricaoprod", prodpromodesc[1]);
                     bundle2.putInt("Imagem", imgpromoid[1]);
-
                     bundle2.putDouble("precoproduto", precos[1]);
                     bundle2.putDouble("antigosprecos", antigosprecos[1]);
 
@@ -100,8 +98,6 @@ public class FragmentPromocao extends Fragment {
                     bundle2.putString("nomedoproduto", s);
                     bundle2.putString("descricaoprod", prodpromodesc[2]);
                     bundle2.putInt("Imagem", imgpromoid[2]);
-
-
                     bundle2.putDouble("precoproduto", precos[2]);
                     bundle2.putDouble("antigosprecos", antigosprecos[2]);
 
@@ -109,8 +105,6 @@ public class FragmentPromocao extends Fragment {
                     bundle2.putString("nomedoproduto", s);
                     bundle2.putString("descricaoprod", prodpromodesc[3]);
                     bundle2.putInt("Imagem", imgpromoid[3]);
-
-
                     bundle2.putDouble("precoproduto", precos[3]);
                     bundle2.putDouble("antigosprecos", antigosprecos[3]);
 

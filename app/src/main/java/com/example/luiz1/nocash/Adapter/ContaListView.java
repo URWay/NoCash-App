@@ -60,9 +60,9 @@ public class ContaListView  extends ArrayAdapter<String>  {
         ImageView imgtrans;
         ViewHolder(View v){
 
-            nometrans = (TextView) v.findViewById(R.id.nomeparca);
+            nometrans = (TextView) v.findViewById(R.id.nomeprod);
             desctrans = (TextView) v.findViewById(R.id.desctrans);
-            imgtrans = (ImageView) v.findViewById(R.id.imgparca);
+            imgtrans = (ImageView) v.findViewById(R.id.imgprodparca);
         }
 
     }

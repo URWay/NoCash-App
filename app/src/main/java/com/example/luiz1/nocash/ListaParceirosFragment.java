@@ -36,10 +36,9 @@ public class ListaParceirosFragment extends Fragment {
         final String parca2 = "Parceiro 2";
         final String parca3 = "Parceiro 3";
         final String parca4 = "Parceiro 4";
+
         final String[] nomeparca={parca1,parca2,parca3, parca4};
-
         final String[] descdoparca={"Descrição 1","Descrição 2", "Descrição 3","Descrição 4"};
-
         final Integer[] imgparca={R.drawable.logomenu, R.drawable.bglogin,R.drawable.bglogin,R.drawable.bglogin}; // Imagens, se for adicionar, use PNG
 
         // Listener de cada item da lista
@@ -56,33 +55,37 @@ public class ListaParceirosFragment extends Fragment {
                 //  Toast.makeText(getActivity().getApplicationContext(), s, Toast.LENGTH_LONG).show();
 
 
-                // Passando os dados dos produtos via Bundle para ListaParceirosFragment
+                // Passando os dados dos produtos via Bundle para FragmentParceiroProduto
                 Bundle bundle = new Bundle();
 
                 if(s == parca1){
 
                     bundle.putString("nomeparca", s);
+                    bundle.putString("descdoparca", descdoparca[0]);
                     bundle.putInt("imgparca", imgparca[0]);
 
                 }else if(s == parca2){
 
                     bundle.putString("nomeparca", s);
+                    bundle.putString("descdoparca", descdoparca[1]);
                     bundle.putInt("imgparca", imgparca[1]);
 
 
                 }else if(s == parca3){
 
                     bundle.putString("nomeparca", s);
-                        bundle.putInt("imgparca", imgparca[2]);
+                    bundle.putString("descdoparca", descdoparca[2]);
+                    bundle.putInt("imgparca", imgparca[2]);
 
 
                 }else if(s == parca4){
                     bundle.putString("nomeparca", s);
+                    bundle.putString("descdoparca", descdoparca[3]);
                     bundle.putInt("imgparca", imgparca[3]);
 
                 }
 
-                ListaParceirosFragment frag1 = new ListaParceirosFragment();
+                FragmentParceiroProduto frag1 = new FragmentParceiroProduto();
                 frag1.setArguments(bundle);
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

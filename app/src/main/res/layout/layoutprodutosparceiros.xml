@@ -17,15 +17,15 @@
             android:layout_width="230dp"
             android:layout_height="62dp"
             android:layout_centerVertical="true"
-            android:layout_marginStart="18dp"
+            android:layout_marginStart="17dp"
             android:layout_toEndOf="@+id/imgprodparca"
-            android:text="Nome do parceiro"
+            android:text="Nome do Produto"
             android:textSize="20dp" />
 
 
         <ImageView
             android:id="@+id/imgprodparca"
-            android:layout_width="130dp"
+            android:layout_width="100dp"
             android:layout_height="130dp"
             android:layout_alignParentStart="true"
             app:srcCompat="@drawable/blue_button_background" />
