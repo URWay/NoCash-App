@@ -48,7 +48,7 @@ public class FragmentCompra extends Fragment {
 // Listener de cada item da lista
         ListView lista =  v.findViewById(R.id.listatrans);
         ContaListView contaListview = new ContaListView(getActivity(), vtrans, desctrans, data);
-        lista.setAdapter(contaListview);
+       lista.setAdapter(contaListview);
 
 
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {

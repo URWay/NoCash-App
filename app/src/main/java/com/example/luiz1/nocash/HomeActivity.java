@@ -110,13 +110,33 @@ public class HomeActivity extends AppCompatActivity
         }
     }
 
+    private void mostraHome(){
+        fragment = new HomeFragment();
+
+        if(fragment != null){
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.corpo, fragment).commit();
+
+        }
+
+    }
+
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
+
         } else {
-            super.onBackPressed();
+
+            if(fragment instanceof HomeFragment){
+               super.onBackPressed(); // fecha o app
+
+            }else{
+                mostraHome();
+            }
+
         }
     }
 
@@ -179,11 +199,12 @@ public class HomeActivity extends AppCompatActivity
     }
 
 
+    Fragment fragment = null;
+    Class fragmentClass = null;
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        Fragment fragment = null;
-        Class fragmentClass = null;
+
 
         if(fragmentClass == FragmentHomeProduto.class){
 
