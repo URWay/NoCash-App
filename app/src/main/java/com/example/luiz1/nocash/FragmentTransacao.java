@@ -15,6 +15,10 @@ import com.example.luiz1.nocash.Adapter.ContaListView;
 import com.example.luiz1.nocash.Adapter.HomeListview;
 import com.example.luiz1.nocash.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -36,10 +40,11 @@ public class FragmentTransacao extends Fragment {
         String[] nometrans={"Prod1","Prod2", "Prod3", "Prod4"};
         String[] desctrans={"Desc1", "Desc2", "Desc3", "Desc4"};
         Integer[] imgtrans={R.drawable.logomenu, R.drawable.bglogin,R.drawable.bglogin,R.drawable.bglogin};
+        String txtdata = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
 
 // Listener de cada item da lista
         ListView lista =  v.findViewById(R.id.listatrans);
-        ContaListView contaListview = new ContaListView(getActivity(), nometrans, desctrans, imgtrans);
+        ContaListView contaListview = new ContaListView(getActivity(), nometrans, desctrans, imgtrans,txtdata);
         lista.setAdapter(contaListview);
 
 
