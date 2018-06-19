@@ -31,8 +31,6 @@
             android:name=".HomeActivity"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".LinkedActivity" />
-
         <activity android:name=".CadastroActivity" />
         <activity android:name=".PagamentoActivity" />
         <activity android:name=".BoardActivity"/>

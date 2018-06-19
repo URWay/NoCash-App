@@ -45,7 +45,7 @@ public class HomeListview extends ArrayAdapter<String> {
                 }
 
                 viewHolder.txtprod.setText(nomeprod[position]);
-                viewHolder.txtdesc.setText(proddesc[position]);
+
                 viewHolder.imgprod.setImageResource(imgid[position]);
 
 
@@ -59,7 +59,7 @@ public class HomeListview extends ArrayAdapter<String> {
         ViewHolder(View v){
 
             txtprod = (TextView) v.findViewById(R.id.nomeprod);
-            txtdesc = (TextView) v.findViewById(R.id.descpromo);
+
             imgprod = (ImageView) v.findViewById(R.id.imgitem);
         }
 

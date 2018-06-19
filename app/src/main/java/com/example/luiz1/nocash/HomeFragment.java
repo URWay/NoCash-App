@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import com.example.luiz1.nocash.Adapter.HomeListview;
 
+import java.text.DecimalFormat;
+
 public class HomeFragment extends Fragment {
 
     public HomeFragment() {
@@ -28,18 +30,21 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         // Produtos Fakes (Mais originais que Modern Warfare 4)
-        final String nomeprod1 = "Produto 1";
-        final String nomeprod2 = "Produto 2";
-        final String nomeprod3 = "Produto 3";
-        final String nomeprod4 = "Produto 4";
+        final String nomeprod1 = "Smart TV Samsung";
+        final String nomeprod2 = "SmartPhone Galaxy J5";
+        final String nomeprod3 = "Geladeira Frost Free";
+        final String nomeprod4 = "Camisa Seleção Brasil 2018";
 
 
 // Definindo o que será passado: nome da promoção, descrição, e imagem nessa ordem:
         final String[] nomeprod={nomeprod1,nomeprod2,nomeprod3, nomeprod4};
         final String[] proddesc={"Desc1", "Desc2", "Desc3", "Desc4"};
-        final Integer[] imgid={R.drawable.logomenu, R.drawable.bglogin,R.drawable.bglogin,R.drawable.bglogin}; // Imagens, se for adicionar, use PNG
-        final Double[] antigosprecos = {30.00, 80.00, 150.00, 250.00};
-        final Double[] precos={20.00 ,50.00 ,100.00 ,200.00};
+        final Integer[] imgid={R.drawable.aprod2, R.drawable.aprod3,R.drawable.aprod4,R.drawable.bprod2}; // Imagens, se for adicionar, use PNG
+        final Double[] antigosprecos = {1199.90, 849.99, 2199.90, 199.90};
+        final Double[] precos={1099.00 ,749.90, 1999.90 ,159.90};
+
+
+
 
 // Listener de cada item da lista
         final ListView lista =  view.findViewById(R.id.listahome);

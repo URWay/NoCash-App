@@ -17,7 +17,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.example.luiz1.nocash.Adapter.ContaListView;
-import com.example.luiz1.nocash.Adapter.PromoListview;
+
 import com.example.luiz1.nocash.Model.Carteira;
 import com.example.luiz1.nocash.Model.Movimento;
 import com.example.luiz1.nocash.Model.Compra;

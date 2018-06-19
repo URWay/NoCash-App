@@ -73,8 +73,6 @@ private Button btnsubmit;
 
         }
 
-
-
         txtpreco1.setPaintFlags(txtpreco1.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
 

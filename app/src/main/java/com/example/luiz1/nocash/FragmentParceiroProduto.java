@@ -109,8 +109,17 @@ public class FragmentParceiroProduto extends Fragment {
 
                     if(s == nomeprod1){
 
-                        antigosprecos[0] = 1500.00;
-                        precos[0] = 1200.00;
+                        antigosprecos[0] = 1599.99;
+                        precos[0] = 1259.90;
+
+                        antigosprecos[1] = 1299.99;
+                        precos[1] = 1099.99;
+
+                        antigosprecos[2] = 749.99;
+                        precos[2] = 699.99;
+
+                        antigosprecos[3] = 1899.99;
+                        precos[3] = 1699.99;
 
                         bundle.putString("nomedoproduto", s);
                         bundle.putDouble("precoproduto", precos[0]);
@@ -122,8 +131,17 @@ public class FragmentParceiroProduto extends Fragment {
 
                         Integer[] imgid={R.drawable.aprod1, R.drawable.aprod2, R.drawable.aprod3, R.drawable.aprod4};
 
-                        antigosprecos[1] = 1500.00;
-                        precos[1] = 1200.00;
+                        antigosprecos[0] = 79.99;
+                        precos[0] = 49.99;
+
+                        antigosprecos[1] = 129.99;
+                        precos[1] = 109.99;
+
+                        antigosprecos[2] = 129.99;
+                        precos[2] = 99.99;
+
+                        antigosprecos[3] = 699.99;
+                        precos[3] = 659.99;
 
 
                         bundle.putString("nomedoproduto", s);
@@ -136,9 +154,17 @@ public class FragmentParceiroProduto extends Fragment {
 
                         Integer[] imgid={R.drawable.aprod1, R.drawable.aprod2, R.drawable.aprod3, R.drawable.aprod4};
 
-                        antigosprecos[2] = 1500.00;
-                        precos[2] = 1200.00;
+                        antigosprecos[0] = 1899.99;
+                        precos[0] = 1699.99;
 
+                        antigosprecos[1] = 149.99;
+                        precos[1] = 129.99;
+
+                        antigosprecos[2] = 3499.99;
+                        precos[2] = 3199.99;
+
+                        antigosprecos[3] = 1599.99;
+                        precos[3] = 1399.99;
 
                         bundle.putString("nomedoproduto", s);
                         bundle.putDouble("precoproduto", precos[2]);
@@ -151,8 +177,18 @@ public class FragmentParceiroProduto extends Fragment {
 
                         Integer[] imgid={R.drawable.aprod1, R.drawable.aprod2, R.drawable.aprod3, R.drawable.aprod4};
 
-                        antigosprecos[3] = 1500.00;
-                        precos[3] = 1200.00;
+                        antigosprecos[0] = 129.99;
+                        precos[0] = 119.99;
+
+                        antigosprecos[1] = 149.99;
+                        precos[1] = 129.99;
+
+                        antigosprecos[2] = 3499.99;
+                        precos[2] = 3199.99;
+
+                        antigosprecos[3] = 1599.99;
+                        precos[3] = 1399.99;
+
 
                         bundle.putString("nomedoproduto", s);
                         bundle.putDouble("precoproduto", precos[3]);

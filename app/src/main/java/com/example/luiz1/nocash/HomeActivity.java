@@ -246,10 +246,6 @@ public class HomeActivity extends AppCompatActivity
 
             fragmentClass = ListaParceirosFragment.class;
 
-        } else if (id == R.id.nav_promo) {
-
-          getSupportActionBar().setTitle("Promoções");
-        fragmentClass = FragmentPromocao.class;
         } else if (id == R.id.nav_recarga) {
 
             getSupportActionBar().setTitle("Recarga");
