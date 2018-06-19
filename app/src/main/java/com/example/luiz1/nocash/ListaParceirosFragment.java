@@ -41,10 +41,10 @@ public class ListaParceirosFragment extends Fragment {
 
         final String[] nomeparca={parca1,parca2,parca3, parca4};
 
-        final String[] descdoparca={" É uma empresa brasileira do segmento de varejo fundada em 1929 na cidade de Niterói, no Rio de Janeiro, pelo austríaco Max Landesmann e pelos norte-americanos John Lee, Glen Matson, James Marshall e Batson Borger."
-                ,"Netshoes é um comércio eletrônico brasileiro de artigos esportivos fundado em fevereiro de 2000 por Marcio Kumruian e Hagop Chabab.",
-                "Wal-Mart Stores, Inc., conhecida como Walmart desde 2008 e Wal-Mart antes disso, é uma multinacional estadunidense de lojas de departamento. A companhia foi eleita a maior multinacional de 2010.",
-                "Shoptime é uma empresa brasileira de varejo, criada em 1995, que possui um canal de televisão, a TV Shoptime, e um site de comércio eletrônico. Desde 2005, pertence ao grupo B2W Digital."};
+        final String[] descdoparca={"É uma empresa brasileira do segmento de varejo fundada em 1929 na cidade de Niterói, no Rio de Janeiro, pelo austríaco Max Landesmann e pelos norte-americanos John Lee, Glen Matson, James Marshall e Batson Borger."
+                                    ,"Netshoes é um comércio eletrônico brasileiro de artigos esportivos fundado em fevereiro de 2000 por Marcio Kumruian e Hagop Chabab.",
+                                    "Wal-Mart Stores, Inc., conhecida como Walmart desde 2008 e Wal-Mart antes disso, é uma multinacional estadunidense de lojas de departamento. A companhia foi eleita a maior multinacional de 2010.",
+                                     "Shoptime é uma empresa brasileira de varejo, criada em 1995, que possui um canal de televisão, a TV Shoptime, e um site de comércio eletrônico. Desde 2005, pertence ao grupo B2W Digital."};
 
         final Integer[] imgparca={R.drawable.logoamericanas, R.drawable.logonetshoes,R.drawable.logowalmart,R.drawable.logoshoptime}; // Imagens, se for adicionar, use PNG
 
@@ -73,11 +73,8 @@ public class ListaParceirosFragment extends Fragment {
 
 
                     final String[] produtos = {"Esteira", "Smart TV Samsung", "SmartPhone Galaxy J5", "Geladeira Frost Free"};
-                    final Double[] antigosprecos = {30.00, 80.00, 150.00, 250.00};
-                    final Double[] precos={20.00 ,50.00 ,100.00 ,200.00};
 
-
-
+                    bundle.putString("nomedoparceiro", parca1);
                     bundle.putString("nomeparca", s);
                     bundle.putString("nomeproduto1", produtos[0]);
                     bundle.putString("nomeproduto2", produtos[1]);
@@ -86,15 +83,6 @@ public class ListaParceirosFragment extends Fragment {
 
                     bundle.putString("descdoparca", descdoparca[0]);
                     bundle.putInt("imgparca", imgparca[0]);
-
-
-                    int imagens = 0;
-                    imagens[1];
-
-                    bundle.putInt("Produto", imagens);
-
-
-
 
                     bundle.putInt("Prod1", imgprod[0]);
                     bundle.putInt("Prod2", imgprod[1]);
@@ -106,7 +94,7 @@ public class ListaParceirosFragment extends Fragment {
                     Integer[] imgprod={R.drawable.bprod1, R.drawable.bprod2, R.drawable.bprod3, R.drawable.bprod4};
 
                     final String[] produtos = {"Bola de Basquete MvP", "Camisa Seleção Brasil 2018", "Bota Gonew Fenix", "Caixa de Som JBL Charge 3"};
-
+                    bundle.putString("nomedoparceiro", parca2);
                     bundle.putString("nomeproduto1", produtos[0]);
                     bundle.putString("nomeproduto2", produtos[1]);
                     bundle.putString("nomeproduto3", produtos[2]);
@@ -123,7 +111,7 @@ public class ListaParceirosFragment extends Fragment {
                     bundle.putInt("Prod4", imgprod[3]);
 
                 }else if(s == parca3){
-
+                    bundle.putString("nomedoparceiro", parca3);
                     Integer[] imgprod={R.drawable.cprod1, R.drawable.cprod2, R.drawable.cprod3, R.drawable.cprod4};
                     final String[] produtos = {"Notebook Asus X556ur Intel Core I5 8Gb 1Tb ",
                                                "Google Chromecast 2 Hdmi Full HD Wireless Para Android PC MAC e IOS",
@@ -148,14 +136,13 @@ public class ListaParceirosFragment extends Fragment {
 
                 }else if(s == parca4){
 
+                    bundle.putString("nomedoparceiro", parca4);
                     Integer[] imgprod={R.drawable.dprod1, R.drawable.dprod2, R.drawable.dprod3, R.drawable.dprod4};
                     final String[] produtos = {"Tapete De Sala Peludo 2,00x2,40 Bege Com Marrom",
                                                 "Colcha Cobre Leito Riviera Casal Queen 5 Peças Vermelho",
                                                 "Cobertor Queen Flannel Colors com Borda em Percal - Casa & Conforto",
                                                 "Cobertor Queen Flannel Hit com Borda em Percal - Casa & Conforto"};
 
-                    final Double[] antigosprecos = {30.00, 80.00, 150.00, 250.00};
-                    final Double[] precos={20.00 ,50.00 ,100.00 ,200.00};
 
 
 

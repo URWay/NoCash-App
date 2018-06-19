@@ -51,8 +51,8 @@ public class ProdParcasListview extends ArrayAdapter<String> {
     }
 
     class ViewHolder {
-        TextView txtprod;
 
+        TextView txtprod;
         ImageView imgprod;
         ViewHolder(View v){
 

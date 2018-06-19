@@ -46,11 +46,15 @@ public class FragmentParceiroProduto extends Fragment {
             String nomedoparca = bundle.getString("nomeparca");
             String descdoparca = bundle.getString("descdoparca");
 
+            final Integer logodoparca = bundle.getInt("imgparca");
+
 
             final Integer imgprod1 = bundle.getInt("Prod1");
             final Integer imgprod2 = bundle.getInt("Prod2");
             final Integer imgprod3 = bundle.getInt("Prod3");
             final Integer imgprod4 = bundle.getInt("Prod4");
+
+
 
             final String nomeprod1 = bundle.getString("nomeproduto1");
             final String nomeprod2 = bundle.getString("nomeproduto2");
@@ -60,7 +64,7 @@ public class FragmentParceiroProduto extends Fragment {
 
             nomeparca.setText(nomedoparca); // Nome do Parceiro
             descparca.setText(descdoparca); // Descrição do Parça
-//            logoparca.setImageResource(logodoparca); // Imagem do Parceiro
+            logoparca.setImageResource(logodoparca); // Imagem do Parceiro
 
 
          // Definindo o que será passado: nome da promoção, descrição, e imagem nessa ordem:
@@ -72,8 +76,19 @@ public class FragmentParceiroProduto extends Fragment {
 
 
 
-
             Integer[] imgid={R.drawable.aprod1, R.drawable.aprod2, R.drawable.aprod3, R.drawable.aprod4};
+
+
+            if(nomedoparca == "Lojas Americanas"){
+                imgid= new Integer[]{R.drawable.aprod1, R.drawable.aprod2, R.drawable.aprod3, R.drawable.aprod4};
+            }else if(nomedoparca == "Netshoes") {
+                 imgid= new Integer[]{R.drawable.bprod1, R.drawable.bprod2, R.drawable.bprod3, R.drawable.bprod4};
+            }else if(nomedoparca == "Walmart") {
+                 imgid= new Integer[]{R.drawable.cprod1, R.drawable.cprod2, R.drawable.cprod3, R.drawable.cprod4};
+            }else if(nomedoparca == "Shoptime") {
+                imgid= new Integer[]{R.drawable.dprod1, R.drawable.dprod2, R.drawable.dprod3, R.drawable.dprod4};
+
+            }
 
             // Listener de cada item da lista
             final ListView lista =  v.findViewById(R.id.listaprodparceiro);
