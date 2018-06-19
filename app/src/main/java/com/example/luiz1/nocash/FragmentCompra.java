@@ -64,7 +64,7 @@ public class FragmentCompra extends Fragment {
 
 
         // Listener de cada item da lista
-        comprar = (Button) v.findViewById(R.id.btnEfetuarPagamento);
+        comprar = (Button) v.findViewById(R.id.btnsubmit);
         txtOrigem = (EditText) v.findViewById(R.id.txtCOD_USER);
         txtVl = (EditText) v.findViewById(R.id.txtVL_COMPRA);
 

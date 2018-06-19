@@ -65,7 +65,7 @@ public class CompraActivity extends AppCompatActivity {
 
                     String object = session.getSessionPagamento(CompraActivity.this);
                     final Compra compra = gson.fromJson(object, Compra.class);
-                    
+
                     cdCliente =  Integer.parseInt(txtCD.getText().toString().trim());
 
                     // Carteira Destino

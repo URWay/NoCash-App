@@ -60,11 +60,11 @@
         android:id="@+id/btnsubmit"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
         android:layout_marginBottom="65dp"
         android:background="@color/accent_material_dark_1"
-        android:text="COMPRAR" />
+        android:text="COMPRAR"
+        android:layout_below="@+id/textInputLayoutCompra"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:id="@+id/textView5"
