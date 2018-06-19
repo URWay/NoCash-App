@@ -5,18 +5,14 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.luiz1.nocash.Model.Carteira;
-import com.example.luiz1.nocash.Model.Movimento;
-import com.example.luiz1.nocash.Model.Pagamento;
 import com.example.luiz1.nocash.Model.Compra;
+import com.example.luiz1.nocash.Model.Movimento;
 import com.example.luiz1.nocash.service.MovimentoService;
 import com.google.gson.Gson;
-
-import java.util.Date;
 
 import cn.pedant.SweetAlert.ProgressHelper;
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -86,8 +82,11 @@ public class CompraActivity extends AppCompatActivity {
                     movimento.setVlLiquido(compra.getValor());
                     movimento.setVlDesc(0);
 
-                    Date date = new Date();
-                    movimento.setDtMovimento(date);
+                    //Date date = new Date();
+                    //movimento.setDtMovimento(date);
+
+                    Gson g = new Gson();
+                    Log.e("JSON", g.toJson(movimento));
 
                     Retrofit retrofit = new Retrofit.Builder()
                             .baseUrl(MovimentoService.BASE_URL)
@@ -107,7 +106,7 @@ public class CompraActivity extends AppCompatActivity {
 
                                 new SweetAlertDialog(CompraActivity.this, SweetAlertDialog.SUCCESS_TYPE)
                                     .setTitleText("Sucesso!")
-                                    .setContentText("Compra efetuada com sucesso!")
+                                    .setContentText("Compra efetuada com\n sucesso!")
                                     .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
 
                                         @Override
