@@ -178,7 +178,7 @@ public class Functions {
         int minutos = prefs.getInt("Timer", 0);
 
         // Atualiza as transações
-        if(minutos < 30) {
+        if(minutos < TIMER) {
             TimerCount(context, minutosT);
             return true;
         }
