@@ -75,7 +75,7 @@ public class Transacoes {
                         double liquido = movimento.getVlBruto();
                         double desc = movimento.getVlBruto();
 
-                        boolean inserted = myDb.insertData(origem, destino, documento, bruto, liquido, desc);
+                        boolean inserted = myDb.insertData(origem, destino, documento, bruto, liquido, desc, movimento.getDtMovimento());
                         if(!inserted){
                             Log.e(TAG, "O valor da transações não foi inserido:");
                         } else {

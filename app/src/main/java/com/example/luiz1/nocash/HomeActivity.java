@@ -108,6 +108,7 @@ public class HomeActivity extends AppCompatActivity
         } catch (Exception e){
             Log.e(TAG, "Erro ao carregar a lista:" + e.getMessage());
         }
+
     }
 
     private void mostraHome(){

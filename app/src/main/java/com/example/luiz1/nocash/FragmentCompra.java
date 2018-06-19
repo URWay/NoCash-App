@@ -14,9 +14,7 @@ import android.widget.ListView;
 import com.example.luiz1.nocash.Adapter.ContaListView;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,18 +35,18 @@ public class FragmentCompra extends Fragment {
 
         SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
         Date todayDate = new Date();
-        String data = currentDate.format(todayDate);
+        //String data = currentDate.format(todayDate);
 
-// Definindo o que será passado: nome da promoção, descrição, e imagem nessa ordem:
+        // Definindo o que será passado: nome da promoção, descrição, e imagem nessa ordem:
         String[] vtrans={"50","100", "200", "300.00"};
         String[] desctrans={"Desc1", "Desc2", "Desc3", "Desc4"};
+        String[] data={""};
 
 
-
-// Listener de cada item da lista
+        // Listener de cada item da lista
         ListView lista =  v.findViewById(R.id.listatrans);
         ContaListView contaListview = new ContaListView(getActivity(), vtrans, desctrans, data);
-       lista.setAdapter(contaListview);
+        lista.setAdapter(contaListview);
 
 
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {

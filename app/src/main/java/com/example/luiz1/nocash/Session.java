@@ -10,11 +10,9 @@ import com.example.luiz1.nocash.Model.Carteira;
 import com.example.luiz1.nocash.Model.Cliente;
 import com.example.luiz1.nocash.Model.Pagamento;
 import com.example.luiz1.nocash.service.CarteiraService;
+import com.example.luiz1.nocash.service.ClienteService;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -160,23 +158,47 @@ public class Session {
 
             Gson g = new Gson();
 
-            Type listType = new TypeToken<ArrayList<Cliente>>(){}.getType();
-            String clientes = getSessionCliente(context);
-            List<Cliente> list = new Gson().fromJson(clientes, listType);
+            try {
+                // verificar pq não está validando
+                String emailUnico = "{\"email\":" + "\"" + email + "\"}";
 
-            for(int i = 0; i <= list.size(); i++) {
-                if(email == list.get(i).getEmail()){
-                    return true;
-                } else {
-                    return false;
-                }
+                Retrofit retrofit = new Retrofit.Builder()
+                        .baseUrl(ClienteService.BASE_URL)
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
+
+                ClienteService service = retrofit.create(ClienteService.class);
+                Call<Boolean> response = service.verificaEmail(emailUnico);
+
+                response.enqueue(new Callback<Boolean>() {
+                    @Override
+                    public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                        if(response.isSuccessful()){
+                            prefs = context.getSharedPreferences("RETORNO", context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = prefs.edit();
+                            editor.putBoolean("RETORNO", true);
+                            editor.apply();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Boolean> call, Throwable t) {
+                        Log.e(TAG, t.getMessage());
+                    }
+                });
+
+            } catch (Exception e) {
+                Log.e(TAG, e.getMessage());
             }
 
         } catch (Exception e){
             Log.e(TAG, e.getMessage());
         }
 
-        return false;
+        prefs = context.getSharedPreferences("RETORNO", context.MODE_PRIVATE);
+        RETORNO =  prefs.getBoolean("RETORNO", false);
+
+        return RETORNO;
     }
 
     // Verifica o primeiro acesso

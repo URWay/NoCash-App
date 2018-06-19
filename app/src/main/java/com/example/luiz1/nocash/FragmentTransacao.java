@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,22 +14,21 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.luiz1.nocash.Adapter.ContaListView;
-import com.example.luiz1.nocash.Adapter.HomeListview;
-import com.example.luiz1.nocash.R;
+import com.example.luiz1.nocash.Model.Movimento;
+import com.example.luiz1.nocash.SQL.DatabaseTransacao;
 
-import org.w3c.dom.Text;
-
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class FragmentTransacao extends Fragment {
+    private static final String TAG = "TRANSACAO";
     private TextView txtdata;
     private TextView nomeprod;
+
     public FragmentTransacao() {
         // Required empty public constructor
     }
@@ -41,39 +41,50 @@ public class FragmentTransacao extends Fragment {
         View v = inflater.inflate(R.layout.fragment_fragment_transacao, container, false);
         nomeprod = v.findViewById(R.id.nomeprod);
 
-        SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
-        Date todayDate = new Date();
-        String data = currentDate.format(todayDate);
+        // Definindo o que será passado: descrição da transação, e valor
+        try {
 
-// Definindo o que será passado: descrição da transação, e valor
-        String[] vtrans={"50","100", "200", "300"};
-        String[] desctrans={"Desc1", "Desc2", "Desc3", "Desc4"};
+            // Lista das transações
+            DatabaseTransacao myDb = new DatabaseTransacao(getContext());
+            List<Movimento> list = new ArrayList<>();
+            list.addAll(myDb.getAllData());
 
+            int size = list.size();
 
+            SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
 
-// Listener de cada item da lista
-        ListView lista =  v.findViewById(R.id.listatrans);
-        ContaListView contaListview = new ContaListView(getActivity(), vtrans, desctrans, data);
-        lista.setAdapter(contaListview);
+            String[] vtrans = new String[size];
+            String[] desctrans = new String[size];
+            String[] vdata = new String[size];
 
-
-
-
-        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                FragmentTransacao frag1 = new FragmentTransacao();
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.corpo, frag1);
-                fragmentTransaction.commit();
-
-
+            for (int i = 0; i < list.size(); i++){
+                vtrans[i] = String.valueOf(list.get(i).getVlBruto());
+                desctrans[i] = list.get(i).getNrDocumento();
             }
-        });
+
+            // Listener de cada item da lista
+            ListView lista =  v.findViewById(R.id.listatrans);
+            ContaListView contaListview = new ContaListView(getActivity(), vtrans, desctrans, vdata);
+            lista.setAdapter(contaListview);
 
 
+            lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                    FragmentTransacao frag1 = new FragmentTransacao();
+                    FragmentManager fragmentManager = getFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.corpo, frag1);
+                    fragmentTransaction.commit();
+
+
+                }
+            });
+        } catch (Exception e){
+            Log.e(TAG, e.getMessage());
+        }
+        
         return v;
     }
 
