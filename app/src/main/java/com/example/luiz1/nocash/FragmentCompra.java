@@ -78,8 +78,8 @@ public class FragmentCompra extends Fragment {
                 fragmentTransaction.replace(R.id.corpo, frag1);
                 fragmentTransaction.commit();
 
-                valor = Double.parseDouble(txtOrigem.getText().toString().trim());
-                origem = Integer.parseInt(txtVl.getText().toString().trim());
+                valor = Double.parseDouble(txtVl.getText().toString().trim());
+                origem = Integer.parseInt(txtOrigem.getText().toString().trim());
 
                 String descricao = "Recarga da carteira";
                 Compra compra = new Compra(valor, origem, "recarga");
