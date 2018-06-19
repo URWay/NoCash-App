@@ -66,7 +66,7 @@ public class CompraActivity extends AppCompatActivity {
                     String object = session.getSessionPagamento(CompraActivity.this);
                     final Compra compra = gson.fromJson(object, Compra.class);
 
-                                   
+
 
                     // Carteira Destino
                     String objCarteira = session.getSessionCarteira(CompraActivity.this);
@@ -95,7 +95,7 @@ public class CompraActivity extends AppCompatActivity {
                             .build();
 
                     MovimentoService service = retrofit.create(MovimentoService.class);
-                    Call<Void> request = service.cargaMovimento(movimento);
+                    Call<Void> request = service.inserirMovimento(movimento);
 
 
                     request.enqueue(new Callback<Void>() {

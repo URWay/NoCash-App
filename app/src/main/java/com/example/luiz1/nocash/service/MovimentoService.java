@@ -20,6 +20,8 @@ public interface MovimentoService {
     @POST("movimento/carga")
     Call<Void> cargaMovimento(@Body Movimento movimento);
 
+    @POST("movimento")
+    Call<Void> inserirMovimento(@Body Movimento movimento);
     /**
     * Serviço para resgatar as transações do cliente
      */
