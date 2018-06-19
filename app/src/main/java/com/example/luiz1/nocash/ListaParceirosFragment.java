@@ -83,7 +83,7 @@ public class ListaParceirosFragment extends Fragment {
                     bundle.putString("descdoparca", descdoparca[0]);
                     bundle.putInt("imgparca", imgparca[0]);
 
-                    bundle.putInt("Produto", imgprod[0]);
+              //      bundle.putInt("Produto", img);
 
                     bundle.putInt("Prod1", imgprod[0]);
                     bundle.putInt("Prod2", imgprod[1]);
