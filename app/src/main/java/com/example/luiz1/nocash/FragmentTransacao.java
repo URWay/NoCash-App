@@ -17,6 +17,7 @@ import com.example.luiz1.nocash.Adapter.ContaListView;
 import com.example.luiz1.nocash.Model.Movimento;
 import com.example.luiz1.nocash.SQL.DatabaseTransacao;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -57,7 +58,7 @@ public class FragmentTransacao extends Fragment {
             String[] vdata = new String[size];
 
             for (int i = 0; i < list.size(); i++){
-                vtrans[i] = String.valueOf(list.get(i).getVlBruto());
+                vtrans[i] = new DecimalFormat("R$ ###,###,##0.00").format(list.get(i).getVlBruto());
                 desctrans[i] = list.get(i).getNrDocumento();
 
                 Date d = new Date();
