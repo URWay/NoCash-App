@@ -237,7 +237,7 @@ public class HomeActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_compra) {
 
-            getSupportActionBar().setTitle("Venda");
+            getSupportActionBar().setTitle("Comprar");
             fragmentClass = FragmentCompra.class;
 
         } else if (id == R.id.nav_transac) {

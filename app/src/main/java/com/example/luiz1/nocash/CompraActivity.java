@@ -12,6 +12,7 @@ import android.widget.EditText;
 import com.example.luiz1.nocash.Model.Carteira;
 import com.example.luiz1.nocash.Model.Movimento;
 import com.example.luiz1.nocash.Model.Pagamento;
+import com.example.luiz1.nocash.Model.Compra;
 import com.example.luiz1.nocash.service.MovimentoService;
 import com.google.gson.Gson;
 
@@ -63,7 +64,7 @@ public class CompraActivity extends AppCompatActivity {
                     Gson gson = new Gson();
 
                     String object = session.getSessionPagamento(CompraActivity.this);
-                    Pagamento pagamento = gson.fromJson(object, Pagamento.class);
+                    Compra compra = gson.fromJson(object, Compra.class);
 
                     // Carteira Destino
                     String objCarteira = session.getSessionCarteira(CompraActivity.this);
@@ -71,15 +72,15 @@ public class CompraActivity extends AppCompatActivity {
 
                     //Carteira Origem
                     Carteira carteiraOrigem = new Carteira();
-                    carteiraOrigem.setId(cdCliente);
+                    carteiraOrigem.setId(compra.getOrigem());
 
                     // Parte do Movimento
                     Movimento movimento = new Movimento();
-                    movimento.setCarteiraOrigem(carteiraOrigem); /// TEM QUE COLOCAR O QUE ESTÁ NA TELA
+                    movimento.setCarteiraOrigem(carteiraOrigem);
                     movimento.setCarteiraDestino(carteiraDestino);
-                    movimento.setNrDocumento(pagamento.getDesccricao());
-                    movimento.setVlBruto(pagamento.getValor());
-                    movimento.setVlLiquido(pagamento.getValor());
+                    movimento.setNrDocumento(compra.getDesccricao());
+                    movimento.setVlBruto(compra.getValor());
+                    movimento.setVlLiquido(compra.getValor());
                     movimento.setVlDesc(0);
 
                     Date date = new Date();

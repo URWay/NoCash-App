@@ -1,20 +1,15 @@
 package com.example.luiz1.nocash.Model;
 
-public class Pagamento {
+public class Compra {
     double valor;
     int origem;
     String desccricao;
 
-    public Pagamento(double valor, String desccricao) {
-        this.valor = valor;
-        this.desccricao = desccricao;
-        this.origem = 0;
-    }
 
-    public Pagamento(double valor, String desccricao, int origem) {
+    public Compra(double valor, int origem, String desccricao) {
         this.valor = valor;
-        this.desccricao = desccricao;
         this.origem = origem;
+        this.desccricao = desccricao;
     }
 
     public double getValor() {
@@ -23,6 +18,14 @@ public class Pagamento {
 
     public void setValor(double valor) {
         this.valor = valor;
+    }
+
+    public int getOrigem() {
+        return origem;
+    }
+
+    public void setOrigem(int origem) {
+        this.origem = origem;
     }
 
     public String getDesccricao() {

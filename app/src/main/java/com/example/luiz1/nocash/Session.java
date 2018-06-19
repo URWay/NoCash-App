@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.example.luiz1.nocash.Model.Carteira;
 import com.example.luiz1.nocash.Model.Cliente;
+import com.example.luiz1.nocash.Model.Compra;
 import com.example.luiz1.nocash.Model.Pagamento;
 import com.example.luiz1.nocash.service.CarteiraService;
 import com.example.luiz1.nocash.service.ClienteService;
@@ -123,6 +124,21 @@ public class Session {
         Gson gson = new Gson();
         try {
             String object = gson.toJson(pagamento);
+
+            prefs = context.getSharedPreferences("SessionPay", context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putString("Pay", object);
+            editor.apply();
+
+        } catch (Exception e){
+            Log.e(TAG, "Erro: " + e.getMessage());
+        }
+    }
+
+    public void SessaoComprar(Context context, Compra compra){
+        Gson gson = new Gson();
+        try {
+            String object = gson.toJson(compra);
 
             prefs = context.getSharedPreferences("SessionPay", context.MODE_PRIVATE);
             SharedPreferences.Editor editor = prefs.edit();
