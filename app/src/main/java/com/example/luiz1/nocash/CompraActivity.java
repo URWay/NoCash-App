@@ -67,7 +67,7 @@ public class CompraActivity extends AppCompatActivity {
                     final Compra compra = gson.fromJson(object, Compra.class);
 
                     cdCliente =  Integer.parseInt(txtCD.getText().toString().trim());
-
+                    erro("Erro", "a: ");
                     // Carteira Destino
                     String objCarteira = session.getSessionCarteira(CompraActivity.this);
                     Carteira carteiraDestino = gson.fromJson(objCarteira, Carteira.class);
@@ -75,7 +75,7 @@ public class CompraActivity extends AppCompatActivity {
                     //Carteira Origem
                     Carteira carteiraOrigem = new Carteira();
                     carteiraOrigem.setId(compra.getOrigem());
-
+                    erro("Erro", "b: ");
                     // Parte do Movimento
                     Movimento movimento = new Movimento();
                     movimento.setCarteiraOrigem(carteiraOrigem);
@@ -95,7 +95,7 @@ public class CompraActivity extends AppCompatActivity {
 
                     MovimentoService service = retrofit.create(MovimentoService.class);
                     Call<Void> request = service.cargaMovimento(movimento);
-
+                    erro("Erro", "c: ");
                     request.enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
