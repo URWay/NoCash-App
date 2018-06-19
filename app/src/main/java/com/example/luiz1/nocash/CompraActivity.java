@@ -45,7 +45,7 @@ public class CompraActivity extends AppCompatActivity {
         txtVl = findViewById(R.id.txtVL_COMPRA);
         txtVl.addTextChangedListener(Mask.insert("###", txtVl));
         txtCD = findViewById(R.id.txtCOD_USER);
-        cdCliente =  Integer.parseInt(txtCD.getText().toString().trim());
+
         btnEfetuarPagamento = findViewById(R.id.btnEfetuarPagamento);
 
         btnEfetuarPagamento.setOnClickListener(new View.OnClickListener() {
@@ -65,6 +65,8 @@ public class CompraActivity extends AppCompatActivity {
 
                     String object = session.getSessionPagamento(CompraActivity.this);
                     final Compra compra = gson.fromJson(object, Compra.class);
+                    
+                    cdCliente =  Integer.parseInt(txtCD.getText().toString().trim());
 
                     // Carteira Destino
                     String objCarteira = session.getSessionCarteira(CompraActivity.this);
