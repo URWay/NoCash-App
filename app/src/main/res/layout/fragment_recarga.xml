@@ -80,27 +80,13 @@
 
     <Button
         android:id="@+id/btnconfrecarga"
-        android:layout_width="wrap_content"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/button5"
         android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/btn1"
-        android:layout_marginBottom="46dp"
+        android:layout_alignStart="@+id/textView3"
+        android:layout_marginBottom="89dp"
         android:background="#6cb907"
         android:text="Confirmar Recarga" />
-
-    <EditText
-        android:id="@+id/edtIdentificacao"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/btnconfrecarga"
-        android:layout_alignStart="@+id/textView6"
-        android:layout_below="@+id/textView6"
-        android:layout_marginTop="28dp"
-        android:ems="10"
-        android:hint="Identificação do Comprovante"
-        android:inputType="textPersonName"
-        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/textView6"

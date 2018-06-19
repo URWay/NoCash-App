@@ -45,8 +45,6 @@ public class FragmentRecarga extends Fragment {
 
        View view = inflater.inflate(R.layout.fragment_recarga, container, false);
 
-        edtIdentificacao=(EditText) view.findViewById(R.id.edtIdentificacao);
-
         btn10=(Button) view.findViewById(R.id.btn1);
         btn20=(Button) view.findViewById(R.id.btn3);
         btn50=(Button) view.findViewById(R.id.button4);
@@ -110,7 +108,7 @@ public class FragmentRecarga extends Fragment {
                             .show();
 
                 }else {
-                    String descricao = edtIdentificacao.getText().toString().trim();
+                    String descricao = "Recarga da carteira";
                     Pagamento pagamento = new Pagamento(soma, descricao);
 
                     Session session = new Session();
