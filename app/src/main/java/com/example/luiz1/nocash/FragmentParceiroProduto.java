@@ -19,6 +19,7 @@ import com.example.luiz1.nocash.Adapter.ProdParcasListview;
 public class FragmentParceiroProduto extends Fragment {
 
     private ImageView logoparca;
+    private ImageView imgprod;
     private TextView nomeparca;
     private TextView descparca;
 
@@ -37,6 +38,7 @@ public class FragmentParceiroProduto extends Fragment {
         logoparca = v.findViewById(R.id.logoparca);
         nomeparca = v.findViewById(R.id.nomeprod);
         descparca = v.findViewById(R.id.descparca);
+        imgprod = v.findViewById(R.id.imgprodparca);
 
         // Pegando os dados dos produtos (ListaParceirosFragment)
         Bundle bundle = this.getArguments();
@@ -45,29 +47,33 @@ public class FragmentParceiroProduto extends Fragment {
             String descdoparca = bundle.getString("descdoparca");
             Integer logodoparca = bundle.getInt("imgparca");
 
+            final Integer imgprod1 = bundle.getInt("Prod1");
+            final Integer imgprod2 = bundle.getInt("Prod2");
+            final Integer imgprod3 = bundle.getInt("Prod3");
+            final Integer imgprod4 = bundle.getInt("Prod4");
+
+            final String nomeprod1 = bundle.getString("nomeproduto1");
+            final String nomeprod2 = bundle.getString("nomeproduto2");
+            final String nomeprod3 = bundle.getString("nomeproduto3");
+            final String nomeprod4 = bundle.getString("nomeproduto4");
+
 
             nomeparca.setText(nomedoparca); // Nome do Parceiro
             descparca.setText(descdoparca); // Descrição do Parça
             logoparca.setImageResource(logodoparca); // Imagem do Parceiro
 
 
-         // Preencher lista dos produtos
-            // Produtos Fakes (Mais originais que Modern Warfare 4)
-            final String nomeprod1 = "Produto 1";
-            final String nomeprod2 = "Produto 2";
-            final String nomeprod3 = "Produto 3";
-            final String nomeprod4 = "Produto 4";
-
-
          // Definindo o que será passado: nome da promoção, descrição, e imagem nessa ordem:
             final String[] nomeprod={nomeprod1,nomeprod2,nomeprod3, nomeprod4};
             final String[] proddesc={"Desc1", "Desc2", "Desc3", "Desc4"};
-            final Integer[] imgid={R.drawable.logomenu, R.drawable.bglogin,R.drawable.bglogin,R.drawable.bglogin}; // Imagens, se for adicionar, use PNG
 
             final Double[] antigosprecos = {30.00, 80.00, 150.00, 250.00};
             final Double[] precos={20.00 ,50.00 ,100.00 ,200.00};
 
 
+
+
+            Integer[] imgid={R.drawable.aprod1, R.drawable.aprod2, R.drawable.aprod3, R.drawable.aprod4};
 
             // Listener de cada item da lista
             final ListView lista =  v.findViewById(R.id.listaprodparceiro);
@@ -88,33 +94,57 @@ public class FragmentParceiroProduto extends Fragment {
 
                     if(s == nomeprod1){
 
+                        antigosprecos[0] = 1500.00;
+                        precos[0] = 1200.00;
 
                         bundle.putString("nomedoproduto", s);
                         bundle.putDouble("precoproduto", precos[0]);
                         bundle.putDouble("antigosprecos", antigosprecos[0]);
-                        bundle.putInt("Imagem", imgid[0]);
+                        bundle.putInt("Imagem", imgprod1);
 
                     }else if(s == nomeprod2){
+
+
+                        Integer[] imgid={R.drawable.aprod1, R.drawable.aprod2, R.drawable.aprod3, R.drawable.aprod4};
+
+                        antigosprecos[1] = 1500.00;
+                        precos[1] = 1200.00;
+
 
                         bundle.putString("nomedoproduto", s);
                         bundle.putDouble("precoproduto", precos[1]);
                         bundle.putDouble("antigosprecos", antigosprecos[1]);
-                        bundle.putInt("Imagem", imgid[1]);
 
+                        bundle.putInt("Imagem", imgprod2);
 
                     }else if(s == nomeprod3){
+
+                        Integer[] imgid={R.drawable.aprod1, R.drawable.aprod2, R.drawable.aprod3, R.drawable.aprod4};
+
+                        antigosprecos[2] = 1500.00;
+                        precos[2] = 1200.00;
+
 
                         bundle.putString("nomedoproduto", s);
                         bundle.putDouble("precoproduto", precos[2]);
                         bundle.putDouble("antigosprecos", antigosprecos[2]);
-                        bundle.putInt("Imagem", imgid[2]);
 
+
+                        bundle.putInt("Imagem", imgprod3);
 
                     }else if(s == nomeprod4){
+
+                        Integer[] imgid={R.drawable.aprod1, R.drawable.aprod2, R.drawable.aprod3, R.drawable.aprod4};
+
+                        antigosprecos[3] = 1500.00;
+                        precos[3] = 1200.00;
+
                         bundle.putString("nomedoproduto", s);
                         bundle.putDouble("precoproduto", precos[3]);
                         bundle.putDouble("antigosprecos", antigosprecos[3]);
-                        bundle.putInt("Imagem", imgid[3]);
+
+
+                        bundle.putInt("Imagem", imgprod4);
 
                     }
 

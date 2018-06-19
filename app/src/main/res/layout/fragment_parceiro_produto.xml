@@ -19,8 +19,9 @@
     <TextView
         android:id="@+id/nomeprod"
         android:layout_width="160dp"
-        android:layout_height="100dp"
-        android:layout_alignTop="@+id/logoparca"
+        android:layout_height="30dp"
+        android:layout_above="@+id/descparca"
+        android:layout_marginBottom="23dp"
         android:layout_marginStart="15dp"
         android:layout_toEndOf="@+id/logoparca"
         android:text="Nome do Parceiro"
@@ -34,7 +35,7 @@
         android:layout_alignStart="@+id/logoparca"
         android:layout_below="@+id/logoparca"
         android:text="Descrição do Parceiro"
-        android:textSize="18sp" />
+        android:textSize="12sp" />
 
     <ListView
         android:id="@+id/listaprodparceiro"
