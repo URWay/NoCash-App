@@ -173,9 +173,6 @@ public class PagamentoActivity extends AppCompatActivity {
                                             @Override
                                             public void onClick(SweetAlertDialog sweetAlertDialog) {
 
-
-
-
                                         sweetAlertDialog.dismissWithAnimation();
                                         Intent i = new Intent(PagamentoActivity.this, HomeActivity.class);
 
