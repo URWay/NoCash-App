@@ -3,6 +3,7 @@ package com.example.luiz1.nocash;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 
 import com.example.luiz1.nocash.Model.Carteira;
@@ -19,6 +20,8 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
  */
 
 public class Functions {
+
+    private static final int TIMER = 30;
 
     private static final String EMAIL_PATTERN =
             "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
@@ -162,4 +165,24 @@ public class Functions {
                 .show();
     }
 
+    public void TimerCount(Context context, int minutos){
+        SharedPreferences prefs = context.getSharedPreferences("Timer", context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt("Timer", minutos);
+        editor.apply();
+    }
+
+    public boolean atualizaMovimentos(Context context, int minutosT){
+        SharedPreferences prefs = context.getSharedPreferences("Timer", context.MODE_PRIVATE);
+
+        int minutos = prefs.getInt("Timer", 0);
+
+        // Atualiza as transações
+        if(minutos < 30) {
+            TimerCount(context, minutosT);
+            return true;
+        }
+
+        return false;
+    }
 }

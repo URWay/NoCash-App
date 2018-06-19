@@ -19,6 +19,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
+import java.util.Calendar;
+import java.util.TimeZone;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -107,9 +109,16 @@ public class HomeActivity extends AppCompatActivity
         }
 
         try {
-            // Carrega as transações
-            Transacoes transacoes = new Transacoes();
-            transacoes.Lista(this);
+
+            Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Brazil/East"));
+            int minuto = calendar.get(Calendar.MINUTE);
+
+            if(new Functions().atualizaMovimentos(HomeActivity.this, minuto)){
+                // Carrega as transações
+                Transacoes transacoes = new Transacoes();
+                transacoes.Lista(this);
+            }
+
         } catch (Exception e){
             Log.e(TAG, "Erro ao carregar a lista:" + e.getMessage());
         }
