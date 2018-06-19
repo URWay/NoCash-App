@@ -138,6 +138,18 @@ public class HomeActivity extends AppCompatActivity
 
     }
 
+    private void mostraParca(){
+        fragment = new ListaParceirosFragment();
+
+        if(fragment != null){
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.corpo, fragment).commit();
+
+        }
+
+    }
+
+
 
     @Override
     public void onBackPressed() {
@@ -146,15 +158,22 @@ public class HomeActivity extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
 
         } else {
+              if (fragment instanceof HomeFragment) {
 
-            if(fragment instanceof HomeFragment){
-               super.onBackPressed(); // fecha o app
 
-            }else{
+            } else {
                 mostraHome();
             }
 
-        }
+            if(fragment instanceof FragmentParceiroProduto) {
+                this.moveTaskToBack(true);
+            }else{
+                    mostraParca();
+                }
+
+
+         }
+
     }
 
     @Override
@@ -234,14 +253,14 @@ public class HomeActivity extends AppCompatActivity
 
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
+/*
         if (id == R.id.nav_home) {
 
             getSupportActionBar().setTitle("Home");
 
             fragmentClass = HomeFragment.class;
 
-        } else if(id == R.id.nav_parcas){
+        }*/  if(id == R.id.nav_parcas){
             getSupportActionBar().setTitle("Parceiros");
 
             fragmentClass = ListaParceirosFragment.class;

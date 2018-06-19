@@ -201,7 +201,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onClick(SweetAlertDialog sweetAlertDialog) {
 
                         sweetAlertDialog.dismissWithAnimation();
-                        Intent i = new Intent(LoginActivity.this, HomeActivity.class);
+                        Intent i = new Intent(LoginActivity.this, ListaParceirosFragment.class);
 
                         if (i.resolveActivity(getPackageManager()) == null) {
                             loading("Aguarde por favor...");

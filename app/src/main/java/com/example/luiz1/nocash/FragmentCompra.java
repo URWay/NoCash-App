@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,16 +64,24 @@ public class FragmentCompra extends Fragment {
         //String data = currentDate.format(todayDate);
 
 
+
+
+
         // Listener de cada item da lista
         comprar = (Button) v.findViewById(R.id.btnsubmit);
         txtOrigem = (EditText) v.findViewById(R.id.txtCOD_USER);
         txtVl = (EditText) v.findViewById(R.id.txtVL_COMPRA);
 
+
+
         comprar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                FragmentCompra frag1 = new FragmentCompra();
+
+
+
+                    FragmentCompra frag1 = new FragmentCompra();
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.corpo, frag1);
@@ -80,6 +89,8 @@ public class FragmentCompra extends Fragment {
 
                 valor = Double.parseDouble(txtVl.getText().toString().trim());
                 origem = Integer.parseInt(txtOrigem.getText().toString().trim());
+
+
 
                 String descricao = "Recarga da carteira";
                 Compra compra = new Compra(valor, origem, "recarga");
@@ -91,6 +102,8 @@ public class FragmentCompra extends Fragment {
                 startActivity(intent);
             }
         });
+
+
 
 
         return v;

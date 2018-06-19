@@ -42,6 +42,9 @@ public class CompraActivity extends AppCompatActivity {
         txtVl.addTextChangedListener(Mask.insert("###", txtVl));
         txtCD = findViewById(R.id.txtCOD_USER);
 
+
+
+
         //btnEfetuarPagamento = findViewById(R.id.btnsubmit);
 
        // btnEfetuarPagamento.setOnClickListener(new View.OnClickListener() {

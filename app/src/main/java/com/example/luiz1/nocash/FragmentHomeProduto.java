@@ -42,6 +42,8 @@ private Button btnsubmit;
 
 
 
+
+
         // Pegando os dados dos produtos (Fragment Home Produto)
         Bundle bundle = this.getArguments();
          if(bundle !=null){
@@ -84,7 +86,7 @@ private Button btnsubmit;
         btnsubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Isso aqui precisa consertar, tá crashando
+
                 Intent intent=new Intent(getActivity(), CompraActivity.class);
 
                 startActivity(intent);
