@@ -147,9 +147,11 @@ public class CadastroActivity extends AppCompatActivity {
                                         if (!response.isSuccessful()) {
                                             load.hide();
 
+                                            erro("Não possível cadastrar, verifique os campos ou\n" +
+                                                    "tente utilizar outro e-mail!");
+
                                             Log.i(TAG, "Erro: " + response.code());
-                                            erro("Não foi possível realizar o cadastro verifique" +
-                                                    " os campos e tente novamente!");
+
                                         } else {
                                             load.hide();
 
@@ -198,7 +200,7 @@ public class CadastroActivity extends AppCompatActivity {
     private void loginok() {
         new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
                 .setTitleText("Bem vindo!")
-                .setContentText("Cadastro realizado com sucesso!")
+                .setContentText("Cadastro realizado com\n sucesso!")
                 .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
 
                     @Override
