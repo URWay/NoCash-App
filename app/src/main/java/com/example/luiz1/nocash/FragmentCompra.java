@@ -68,9 +68,6 @@ public class FragmentCompra extends Fragment {
         txtOrigem = (EditText) v.findViewById(R.id.txtCOD_USER);
         txtVl = (EditText) v.findViewById(R.id.txtVL_COMPRA);
 
-        valor = Double.parseDouble(txtOrigem.getText().toString().trim());
-        origem = Integer.parseInt(txtVl.getText().toString().trim());
-
         comprar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,6 +77,9 @@ public class FragmentCompra extends Fragment {
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.corpo, frag1);
                 fragmentTransaction.commit();
+
+                valor = Double.parseDouble(txtOrigem.getText().toString().trim());
+                origem = Integer.parseInt(txtVl.getText().toString().trim());
 
                 String descricao = "Recarga da carteira";
                 Compra compra = new Compra(valor, origem, "recarga");
