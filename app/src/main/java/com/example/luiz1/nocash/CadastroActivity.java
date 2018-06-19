@@ -130,7 +130,7 @@ public class CadastroActivity extends AppCompatActivity {
                             // Verifica se o e-mail não está cadastrado
                             Session session = new Session();
 
-                            if(!session.verificaEmail(email, CadastroActivity.this)) {
+                            //if(!session.verificaEmail(email, CadastroActivity.this)) {
                                 // Efetua o cadastro
                                 Retrofit retrofit = new Retrofit.Builder()
                                         .baseUrl(ClienteService.BASE_URL)
@@ -162,14 +162,14 @@ public class CadastroActivity extends AppCompatActivity {
                                         load.hide();
 
                                         Log.e(TAG, "Erro: " + t.getMessage());
-                                        erro("Não foi possível realizar o cadastro!");
+                                        erro(t.getMessage());
                                     }
                                 });
-                            } else {
+                            /*} else {
                                 load.hide();
 
                                 erro("E-mail já cadastro!");
-                            }
+                            }*/
 
                         } catch(Exception e){
                             // Terminar o loading aqui
