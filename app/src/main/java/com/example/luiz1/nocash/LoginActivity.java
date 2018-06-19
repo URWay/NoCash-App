@@ -156,7 +156,7 @@ public class LoginActivity extends AppCompatActivity {
                                 // Armazena a carteira
                                 Session session = new Session();
                                 session.retornoCarteira(cliente.getId(), LoginActivity.this);
-                                
+
                                 loginok();
                             } else {
                                 erro("Erro", "E-mail ou senha inválidos!");

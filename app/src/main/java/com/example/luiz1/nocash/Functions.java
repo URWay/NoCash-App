@@ -21,7 +21,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class Functions {
 
-    private static final int TIMER = 30;
+    private static final int TIMER = 0;
 
     private static final String EMAIL_PATTERN =
             "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
@@ -178,7 +178,7 @@ public class Functions {
         int minutos = prefs.getInt("Timer", 0);
 
         // Atualiza as transações
-        if(minutos < TIMER) {
+        if(minutos > TIMER) {
             TimerCount(context, minutosT);
             return true;
         }
