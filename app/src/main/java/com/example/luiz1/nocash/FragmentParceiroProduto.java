@@ -60,7 +60,7 @@ public class FragmentParceiroProduto extends Fragment {
 
             nomeparca.setText(nomedoparca); // Nome do Parceiro
             descparca.setText(descdoparca); // Descrição do Parça
-            logoparca.setImageResource(logodoparca); // Imagem do Parceiro
+//            logoparca.setImageResource(logodoparca); // Imagem do Parceiro
 
 
          // Definindo o que será passado: nome da promoção, descrição, e imagem nessa ordem:

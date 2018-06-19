@@ -3,6 +3,7 @@ package com.example.luiz1.nocash;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.luiz1.nocash.Model.Carteira;
 import com.example.luiz1.nocash.Model.Movimento;
@@ -45,6 +47,7 @@ public class PagamentoActivity extends AppCompatActivity {
     private List<String> mes = new ArrayList<String>();
     private List<String> anos = new ArrayList<String>();
 
+    private TextView txtsaldo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +72,8 @@ public class PagamentoActivity extends AppCompatActivity {
         txtcod.addTextChangedListener(Mask.insert("###", txtcod));
 
         btnEfetuarPagamento = findViewById(R.id.btnEfetuarPagamento);
+
+
 
         spinmes=findViewById(R.id.spinmes);
         spinano= findViewById(R.id.spinano);
@@ -151,9 +156,19 @@ public class PagamentoActivity extends AppCompatActivity {
                                 // Atualiza valor da carteira
                                 String carteiraObj = session.getSessionCarteira(PagamentoActivity.this);
                                 Carteira carteira = gson.fromJson(carteiraObj, Carteira.class);
-                                double saldo = carteira.getSaldo() + pagamento.getValor();
+                                final double saldo = carteira.getSaldo() + pagamento.getValor();
                                 carteira.setSaldo(saldo);
+
+
+                                NavigationView navigationView = findViewById(R.id.nav_view);
+                                View headerView = navigationView.getHeaderView(0);
+                                txtsaldo = headerView.findViewById(R.id.txtsaldo);
+                                txtsaldo.setText(Double.parseDouble(String.valueOf())); //fix this
+
+
                                 session.SessaoCarteira(PagamentoActivity.this, carteira);
+
+
 
                                 // Atualiza transação
                                 DatabaseTransacao myDb = new DatabaseTransacao(PagamentoActivity.this);
@@ -174,13 +189,23 @@ public class PagamentoActivity extends AppCompatActivity {
                                 // Deleta pagamento
                                 session.SessionPagamentoDelete(PagamentoActivity.this);
 
+
+
+
+
                                 new SweetAlertDialog(PagamentoActivity.this, SweetAlertDialog.SUCCESS_TYPE)
                                     .setTitleText("Sucesso!")
-                                    .setContentText("Recarga efetuado com \nsucesso!")
+                                    .setContentText("Recarga efetuada com \nsucesso!")
                                     .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+
+
+
 
                                             @Override
                                             public void onClick(SweetAlertDialog sweetAlertDialog) {
+
+
+
 
                                         sweetAlertDialog.dismissWithAnimation();
                                         Intent i = new Intent(PagamentoActivity.this, HomeActivity.class);
