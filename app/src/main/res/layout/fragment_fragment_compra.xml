@@ -14,8 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="70dp"
-       
-        android:layout_marginTop="105dp"
+        android:layout_marginTop="120dp"
         android:textColorHint="#ffffff"
         android:padding="10dp">
 
@@ -41,6 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="70dp"
         android:layout_marginTop="280dp"
+        android:layout_marginBottom="60dp"
         android:textColorHint="#ffffff"
         android:padding="10dp">
 
@@ -62,7 +62,7 @@
         android:id="@+id/btnsubmit"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="65dp"
+        android:layout_marginBottom="85dp"
         android:background="@color/accent_material_dark_1"
         android:text="COMPRAR"
         android:layout_below="@+id/textInputLayoutCompra"
