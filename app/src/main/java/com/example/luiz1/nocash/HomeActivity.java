@@ -18,6 +18,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.luiz1.nocash.SQL.DatabaseTransacao;
+
 import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.TimeZone;
@@ -111,7 +113,7 @@ public class HomeActivity extends AppCompatActivity
         try {
 
             Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Brazil/East"));
-            int minuto = calendar.get(Calendar.MINUTE);
+            int minuto = calendar.get(Calendar.SECOND);
 
             if(new Functions().atualizaMovimentos(HomeActivity.this, minuto)){
                 // Carrega as transações
@@ -190,6 +192,10 @@ public class HomeActivity extends AppCompatActivity
                             Session session = new Session();
                             session.Logoff(HomeActivity.this);
                             session.SessionCarteiraDelete(HomeActivity.this);
+
+                            //
+                            DatabaseTransacao myDb = new DatabaseTransacao(HomeActivity.this);
+                            myDb.deleteAllData();
 
                             sDialog.dismissWithAnimation();
                             Intent i = new Intent(getApplicationContext(), LoginActivity.class);

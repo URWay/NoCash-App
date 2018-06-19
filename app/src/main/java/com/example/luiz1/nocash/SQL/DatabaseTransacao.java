@@ -10,6 +10,7 @@ import android.util.Log;
 import com.example.luiz1.nocash.Model.Movimento;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -59,7 +60,7 @@ public class DatabaseTransacao extends SQLiteOpenHelper{
     }
 
     public boolean insertData(int carteiraOrigem, int carteiraDestino, String doc, double bruto,
-                              double liquido, double desc, Date data) {
+                              double liquido, double desc, String data) {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -69,7 +70,7 @@ public class DatabaseTransacao extends SQLiteOpenHelper{
         contentValues.put(COL_5, bruto);
         contentValues.put(COL_6, liquido);
         contentValues.put(COL_7, desc);
-        contentValues.put(COL_8, String.valueOf(data));
+        contentValues.put(COL_8, data);
         long result = db.insert(TABLE_NAME, null, contentValues);
         if(result == -1)
             return false;
@@ -97,14 +98,19 @@ public class DatabaseTransacao extends SQLiteOpenHelper{
             res.moveToFirst();
             do {
                 Movimento movimento = new Movimento();
-                movimento.setId(res.getInt(1));
+                movimento.setId(res.getInt(0));
                 movimento.setNrDocumento(res.getString(3));
-                movimento.setVlBruto(res.getDouble(5));
-                movimento.setVlLiquido(res.getDouble(6));
-                movimento.setVlDesc(res.getDouble(7));
+                movimento.setVlBruto(res.getDouble(4));
+                movimento.setVlLiquido(res.getDouble(5));
+                movimento.setVlDesc(res.getDouble(6));
 
-                //Date date = format.parse(res.getString(8));
-                //movimento.setDtMovimento(date);
+                String s = res.getString(7);
+
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                Date d = dateFormat.parse(s);
+                movimento.setDtMovimento(d);
+
+
                 list.add(movimento);
             } while (res.moveToNext());
         }

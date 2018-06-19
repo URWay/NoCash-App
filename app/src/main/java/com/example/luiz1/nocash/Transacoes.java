@@ -9,6 +9,7 @@ import com.example.luiz1.nocash.SQL.DatabaseTransacao;
 import com.example.luiz1.nocash.service.MovimentoService;
 import com.google.gson.Gson;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,7 +76,16 @@ public class Transacoes {
                         double liquido = movimento.getVlBruto();
                         double desc = movimento.getVlBruto();
 
-                        boolean inserted = myDb.insertData(origem, destino, documento, bruto, liquido, desc, movimento.getDtMovimento());
+                        String data = null;
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+                        try {
+                            data = dateFormat.format(movimento.getDtMovimento());
+                        } catch (Exception e) {
+                            Log.e(TAG, e.getMessage());
+                        }
+
+                        boolean inserted = myDb.insertData(origem, destino, documento, bruto, liquido, desc, data);
                         if(!inserted){
                             Log.e(TAG, "O valor da transações não foi inserido:");
                         } else {
