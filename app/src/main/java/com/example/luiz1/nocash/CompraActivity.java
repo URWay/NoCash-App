@@ -60,11 +60,11 @@ public class CompraActivity extends AppCompatActivity {
 
                 try {
 
-                    Session session = new Session();
-                    Gson gson = new Gson();
+                    final Session session = new Session();
+                    final Gson gson = new Gson();
 
                     String object = session.getSessionPagamento(CompraActivity.this);
-                    Compra compra = gson.fromJson(object, Compra.class);
+                    final Compra compra = gson.fromJson(object, Compra.class);
 
                     // Carteira Destino
                     String objCarteira = session.getSessionCarteira(CompraActivity.this);
@@ -111,6 +111,14 @@ public class CompraActivity extends AppCompatActivity {
 
                                         sweetAlertDialog.dismissWithAnimation();
                                         Intent i = new Intent(CompraActivity.this, HomeActivity.class);
+
+
+                                        // Atualiza valor da carteira
+                                        String carteiraObj = session.getSessionCarteira(CompraActivity.this);
+                                        Carteira carteira = gson.fromJson(carteiraObj, Carteira.class);
+                                        double saldo = carteira.getSaldo() - compra.getValor();
+                                        carteira.setSaldo(saldo);
+                                        session.SessaoCarteira(CompraActivity.this, carteira);
 
                                         if (i.resolveActivity(getPackageManager()) == null) {
                                             loading("Aguarde por favor...");
