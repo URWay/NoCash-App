@@ -46,11 +46,11 @@ public class CompraActivity extends AppCompatActivity {
         txtVl.addTextChangedListener(Mask.insert("###", txtVl));
         txtCD = findViewById(R.id.txtCOD_USER);
 
-        btnEfetuarPagamento = findViewById(R.id.btnEfetuarPagamento);
+        //btnEfetuarPagamento = findViewById(R.id.btnsubmit);
 
-        btnEfetuarPagamento.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+       // btnEfetuarPagamento.setOnClickListener(new View.OnClickListener() {
+            //@Override
+            //public void onClick(View view) {
 
                 load=new SweetAlertDialog(CompraActivity.this,SweetAlertDialog.PROGRESS_TYPE);
                 load.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
@@ -157,9 +157,9 @@ public class CompraActivity extends AppCompatActivity {
                 }
 
             }
-        });
+      //  });
 
-    }
+    //}
 
     private void erro(String title, String mensagem) {
         new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
