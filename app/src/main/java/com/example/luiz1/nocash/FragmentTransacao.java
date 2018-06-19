@@ -19,6 +19,7 @@ import com.example.luiz1.nocash.SQL.DatabaseTransacao;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -51,8 +52,6 @@ public class FragmentTransacao extends Fragment {
 
             int size = list.size();
 
-            SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
-
             String[] vtrans = new String[size];
             String[] desctrans = new String[size];
             String[] vdata = new String[size];
@@ -60,6 +59,14 @@ public class FragmentTransacao extends Fragment {
             for (int i = 0; i < list.size(); i++){
                 vtrans[i] = String.valueOf(list.get(i).getVlBruto());
                 desctrans[i] = list.get(i).getNrDocumento();
+
+                Date d = new Date();
+                d = list.get(i).getDtMovimento();
+
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyy");
+                String strDate = dateFormat.format(d);
+
+                vdata[i] = strDate;
             }
 
             // Listener de cada item da lista
