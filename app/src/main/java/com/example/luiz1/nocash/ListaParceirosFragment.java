@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import com.example.luiz1.nocash.Adapter.ParcasListview;
+import com.example.luiz1.nocash.Model.Imagens;
 
 
 /**
@@ -22,6 +23,7 @@ public class ListaParceirosFragment extends Fragment {
     public ListaParceirosFragment() {
         // Required empty public constructor
     }
+
 
 
     @Override
@@ -46,6 +48,8 @@ public class ListaParceirosFragment extends Fragment {
 
         final Integer[] imgparca={R.drawable.logoamericanas, R.drawable.logonetshoes,R.drawable.logowalmart,R.drawable.logoshoptime}; // Imagens, se for adicionar, use PNG
 
+      //  Imagens[] imgprods;
+      //  String[] imagens = imgprods[0].getImg();
 
         // Listener de cada item da lista
         final ListView lista =  v.findViewById(R.id.listaparcas);
@@ -67,12 +71,12 @@ public class ListaParceirosFragment extends Fragment {
 
                     Integer[] imgprod={R.drawable.aprod1, R.drawable.aprod2, R.drawable.aprod3, R.drawable.aprod4};
 
+
                     final String[] produtos = {"Esteira", "Smart TV Samsung", "SmartPhone Galaxy J5", "Geladeira Frost Free"};
                     final Double[] antigosprecos = {30.00, 80.00, 150.00, 250.00};
                     final Double[] precos={20.00 ,50.00 ,100.00 ,200.00};
 
-//                    bundle.putDouble("antigosprecos", Double.parseDouble(String.valueOf(antigosprecos)));
-//                  bundle.putDouble("precos", Double.parseDouble(String.valueOf(precos)));
+
 
                     bundle.putString("nomeparca", s);
                     bundle.putString("nomeproduto1", produtos[0]);
@@ -83,7 +87,14 @@ public class ListaParceirosFragment extends Fragment {
                     bundle.putString("descdoparca", descdoparca[0]);
                     bundle.putInt("imgparca", imgparca[0]);
 
-              //      bundle.putInt("Produto", img);
+
+                    int imagens = 0;
+                    imagens[1];
+
+                    bundle.putInt("Produto", imagens);
+
+
+
 
                     bundle.putInt("Prod1", imgprod[0]);
                     bundle.putInt("Prod2", imgprod[1]);

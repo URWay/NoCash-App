@@ -160,10 +160,6 @@ public class PagamentoActivity extends AppCompatActivity {
                                 carteira.setSaldo(saldo);
 
 
-//                                NavigationView navigationView = findViewById(R.id.nav_view);
-//                                View headerView = navigationView.getHeaderView(0);
-//                                txtsaldo = headerView.findViewById(R.id.txtsaldo);
-//                                txtsaldo.setText(Double.parseDouble(String.valueOf())); //fix this
 
 
                                 session.SessaoCarteira(PagamentoActivity.this, carteira);

@@ -45,7 +45,7 @@ public class FragmentParceiroProduto extends Fragment {
         if(bundle !=null){
             String nomedoparca = bundle.getString("nomeparca");
             String descdoparca = bundle.getString("descdoparca");
-            Integer logodoparca = bundle.getInt("imgparca");
+
 
             final Integer imgprod1 = bundle.getInt("Prod1");
             final Integer imgprod2 = bundle.getInt("Prod2");
@@ -65,7 +65,7 @@ public class FragmentParceiroProduto extends Fragment {
 
          // Definindo o que será passado: nome da promoção, descrição, e imagem nessa ordem:
             final String[] nomeprod={nomeprod1,nomeprod2,nomeprod3, nomeprod4};
-            final String[] proddesc={"Desc1", "Desc2", "Desc3", "Desc4"};
+
 
             final Double[] antigosprecos = {30.00, 80.00, 150.00, 250.00};
             final Double[] precos={20.00 ,50.00 ,100.00 ,200.00};
