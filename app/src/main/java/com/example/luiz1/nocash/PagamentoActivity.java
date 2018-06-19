@@ -3,7 +3,6 @@ package com.example.luiz1.nocash;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -17,7 +16,6 @@ import android.widget.TextView;
 import com.example.luiz1.nocash.Model.Carteira;
 import com.example.luiz1.nocash.Model.Movimento;
 import com.example.luiz1.nocash.Model.Pagamento;
-import com.example.luiz1.nocash.SQL.DatabaseTransacao;
 import com.example.luiz1.nocash.service.MovimentoService;
 import com.google.gson.Gson;
 
@@ -159,35 +157,10 @@ public class PagamentoActivity extends AppCompatActivity {
                                 final double saldo = carteira.getSaldo() + pagamento.getValor();
                                 carteira.setSaldo(saldo);
 
-
-
-
                                 session.SessaoCarteira(PagamentoActivity.this, carteira);
-
-
-
-                                // Atualiza transação
-                                DatabaseTransacao myDb = new DatabaseTransacao(PagamentoActivity.this);
-
-                                Carteira carteiraOrigem = movimento.getCarteiraOrigem();
-                                int origem = carteiraOrigem.getId();
-
-                                Carteira carteiraDestino = movimento.getCarteiraDestino();
-                                int destino = carteiraDestino.getId();
-
-                                String documento = movimento.getNrDocumento();
-                                double bruto = movimento.getVlBruto();
-                                double liquido = movimento.getVlBruto();
-                                double desc = movimento.getVlBruto();
-
-                                myDb.insertData(origem, destino, documento, bruto, liquido, desc, movimento.getDtMovimento());
 
                                 // Deleta pagamento
                                 session.SessionPagamentoDelete(PagamentoActivity.this);
-
-
-
-
 
                                 new SweetAlertDialog(PagamentoActivity.this, SweetAlertDialog.SUCCESS_TYPE)
                                     .setTitleText("Sucesso!")

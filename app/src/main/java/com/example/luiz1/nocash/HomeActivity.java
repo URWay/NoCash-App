@@ -15,7 +15,10 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
+
+import java.text.DecimalFormat;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -93,9 +96,11 @@ public class HomeActivity extends AppCompatActivity
             // Atualizar o valor da carteira
             Functions functions = new Functions();
             double saldo = functions.vSaldo(HomeActivity.this);
-            // txtsaldomenu.setText(new DecimalFormat("R$ #,##0.00").format(saldo));
 
-            ((TextView) findViewById(R.id.txtsaldo)).setText(String.valueOf(saldo));
+            NavigationView navigationView = findViewById(R.id.nav_view);
+            View headerView = navigationView.getHeaderView(0);
+            txtsaldomenu = headerView.findViewById(R.id.txtsaldo);
+            txtsaldomenu.setText(new DecimalFormat("R$ ###,###,##0.00").format(saldo));
 
         } catch (Exception e){
             Log.e(TAG, "Erro na carteira:" + e.getMessage());
