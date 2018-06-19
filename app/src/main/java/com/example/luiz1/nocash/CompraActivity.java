@@ -31,27 +31,21 @@ public class CompraActivity extends AppCompatActivity {
     private ProgressHelper tempoload;
     SweetAlertDialog load;
 
-
-    private EditText txtNr;
     private EditText txtVl;
     private EditText txtCD;
     private Button btnEfetuarPagamento;
-    private char origem;
+    private int cdCliente;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pagamento);
+        setContentView(R.layout.activity_compra);
 
         txtVl = findViewById(R.id.txtVL_COMPRA);
         txtVl.addTextChangedListener(Mask.insert("###", txtVl));
-
-        txtNr = findViewById(R.id.txtNrDocumento);
         txtCD = findViewById(R.id.txtCOD_USER);
-
+        cdCliente =  Integer.parseInt(txtCD.getText().toString().trim());
         btnEfetuarPagamento = findViewById(R.id.btnEfetuarPagamento);
-
-
 
         btnEfetuarPagamento.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,9 +69,13 @@ public class CompraActivity extends AppCompatActivity {
                     String objCarteira = session.getSessionCarteira(CompraActivity.this);
                     Carteira carteiraDestino = gson.fromJson(objCarteira, Carteira.class);
 
+                    //Carteira Origem
+                    Carteira carteiraOrigem = new Carteira();
+                    carteiraOrigem.setId(cdCliente);
+
                     // Parte do Movimento
                     Movimento movimento = new Movimento();
-                    movimento.setCarteiraOrigem(null); /// TEM QUE COLOCAR O QUE ESTÁ NA TELA
+                    movimento.setCarteiraOrigem(carteiraOrigem); /// TEM QUE COLOCAR O QUE ESTÁ NA TELA
                     movimento.setCarteiraDestino(carteiraDestino);
                     movimento.setNrDocumento(pagamento.getDesccricao());
                     movimento.setVlBruto(pagamento.getValor());
