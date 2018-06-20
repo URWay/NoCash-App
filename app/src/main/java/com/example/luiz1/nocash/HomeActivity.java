@@ -115,11 +115,11 @@ public class HomeActivity extends AppCompatActivity
             Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Brazil/East"));
             int minuto = calendar.get(Calendar.SECOND);
 
-            if(new Functions().atualizaMovimentos(HomeActivity.this, minuto)){
+            //if(new Functions().atualizaMovimentos(HomeActivity.this, minuto)){
                 // Carrega as transações
                 Transacoes transacoes = new Transacoes();
                 transacoes.Lista(this);
-            }
+           // }
 
         } catch (Exception e){
             Log.e(TAG, "Erro ao carregar a lista:" + e.getMessage());
@@ -253,14 +253,14 @@ public class HomeActivity extends AppCompatActivity
 
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-/*
+
         if (id == R.id.nav_home) {
 
             getSupportActionBar().setTitle("Home");
 
             fragmentClass = HomeFragment.class;
 
-        }*/  if(id == R.id.nav_parcas){
+        } else if(id == R.id.nav_parcas){
             getSupportActionBar().setTitle("Parceiros");
 
             fragmentClass = ListaParceirosFragment.class;

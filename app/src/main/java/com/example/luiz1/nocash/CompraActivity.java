@@ -78,8 +78,8 @@ public class CompraActivity extends AppCompatActivity {
 
                     // Parte do Movimento
                     Movimento movimento = new Movimento();
-                    movimento.setCarteiraOrigem(carteiraOrigem);
-                    movimento.setCarteiraDestino(carteiraDestino);
+                    movimento.setCarteiraOrigem(carteiraDestino);
+                    movimento.setCarteiraDestino(carteiraOrigem);
                     movimento.setNrDocumento(compra.getDesccricao());
                     movimento.setVlBruto(compra.getValor());
                     movimento.setVlLiquido(compra.getValor());
